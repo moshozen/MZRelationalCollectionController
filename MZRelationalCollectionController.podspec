@@ -1,38 +1,25 @@
-#
-# Be sure to run `pod lib lint MZRelationalCollectionController.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# Any lines starting with a # are optional, but encouraged
-#
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
+version = '0.0.1'
 
 Pod::Spec.new do |s|
-  s.name             = "MZRelationalCollectionController"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of MZRelationalCollectionController."
-  s.description      = <<-DESC
-                       An optional longer description of MZRelationalCollectionController
+  s.name         = "MZRelationalCollectionController"
+  s.version      = version
+  s.summary      = "Controller to expose KVO on a collection relation and its objects"
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
-                       DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/MZRelationalCollectionController"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
-  s.author           = { "Mat Trudel" => "mat@geeky.net" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/MZRelationalCollectionController.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.description  = <<-DESC
+                    MZRelationalCollectionController manages KVO on a named relation of an object,
+                    providing delegate notification on various changes to the content of the
+                    relation, as well as on changes to specified attributes of the objects in the
+                    relation collection. Very loosely inspired by NSArrayController and
+                    NSFetchedResultsController
+                   DESC
+
+  s.homepage     = "https://github.com/moshozen/MZRelationalCollectionController"
+  s.license      = { :type => 'MIT', :file => 'LICENSE' }
+
+  s.author             = { "Mat Trudel" => "mat@geeky.net" }
+  s.social_media_url   = "http://twitter.com/mattrudel"
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
-
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'MZRelationalCollectionController' => ['Pod/Assets/*.png']
-  }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

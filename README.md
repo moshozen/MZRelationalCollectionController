@@ -5,6 +5,14 @@
 [![License](https://img.shields.io/cocoapods/l/MZRelationalCollectionController.svg?style=flat)](http://cocoapods.org/pods/MZRelationalCollectionController)
 [![Platform](https://img.shields.io/cocoapods/p/MZRelationalCollectionController.svg?style=flat)](http://cocoapods.org/pods/MZRelationalCollectionController)
 
+## Overview
+
+MZRelationalCollectionController manages KVO on a named relation of an object,
+providing delegate notification on various changes to the content of the
+relation, as well as on changes to specified attributes of the objects in the
+relation collection. Very loosely inspired by NSArrayController and
+NSFetchedResultsController
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
