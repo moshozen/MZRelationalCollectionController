@@ -29,7 +29,8 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 
 - (instancetype)initWithRelation:(NSString *)key onObject:(id)object filteredBy:(NSPredicate *)filteringPredicate sortedBy:(NSArray *)sortDescriptors observingChildKeyPaths:(NSArray *)childKeyPaths {
   if (self = [super init]) {
-    NSAssert([[object valueForKey:key] isKindOfClass:[NSSet class]], @"MZRelationalCollectionController only handles set relations (for now)");
+    id collection = [object valueForKey:key];
+    NSAssert(collection == nil || [collection isKindOfClass:[NSSet class]], @"MZRelationalCollectionController only handles set relations (for now)");
     self.object = object;
     self.relation = key;
     self.filteringPredicate = filteringPredicate ?: [NSPredicate predicateWithValue:YES];
@@ -72,8 +73,10 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 
 - (void)handleChangeToRootObject:(NSDictionary *)change {
   if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeSetting) {
-    for (id oldObj in change[NSKeyValueChangeOldKey]) {
-      [self stopObservingRelationObject:oldObj];
+    if ([change[NSKeyValueChangeOldKey] conformsToProtocol:@protocol(NSFastEnumeration)]) {
+      for (id oldObj in change[NSKeyValueChangeOldKey]) {
+        [self stopObservingRelationObject:oldObj];
+      }
     }
     for (id oldObj in self.collection) {
       [self stopObservingCollectionObject:oldObj];
@@ -86,8 +89,10 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
       [self startObservingCollectionObject:obj];
     }
   } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeInsertion) {
-    for (id obj in change[NSKeyValueChangeNewKey]) {
-      [self startObservingRelationObject:obj];
+    if ([change[NSKeyValueChangeNewKey] conformsToProtocol:@protocol(NSFastEnumeration)]) {
+      for (id obj in change[NSKeyValueChangeNewKey]) {
+        [self startObservingRelationObject:obj];
+      }
     }
     NSSet *newObjects = [change[NSKeyValueChangeNewKey] filteredSetUsingPredicate:self.filteringPredicate];
     [self.mutableCollection addObjectsFromArray:newObjects.allObjects];
