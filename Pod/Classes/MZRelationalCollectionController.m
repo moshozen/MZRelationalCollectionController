@@ -29,8 +29,7 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 
 - (instancetype)initWithRelation:(NSString *)key onObject:(id)object filteredBy:(NSPredicate *)filteringPredicate sortedBy:(NSArray *)sortDescriptors observingChildKeyPaths:(NSArray *)childKeyPaths {
   if (self = [super init]) {
-    id collection = [object valueForKey:key];
-    NSAssert(collection == nil || [collection isKindOfClass:[NSSet class]], @"MZRelationalCollectionController only handles set relations (for now)");
+    NSAssert([object valueForKey:key] == nil || [[object valueForKey:key] isKindOfClass:[NSSet class]], @"MZRelationalCollectionController only handles set relations (for now)");
     self.object = object;
     self.relation = key;
     self.filteringPredicate = filteringPredicate ?: [NSPredicate predicateWithValue:YES];
