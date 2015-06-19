@@ -29,7 +29,6 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 
 - (instancetype)initWithRelation:(NSString *)key onObject:(id)object filteredBy:(NSPredicate *)filteringPredicate sortedBy:(NSArray *)sortDescriptors observingChildKeyPaths:(NSArray *)childKeyPaths {
   if (self = [super init]) {
-    NSAssert([object valueForKey:key] == nil || [[object valueForKey:key] isKindOfClass:[NSSet class]], @"MZRelationalCollectionController only handles set relations (for now)");
     self.object = object;
     self.relation = key;
     self.filteringPredicate = filteringPredicate ?: [NSPredicate predicateWithValue:YES];
@@ -80,7 +79,15 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
     for (id oldObj in self.collection) {
       [self stopObservingCollectionObject:oldObj];
     }
-    self.mutableCollection = [[[[self.object valueForKey:self.relation] filteredSetUsingPredicate:self.filteringPredicate] sortedArrayUsingDescriptors:self.sortDescriptors] mutableCopy];
+    if ([[self.object valueForKey:self.relation] isKindOfClass:[NSSet class]]) {
+      self.mutableCollection = [[[[self.object valueForKey:self.relation] filteredSetUsingPredicate:self.filteringPredicate] sortedArrayUsingDescriptors:self.sortDescriptors] mutableCopy];
+    } else if ([[self.object valueForKey:self.relation] isKindOfClass:[NSArray class]]) {
+      self.mutableCollection = [[[[self.object valueForKey:self.relation] filteredArrayUsingPredicate:self.filteringPredicate] sortedArrayUsingDescriptors:self.sortDescriptors] mutableCopy];
+    } else {
+      // In this case, the only valid condition is the relation being nil. Any other type of collection is unsupported
+      NSAssert([self.object valueForKey:self.relation] == nil, @"Encountered a relation collection of unsupported type: %@", [self.object valueForKey:self.relation]);
+      self.mutableCollection = [NSMutableArray array];
+    }
     for (id obj in [self.object valueForKey:self.relation]) {
       [self startObservingRelationObject:obj];
     }
@@ -93,8 +100,13 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
         [self startObservingRelationObject:obj];
       }
     }
-    NSSet *newObjects = [change[NSKeyValueChangeNewKey] filteredSetUsingPredicate:self.filteringPredicate];
-    [self.mutableCollection addObjectsFromArray:newObjects.allObjects];
+    NSArray *newObjects;
+    if ([change[NSKeyValueChangeNewKey] isKindOfClass:[NSSet class]]) {
+      newObjects = [[change[NSKeyValueChangeNewKey] filteredSetUsingPredicate:self.filteringPredicate] allObjects];
+    } else if ([change[NSKeyValueChangeNewKey] isKindOfClass:[NSArray class]]) {
+      newObjects = [change[NSKeyValueChangeNewKey] filteredArrayUsingPredicate:self.filteringPredicate];
+    }
+    [self.mutableCollection addObjectsFromArray:newObjects];
     [self.mutableCollection sortUsingDescriptors:self.sortDescriptors];
 
     if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
@@ -110,7 +122,12 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
       [self.delegate relationalCollectionControllerDidChangeContent:self];
     }
   } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeRemoval) {
-    NSSet *oldObjects = change[NSKeyValueChangeOldKey];
+    NSArray *oldObjects;
+    if ([change[NSKeyValueChangeOldKey] isKindOfClass:[NSSet class]]) {
+      oldObjects = [change[NSKeyValueChangeOldKey] allObjects];
+    } else if ([change[NSKeyValueChangeOldKey] isKindOfClass:[NSArray class]]) {
+      oldObjects = change[NSKeyValueChangeOldKey];
+    }
     NSMutableDictionary *oldIndexMap = [NSMutableDictionary dictionary];
 
     for (id oldObject in oldObjects) {
@@ -120,7 +137,7 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
         [self stopObservingCollectionObject:oldObject];
       }
     }
-    [self.mutableCollection removeObjectsInArray:oldObjects.allObjects];
+    [self.mutableCollection removeObjectsInArray:oldObjects];
     if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
       [self.delegate relationalCollectionControllerWillChangeContent:self];
     }

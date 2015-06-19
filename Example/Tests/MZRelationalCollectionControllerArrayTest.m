@@ -9,19 +9,19 @@
 
 #import "MZRelationalCollectionController.h"
 
-#import "MZProject.h"
+#import "MZArrayProject.h"
 #import "MZTask.h"
 
-@interface MZRelationalCollectionControllerTest : XCTestCase
-@property MZProject *project;
+@interface MZRelationalCollectionControllerArrayTest : XCTestCase
+@property MZArrayProject *project;
 @property MZRelationalCollectionController *controller;
 @end
 
-@implementation MZRelationalCollectionControllerTest
+@implementation MZRelationalCollectionControllerArrayTest
 
 - (void)setUp {
   [super setUp];
-  self.project = [[MZProject alloc] init];
+  self.project = [[MZArrayProject alloc] init];
   self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"tasks"
                                                                              onObject:self.project
                                                                            filteredBy:[NSPredicate predicateWithFormat:@"hidden != YES"]
@@ -31,29 +31,29 @@
 
 @end
 
-@interface MZRelationalCollectionControllerMembershipTest : MZRelationalCollectionControllerTest
+@interface MZRelationalCollectionControllerArrayMembershipTest : MZRelationalCollectionControllerArrayTest
 @end
 
-@implementation MZRelationalCollectionControllerMembershipTest
+@implementation MZRelationalCollectionControllerArrayMembershipTest
 
 - (void)testAssignment {
   MZTask *task = [[MZTask alloc] init];
-  [self.project setTasks:[NSSet setWithObject:task]];
+  [self.project setTasks:@[task]];
 
   XCTAssertEqualObjects(self.controller.collection, @[task]);
 }
 
 - (void)testReassignment {
   MZTask *task = [[MZTask alloc] init];
-  [self.project setTasks:[NSSet setWithObject:task]];
-  [self.project setTasks:[NSSet set]];
+  [self.project setTasks:@[task]];
+  [self.project setTasks:@[]];
 
   XCTAssertEqualObjects(self.controller.collection, @[]);
 }
 
 - (void)testNilReassignment {
   MZTask *task = [[MZTask alloc] init];
-  [self.project setTasks:[NSSet setWithObject:task]];
+  [self.project setTasks:@[task]];
   [self.project setTasks:nil];
 
   XCTAssertEqualObjects(self.controller.collection, @[]);
@@ -67,7 +67,7 @@
   MZTask *task3 = [[MZTask alloc] init];
   task3.index = @3;
 
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, task3, nil]];
+  [self.project setTasks:@[task1, task2, task3]];
 
   NSArray *expected = @[task1, task2, task3];
   XCTAssertEqualObjects(self.controller.collection, expected);
@@ -80,7 +80,7 @@
   task2.index = @2;
   MZTask *task3 = [[MZTask alloc] init];
   task3.index = @3;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, task3, nil]];
+  [self.project setTasks:@[task1, task2, task3]];
 
   task1.index = @4;
 
@@ -93,11 +93,11 @@
   task1.index = @1;
   MZTask *task3 = [[MZTask alloc] init];
   task3.index = @3;
-  [self.project setTasks:[NSSet setWithObjects:task1, task3, nil]];
+  [self.project setTasks:@[task1, task3]];
 
   MZTask *task2 = [[MZTask alloc] init];
   task2.index = @2;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task2];
+  [[self.project mutableArrayValueForKey:@"tasks"] addObject:task2];
 
   NSArray *expected = @[task1, task2, task3];
   XCTAssertEqualObjects(self.controller.collection, expected);
@@ -110,9 +110,9 @@
   task2.index = @2;
   MZTask *task3 = [[MZTask alloc] init];
   task3.index = @3;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, task3, nil]];
+  [self.project setTasks:@[task1, task2, task3]];
 
-  [[self.project mutableSetValueForKey:@"tasks"] removeObject:task2];
+  [[self.project mutableArrayValueForKey:@"tasks"] removeObject:task2];
 
   NSArray *expected = @[task1, task3];
   XCTAssertEqualObjects(self.controller.collection, expected);
@@ -124,9 +124,9 @@
   MZTask *task2 = [[MZTask alloc] init];
   task2.index = @2;
   task2.hidden = @YES;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  [self.project setTasks:@[task1, task2]];
 
-  [[self.project mutableSetValueForKey:@"tasks"] removeObject:task2];
+  [[self.project mutableArrayValueForKey:@"tasks"] removeObject:task2];
 
   NSArray *expected = @[task1];
   XCTAssertEqualObjects(self.controller.collection, expected);
@@ -137,7 +137,7 @@
   task1.index = @1;
   MZTask *task2 = [[MZTask alloc] init];
   task2.index = @2;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  [self.project setTasks:@[task1, task2]];
 
   task1.hidden = @YES;
 
@@ -148,12 +148,12 @@
 - (void)testPredicateFilteringOnInsertion {
   MZTask *task1 = [[MZTask alloc] init];
   task1.index = @1;
-  [self.project setTasks:[NSSet setWithObjects:task1, nil]];
+  [self.project setTasks:@[task1]];
 
   MZTask *task2 = [[MZTask alloc] init];
   task2.index = @2;
   task2.hidden = @YES;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task2];
+  [[self.project mutableArrayValueForKey:@"tasks"] addObject:task2];
 
   NSArray *expected = @[task1];
   XCTAssertEqualObjects(self.controller.collection, expected);
@@ -165,7 +165,7 @@
   MZTask *task2 = [[MZTask alloc] init];
   task2.index = @2;
   task2.hidden = @YES;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  [self.project setTasks:@[task1, task2]];
 
   task2.hidden = @NO;
 
@@ -175,7 +175,7 @@
 
 @end
 
-@interface MZRelationalCollectionControllerDelegateTest : MZRelationalCollectionControllerTest <MZRelationalCollectionControllerDelegate>
+@interface MZRelationalCollectionControllerDelegateArrayTest : MZRelationalCollectionControllerArrayTest <MZRelationalCollectionControllerDelegate>
 @property NSMutableArray *relationalCollectionControllerWillChangeContentParameters;
 @property NSMutableArray *relationalCollectionControllerDidChangeContentParameters;
 @property NSMutableArray *relationalCollectionControllerInsertedObjectAtIndexParameters;
@@ -184,11 +184,11 @@
 @property NSMutableArray *relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters;
 @end
 
-@implementation MZRelationalCollectionControllerDelegateTest
+@implementation MZRelationalCollectionControllerDelegateArrayTest
 
 - (void)setUp {
   [super setUp];
-  self.project.tasks = [NSSet set];
+  self.project.tasks = @[];
   self.controller.delegate = self;
   self.relationalCollectionControllerWillChangeContentParameters = [NSMutableArray array];
   self.relationalCollectionControllerDidChangeContentParameters = [NSMutableArray array];
@@ -201,7 +201,7 @@
 - (void)testRelationalCollectionControllerWillChangeContent {
   MZTask *task1 = [[MZTask alloc] init];
   task1.index = @1;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task1];
+  [[self.project mutableArrayValueForKey:@"tasks"] addObject:task1];
 
   XCTAssertEqual(self.relationalCollectionControllerWillChangeContentParameters.count, 1);
   XCTAssertEqualObjects([self.relationalCollectionControllerWillChangeContentParameters.firstObject firstObject], self.controller);
@@ -210,7 +210,7 @@
 - (void)testRelationalCollectionControllerDidChangeContent {
   MZTask *task1 = [[MZTask alloc] init];
   task1.index = @1;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task1];
+  [[self.project mutableArrayValueForKey:@"tasks"] addObject:task1];
 
   XCTAssertEqual(self.relationalCollectionControllerDidChangeContentParameters.count, 1);
   XCTAssertEqualObjects([self.relationalCollectionControllerDidChangeContentParameters.firstObject firstObject], self.controller);
@@ -219,7 +219,7 @@
 - (void)testRelationalCollectionControllerInsertedObjectAtIndex {
   MZTask *task1 = [[MZTask alloc] init];
   task1.index = @1;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task1];
+  [[self.project mutableArrayValueForKey:@"tasks"] addObject:task1];
 
   XCTAssertEqual(self.relationalCollectionControllerInsertedObjectAtIndexParameters.count, 1);
   NSArray *expected = @[self.controller, task1, @0];
@@ -229,9 +229,9 @@
 - (void)testRelationalCollectionControllerRemovedObjectAtIndex {
   MZTask *task1 = [[MZTask alloc] init];
   task1.index = @1;
-  [self.project setTasks:[NSSet setWithObject:task1]];
+  [self.project setTasks:@[task1]];
 
-  [[self.project mutableSetValueForKey:@"tasks"] removeObject:task1];
+  [[self.project mutableArrayValueForKey:@"tasks"] removeObject:task1];
 
   XCTAssertEqual(self.relationalCollectionControllerRemovedObjectAtIndexParameters.count, 1);
   NSArray *expected = @[self.controller, task1, @0];
@@ -243,7 +243,7 @@
   task1.index = @1;
   MZTask *task2 = [[MZTask alloc] init];
   task2.index = @2;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  [self.project setTasks:@[task1, task2]];
 
   task1.index = @3;
 
@@ -255,7 +255,7 @@
 - (void)testRelationalCollectionControllerUpdatedObjectAtIndexChangedKeyPath {
   MZTask *task1 = [[MZTask alloc] init];
   task1.index = @1;
-  [self.project setTasks:[NSSet setWithObject:task1]];
+  [self.project setTasks:@[task1]];
 
   task1.title = @"New Title";
 
@@ -267,7 +267,7 @@
 - (void)testRelationalCollectionControllerRemovedObjectAtIndexViaPredicateChangeOut {
   MZTask *task1 = [[MZTask alloc] init];
   task1.index = @1;
-  [self.project setTasks:[NSSet setWithObject:task1]];
+  [self.project setTasks:@[task1]];
 
   task1.hidden = @YES;
 
@@ -279,12 +279,12 @@
 - (void)testNoRelationalCollectionControllerInsertedObjectAtIndexOnPredicateFailureInsertion {
   MZTask *task1 = [[MZTask alloc] init];
   task1.index = @1;
-  [self.project setTasks:[NSSet setWithObject:task1]];
+  [self.project setTasks:@[task1]];
 
   MZTask *task2 = [[MZTask alloc] init];
   task1.index = @2;
   task2.hidden = @YES;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task2];
+  [[self.project mutableArrayValueForKey:@"tasks"] addObject:task2];
 
   XCTAssertEqual(self.relationalCollectionControllerInsertedObjectAtIndexParameters.count, 0);
 }
@@ -295,7 +295,7 @@
   MZTask *task2 = [[MZTask alloc] init];
   task2.index = @2;
   task2.hidden = @YES;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  [self.project setTasks:@[task1, task2]];
 
   task2.hidden = @NO;
 
