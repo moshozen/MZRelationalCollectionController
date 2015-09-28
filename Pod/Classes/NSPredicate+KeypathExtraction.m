@@ -19,8 +19,6 @@
         for (NSExpression *expression in @[((NSComparisonPredicate *)self).leftExpression, ((NSComparisonPredicate *)self).rightExpression]) {
             if (expression.expressionType ==  NSKeyPathExpressionType) {
                 [result addObject:expression.keyPath];
-            } else if (expression.expressionType != NSConstantValueExpressionType) {
-                [[NSException exceptionWithName:@"Unsupported Argument" reason:[NSString stringWithFormat:@"Don't know how to deal with type %ld", (long)expression.expressionType] userInfo:nil] raise];
             }
         }
     }

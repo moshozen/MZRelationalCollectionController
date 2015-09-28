@@ -175,6 +175,29 @@
 
 @end
 
+@interface MZRelationalCollectionControllerArrayComplexPredicateTest : MZRelationalCollectionControllerArrayTest
+@end
+
+@implementation MZRelationalCollectionControllerArrayComplexPredicateTest
+
+- (void)testPredicateFilteringOnObjects {
+  MZTask *task1 = [[MZTask alloc] init];
+  task1.index = @1;
+  MZTask *task2 = [[MZTask alloc] init];
+  task2.index = @2;
+  self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"tasks"
+                                                                             onObject:self.project
+                                                                           filteredBy:[NSPredicate predicateWithFormat:@"self != %@", task1]
+                                                                             sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES]]
+                                                               observingChildKeyPaths:@[@"title", @"descrption"]];
+
+  [self.project setTasks:@[task1, task2]];
+  NSArray *expected = @[task2];
+  XCTAssertEqualObjects(self.controller.collection, expected);
+}
+
+@end
+
 @interface MZRelationalCollectionControllerDelegateArrayTest : MZRelationalCollectionControllerArrayTest <MZRelationalCollectionControllerDelegate>
 @property NSMutableArray *relationalCollectionControllerWillChangeContentParameters;
 @property NSMutableArray *relationalCollectionControllerDidChangeContentParameters;
