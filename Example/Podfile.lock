@@ -1,5 +1,5 @@
 PODS:
-  - MZRelationalCollectionController (0.2.1)
+  - MZRelationalCollectionController (0.3.1)
 
 DEPENDENCIES:
   - MZRelationalCollectionController (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MZRelationalCollectionController: b1f9df4686e76e44de61d40d7ce30196cbfe94f6
+  MZRelationalCollectionController: 00b68138f2998fe5727970d94b559e7820d221f2
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.38.2

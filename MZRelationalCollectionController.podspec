@@ -1,4 +1,4 @@
-version = '0.2.1' # Don't forget to bump example project's podfile
+version = '0.3.1' # Don't forget to bump example project's podfile
 
 Pod::Spec.new do |s|
   s.name         = "MZRelationalCollectionController"
