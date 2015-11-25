@@ -7,22 +7,13 @@
 
 @import XCTest;
 
-#import "MZRelationalCollectionController.h"
+#import <MZRelationalCollectionController/MZRelationalCollectionController.h>
 
+#import "ArrayArtist.h"
 #import "Album.h"
 
-// Define a local Artist class that has an array of Albums
-
-@interface Artist : NSObject
-@property NSString *name;
-@property NSArray *albums;
-@end
-
-@implementation Artist
-@end
-
 @interface MZRelationalCollectionControllerArrayTest : XCTestCase
-@property Artist *artist;
+@property ArrayArtist *artist;
 @property MZRelationalCollectionController *controller;
 @end
 
@@ -30,7 +21,7 @@
 
 - (void)setUp {
   [super setUp];
-  self.artist = [Artist new];
+  self.artist = [ArrayArtist new];
   self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
                                                                              onObject:self.artist
                                                                            filteredBy:[NSPredicate predicateWithFormat:@"liveAlbum != YES"]

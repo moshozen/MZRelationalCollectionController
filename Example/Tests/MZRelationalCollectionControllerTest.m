@@ -7,7 +7,7 @@
 
 @import XCTest;
 
-#import "MZRelationalCollectionController.h"
+#import <MZRelationalCollectionController/MZRelationalCollectionController.h>
 
 #import "Artist.h"
 #import "Album.h"
