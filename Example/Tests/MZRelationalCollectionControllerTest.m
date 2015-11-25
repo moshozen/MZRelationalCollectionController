@@ -9,11 +9,11 @@
 
 #import "MZRelationalCollectionController.h"
 
-#import "MZProject.h"
-#import "MZTask.h"
+#import "Artist.h"
+#import "Album.h"
 
 @interface MZRelationalCollectionControllerTest : XCTestCase
-@property MZProject *project;
+@property Artist *artist;
 @property MZRelationalCollectionController *controller;
 @end
 
@@ -21,12 +21,12 @@
 
 - (void)setUp {
   [super setUp];
-  self.project = [[MZProject alloc] init];
-  self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"tasks"
-                                                                             onObject:self.project
-                                                                           filteredBy:[NSPredicate predicateWithFormat:@"hidden != YES"]
-                                                                             sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES]]
-                                                               observingChildKeyPaths:@[@"title", @"descrption"]];
+  self.artist = [Artist new];
+  self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                             onObject:self.artist
+                                                                           filteredBy:[NSPredicate predicateWithFormat:@"liveAlbum != YES"]
+                                                                             sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
+                                                               observingChildKeyPaths:@[@"title"]];
 }
 
 @end
@@ -37,139 +37,156 @@
 @implementation MZRelationalCollectionControllerMembershipTest
 
 - (void)testAssignment {
-  MZTask *task = [[MZTask alloc] init];
-  [self.project setTasks:[NSSet setWithObject:task]];
+  Album *album = [Album new];
+  [self.artist setAlbums:[NSSet setWithObject:album]];
 
-  XCTAssertEqualObjects(self.controller.collection, @[task]);
+  XCTAssertEqualObjects(self.controller.collection, @[album]);
 }
 
 - (void)testReassignment {
-  MZTask *task = [[MZTask alloc] init];
-  [self.project setTasks:[NSSet setWithObject:task]];
-  [self.project setTasks:[NSSet set]];
+  Album *album = [Album new];
+  [self.artist setAlbums:[NSSet setWithObject:album]];
+  [self.artist setAlbums:[NSSet set]];
 
   XCTAssertEqualObjects(self.controller.collection, @[]);
 }
 
 - (void)testNilReassignment {
-  MZTask *task = [[MZTask alloc] init];
-  [self.project setTasks:[NSSet setWithObject:task]];
-  [self.project setTasks:nil];
+  Album *album = [Album new];
+  [self.artist setAlbums:[NSSet setWithObject:album]];
+  [self.artist setAlbums:nil];
 
   XCTAssertEqualObjects(self.controller.collection, @[]);
 }
 
 - (void)testSorting {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  MZTask *task3 = [[MZTask alloc] init];
-  task3.index = @3;
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, task3, nil]];
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
 
-  NSArray *expected = @[task1, task2, task3];
+  NSArray *expected = @[album1, album2, album3];
   XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
 - (void)testDynamicSorting {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  MZTask *task3 = [[MZTask alloc] init];
-  task3.index = @3;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, task3, nil]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-  task1.index = @4;
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
 
-  NSArray *expected = @[task2, task3, task1];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:3];
+
+  NSArray *expected = @[album2, album3, album1];
   XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
 - (void)testInsertion {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task3 = [[MZTask alloc] init];
-  task3.index = @3;
-  [self.project setTasks:[NSSet setWithObjects:task1, task3, nil]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task2];
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album3, nil]];
 
-  NSArray *expected = @[task1, task2, task3];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+
+  [[self.artist mutableSetValueForKey:@"albums"] addObject:album2];
+
+  NSArray *expected = @[album1, album2, album3];
   XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
 - (void)testDeletion {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  MZTask *task3 = [[MZTask alloc] init];
-  task3.index = @3;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, task3, nil]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-  [[self.project mutableSetValueForKey:@"tasks"] removeObject:task2];
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
 
-  NSArray *expected = @[task1, task3];
+  [[self.artist mutableSetValueForKey:@"albums"] removeObject:album2];
+
+  NSArray *expected = @[album1, album3];
   XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
 - (void)testDeletionOfFilteredObject {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  task2.hidden = @YES;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  album2.liveAlbum = YES;
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-  [[self.project mutableSetValueForKey:@"tasks"] removeObject:task2];
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
 
-  NSArray *expected = @[task1];
+  [[self.artist mutableSetValueForKey:@"albums"] removeObject:album2];
+
+  NSArray *expected = @[album1, album3];
   XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
 - (void)testPredicateFilteringOnChangeOut {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-  task1.hidden = @YES;
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
 
-  NSArray *expected = @[task2];
+  album1.liveAlbum = YES;
+
+  NSArray *expected = @[album2, album3];
   XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
 - (void)testPredicateFilteringOnInsertion {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  [self.project setTasks:[NSSet setWithObjects:task1, nil]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  task2.hidden = @YES;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task2];
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album3, nil]];
 
-  NSArray *expected = @[task1];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  album2.liveAlbum = YES;
+
+  [[self.artist mutableSetValueForKey:@"albums"] addObject:album2];
+
+  NSArray *expected = @[album1, album3];
   XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
 - (void)testPredicateFilteringOnChangeIn {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  task2.hidden = @YES;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  album2.liveAlbum = YES;
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-  task2.hidden = @NO;
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
 
-  NSArray *expected = @[task1, task2];
+  album2.liveAlbum = NO;
+
+  NSArray *expected = @[album1, album2, album3];
   XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
@@ -181,18 +198,22 @@
 @implementation MZRelationalCollectionControllerParamaterFreeTest
 
 - (void)testWithNoParameters {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"tasks"
-                                                                             onObject:self.project
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
+
+  self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                             onObject:self.artist
                                                                            filteredBy:nil
                                                                              sortedBy:nil
                                                                observingChildKeyPaths:nil];
 
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
-  NSSet *expected = [NSSet setWithObjects:task1, task2, nil];
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
+
+  NSSet *expected = [NSSet setWithObjects:album1, album2, album3, nil];
   XCTAssertEqualObjects([NSSet setWithArray:self.controller.collection], expected);
 }
 
@@ -204,18 +225,21 @@
 @implementation MZRelationalCollectionControllerComplexPredicateTest
 
 - (void)testPredicateFilteringOnObjects {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"tasks"
-                                                                             onObject:self.project
-                                                                           filteredBy:[NSPredicate predicateWithFormat:@"self != %@", task1]
-                                                                             sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES]]
-                                                               observingChildKeyPaths:@[@"title", @"descrption"]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
-  NSArray *expected = @[task2];
+  self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                             onObject:self.artist
+                                                                           filteredBy:[NSPredicate predicateWithFormat:@"self != %@", album1]
+                                                                             sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
+                                                               observingChildKeyPaths:@[@"title"]];
+
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
+  NSArray *expected = @[album2, album3];
   XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
@@ -234,7 +258,7 @@
 
 - (void)setUp {
   [super setUp];
-  self.project.tasks = [NSSet set];
+  self.artist.albums = [NSSet set];
   self.controller.delegate = self;
   self.relationalCollectionControllerWillChangeContentParameters = [NSMutableArray array];
   self.relationalCollectionControllerDidChangeContentParameters = [NSMutableArray array];
@@ -245,108 +269,120 @@
 }
 
 - (void)testRelationalCollectionControllerWillChangeContent {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task1];
+  Album *album = [Album new];
+  album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+
+  [[self.artist mutableSetValueForKey:@"albums"] addObject:album];
 
   XCTAssertEqual(self.relationalCollectionControllerWillChangeContentParameters.count, 1);
   XCTAssertEqualObjects([self.relationalCollectionControllerWillChangeContentParameters.firstObject firstObject], self.controller);
 }
 
 - (void)testRelationalCollectionControllerDidChangeContent {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task1];
+  Album *album = [Album new];
+  album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+
+  [[self.artist mutableSetValueForKey:@"albums"] addObject:album];
 
   XCTAssertEqual(self.relationalCollectionControllerDidChangeContentParameters.count, 1);
   XCTAssertEqualObjects([self.relationalCollectionControllerDidChangeContentParameters.firstObject firstObject], self.controller);
 }
 
 - (void)testRelationalCollectionControllerInsertedObjectAtIndex {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task1];
+  Album *album = [Album new];
+  album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+
+  [[self.artist mutableSetValueForKey:@"albums"] addObject:album];
 
   XCTAssertEqual(self.relationalCollectionControllerInsertedObjectAtIndexParameters.count, 1);
-  NSArray *expected = @[self.controller, task1, @0];
+  NSArray *expected = @[self.controller, album, @0];
   XCTAssertEqualObjects(self.relationalCollectionControllerInsertedObjectAtIndexParameters.firstObject, expected);
 }
 
 - (void)testRelationalCollectionControllerRemovedObjectAtIndex {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  [self.project setTasks:[NSSet setWithObject:task1]];
+  Album *album = [Album new];
+  album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
 
-  [[self.project mutableSetValueForKey:@"tasks"] removeObject:task1];
+  [self.artist setAlbums:[NSSet setWithObject:album]];
+
+  [[self.artist mutableSetValueForKey:@"albums"] removeObject:album];
 
   XCTAssertEqual(self.relationalCollectionControllerRemovedObjectAtIndexParameters.count, 1);
-  NSArray *expected = @[self.controller, task1, @0];
+  NSArray *expected = @[self.controller, album, @0];
   XCTAssertEqualObjects(self.relationalCollectionControllerRemovedObjectAtIndexParameters.firstObject, expected);
 }
 
 - (void)testRelationalCollectionControllerMovedObjectFromIndexToIndex {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  Album *album3 = [Album new];
+  album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-  task1.index = @3;
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
+
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:3];
 
   XCTAssertEqual(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.count, 1);
-  NSArray *expected = @[self.controller, task1, @0, @1];
+  NSArray *expected = @[self.controller, album1, @0, @2];
   XCTAssertEqualObjects(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.firstObject, expected);
 }
 
 - (void)testRelationalCollectionControllerUpdatedObjectAtIndexChangedKeyPath {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  [self.project setTasks:[NSSet setWithObject:task1]];
+  Album *album = [Album new];
+  album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
 
-  task1.title = @"New Title";
+  [self.artist setAlbums:[NSSet setWithObject:album]];
+
+  album.title = @"New Title";
 
   XCTAssertEqual(self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters.count, 1);
-  NSArray *expected = @[self.controller, task1, @0, @"title"];
+  NSArray *expected = @[self.controller, album, @0, @"title"];
   XCTAssertEqualObjects(self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters.firstObject, expected);
 }
 
 - (void)testRelationalCollectionControllerRemovedObjectAtIndexViaPredicateChangeOut {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  [self.project setTasks:[NSSet setWithObject:task1]];
+  Album *album = [Album new];
+  album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
 
-  task1.hidden = @YES;
+  [self.artist setAlbums:[NSSet setWithObject:album]];
+
+  album.liveAlbum = YES;
 
   XCTAssertEqual(self.relationalCollectionControllerRemovedObjectAtIndexParameters.count, 1);
-  NSArray *expected = @[self.controller, task1, @0];
+  NSArray *expected = @[self.controller, album, @0];
   XCTAssertEqualObjects(self.relationalCollectionControllerRemovedObjectAtIndexParameters.firstObject, expected);
 }
 
 - (void)testNoRelationalCollectionControllerInsertedObjectAtIndexOnPredicateFailureInsertion {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  [self.project setTasks:[NSSet setWithObject:task1]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
 
-  MZTask *task2 = [[MZTask alloc] init];
-  task1.index = @2;
-  task2.hidden = @YES;
-  [[self.project mutableSetValueForKey:@"tasks"] addObject:task2];
+  [self.artist setAlbums:[NSSet setWithObject:album1]];
+
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  album2.liveAlbum = YES;
+
+  [[self.artist mutableSetValueForKey:@"albums"] addObject:album2];
 
   XCTAssertEqual(self.relationalCollectionControllerInsertedObjectAtIndexParameters.count, 0);
 }
 
 - (void)testRelationalCollectionControllerInsertedObjectAtIndexViaPredicateChangeIn {
-  MZTask *task1 = [[MZTask alloc] init];
-  task1.index = @1;
-  MZTask *task2 = [[MZTask alloc] init];
-  task2.index = @2;
-  task2.hidden = @YES;
-  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  Album *album1 = [Album new];
+  album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+  Album *album2 = [Album new];
+  album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  album2.liveAlbum = YES;
 
-  task2.hidden = @NO;
+  [self.artist setAlbums:[NSSet setWithObjects:album1, album2, nil]];
+
+  album2.liveAlbum = NO;
 
   XCTAssertEqual(self.relationalCollectionControllerInsertedObjectAtIndexParameters.count, 1);
-  NSArray *expected = @[self.controller, task2, @1];
+  NSArray *expected = @[self.controller, album2, @1];
   XCTAssertEqualObjects(self.relationalCollectionControllerInsertedObjectAtIndexParameters.firstObject, expected);
 }
 
