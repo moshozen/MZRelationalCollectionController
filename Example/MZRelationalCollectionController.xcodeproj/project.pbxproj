@@ -17,6 +17,10 @@
 		402F6E9A1C06552C00276647 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F273E1C0648480001F83B /* Song.m */; };
 		402F6EA01C0655F400276647 /* ArrayArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6E9F1C0655F400276647 /* ArrayArtist.m */; };
 		402F6EA11C06563800276647 /* ArrayArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6E9F1C0655F400276647 /* ArrayArtist.m */; };
+		402F6EA41C065FCA00276647 /* Catalogue.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EA31C065FCA00276647 /* Catalogue.m */; };
+		402F6EB11C0663A300276647 /* MZCatalogueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EB01C0663A300276647 /* MZCatalogueTableViewController.m */; };
+		402F6EB41C0663B200276647 /* MZArtistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EB31C0663B200276647 /* MZArtistTableViewController.m */; };
+		402F6EB71C0663CC00276647 /* MZAlbumTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EB61C0663CC00276647 /* MZAlbumTableViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -24,7 +28,6 @@
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* MZAppDelegate.m */; };
 		6003F5A1195388D20070C39A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* Main.storyboard */; };
-		6003F5A7195388D20070C39A /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* MZViewController.m */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -55,6 +58,14 @@
 		402F273E1C0648480001F83B /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		402F6E9E1C0655F400276647 /* ArrayArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayArtist.h; sourceTree = "<group>"; };
 		402F6E9F1C0655F400276647 /* ArrayArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayArtist.m; sourceTree = "<group>"; };
+		402F6EA21C065FCA00276647 /* Catalogue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Catalogue.h; sourceTree = "<group>"; };
+		402F6EA31C065FCA00276647 /* Catalogue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Catalogue.m; sourceTree = "<group>"; };
+		402F6EAF1C0663A300276647 /* MZCatalogueTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCatalogueTableViewController.h; sourceTree = "<group>"; };
+		402F6EB01C0663A300276647 /* MZCatalogueTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCatalogueTableViewController.m; sourceTree = "<group>"; };
+		402F6EB21C0663B200276647 /* MZArtistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZArtistTableViewController.h; sourceTree = "<group>"; };
+		402F6EB31C0663B200276647 /* MZArtistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZArtistTableViewController.m; sourceTree = "<group>"; };
+		402F6EB51C0663CC00276647 /* MZAlbumTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAlbumTableViewController.h; sourceTree = "<group>"; };
+		402F6EB61C0663CC00276647 /* MZAlbumTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAlbumTableViewController.m; sourceTree = "<group>"; };
 		40C471441B34706B00BEF8FD /* MZRelationalCollectionControllerArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRelationalCollectionControllerArrayTest.m; sourceTree = "<group>"; };
 		55A57F8EEEE20464D6679E76 /* Pods-MZRelationalCollectionController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZRelationalCollectionController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MZRelationalCollectionController/Pods-MZRelationalCollectionController.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* MZRelationalCollectionController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZRelationalCollectionController.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,8 +79,6 @@
 		6003F59C195388D20070C39A /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
 		6003F5A0195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* MZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* MZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
@@ -111,6 +120,8 @@
 		400497EC1B0686B600FD9EFB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				402F6EA21C065FCA00276647 /* Catalogue.h */,
+				402F6EA31C065FCA00276647 /* Catalogue.m */,
 				402F27371C0647E80001F83B /* Artist.h */,
 				402F27381C0647E80001F83B /* Artist.m */,
 				402F6E9E1C0655F400276647 /* ArrayArtist.h */,
@@ -121,6 +132,19 @@
 				402F273E1C0648480001F83B /* Song.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		402F6EA51C0662F000276647 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				402F6EAF1C0663A300276647 /* MZCatalogueTableViewController.h */,
+				402F6EB01C0663A300276647 /* MZCatalogueTableViewController.m */,
+				402F6EB21C0663B200276647 /* MZArtistTableViewController.h */,
+				402F6EB31C0663B200276647 /* MZArtistTableViewController.m */,
+				402F6EB51C0663CC00276647 /* MZAlbumTableViewController.h */,
+				402F6EB61C0663CC00276647 /* MZAlbumTableViewController.m */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		4999F2CFC78CEECA22FB2317 /* Pods */ = {
@@ -174,9 +198,8 @@
 				6003F59C195388D20070C39A /* MZAppDelegate.h */,
 				6003F59D195388D20070C39A /* MZAppDelegate.m */,
 				6003F59F195388D20070C39A /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* MZViewController.h */,
-				6003F5A6195388D20070C39A /* MZViewController.m */,
 				400497EC1B0686B600FD9EFB /* Models */,
+				402F6EA51C0662F000276647 /* Controllers */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			path = MZRelationalCollectionController;
@@ -413,10 +436,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				402F6EB71C0663CC00276647 /* MZAlbumTableViewController.m in Sources */,
+				402F6EB41C0663B200276647 /* MZArtistTableViewController.m in Sources */,
 				402F273F1C0648480001F83B /* Song.m in Sources */,
 				6003F59E195388D20070C39A /* MZAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* MZViewController.m in Sources */,
+				402F6EA41C065FCA00276647 /* Catalogue.m in Sources */,
 				402F27391C0647E80001F83B /* Artist.m in Sources */,
+				402F6EB11C0663A300276647 /* MZCatalogueTableViewController.m in Sources */,
 				402F273C1C0648140001F83B /* Album.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				402F6EA01C0655F400276647 /* ArrayArtist.m in Sources */,
