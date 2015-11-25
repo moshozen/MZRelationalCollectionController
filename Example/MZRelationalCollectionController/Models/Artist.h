@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+@class Album;
+
 @interface Artist : NSObject
 @property NSString *name;
-@property NSSet *albums;
+@property NSSet<Album *> *albums;
 @end

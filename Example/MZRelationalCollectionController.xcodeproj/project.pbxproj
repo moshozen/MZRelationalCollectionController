@@ -120,7 +120,7 @@
 				402F273D1C0648480001F83B /* Song.h */,
 				402F273E1C0648480001F83B /* Song.m */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		4999F2CFC78CEECA22FB2317 /* Pods */ = {
@@ -171,12 +171,12 @@
 		6003F593195388D20070C39A /* MZRelationalCollectionController */ = {
 			isa = PBXGroup;
 			children = (
-				400497EC1B0686B600FD9EFB /* Models */,
 				6003F59C195388D20070C39A /* MZAppDelegate.h */,
 				6003F59D195388D20070C39A /* MZAppDelegate.m */,
 				6003F59F195388D20070C39A /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* MZViewController.h */,
 				6003F5A6195388D20070C39A /* MZViewController.m */,
+				400497EC1B0686B600FD9EFB /* Models */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			path = MZRelationalCollectionController;

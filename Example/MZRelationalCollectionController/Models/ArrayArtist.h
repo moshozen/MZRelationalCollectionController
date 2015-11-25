@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+@class Album;
+
 @interface ArrayArtist : NSObject
 @property NSString *name;
-@property NSArray *albums;
+@property NSArray<Album *> *albums;
 @end

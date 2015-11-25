@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class Song;
+
 @interface Album : NSObject
 @property NSString *title;
 @property NSDate *releaseDate;
 @property BOOL liveAlbum;
-@property NSArray *tracks;
+@property NSArray<Song *> *tracks;
 @end
