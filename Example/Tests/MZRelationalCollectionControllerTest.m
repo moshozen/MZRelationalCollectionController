@@ -175,6 +175,29 @@
 
 @end
 
+@interface MZRelationalCollectionControllerParamaterFreeTest : MZRelationalCollectionControllerTest
+@end
+
+@implementation MZRelationalCollectionControllerParamaterFreeTest
+
+- (void)testWithNoParameters {
+  MZTask *task1 = [[MZTask alloc] init];
+  task1.index = @1;
+  MZTask *task2 = [[MZTask alloc] init];
+  task2.index = @2;
+  self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"tasks"
+                                                                             onObject:self.project
+                                                                           filteredBy:nil
+                                                                             sortedBy:nil
+                                                               observingChildKeyPaths:nil];
+
+  [self.project setTasks:[NSSet setWithObjects:task1, task2, nil]];
+  NSSet *expected = [NSSet setWithObjects:task1, task2, nil];
+  XCTAssertEqualObjects([NSSet setWithArray:self.controller.collection], expected);
+}
+
+@end
+
 @interface MZRelationalCollectionControllerComplexPredicateTest : MZRelationalCollectionControllerTest
 @end
 
