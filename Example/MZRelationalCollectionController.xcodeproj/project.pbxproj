@@ -231,6 +231,7 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				7963011BC8981C5D93737DC8 /* Copy Pods Resources */,
+				24853EC578D6F28ED0E261EA /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -250,6 +251,7 @@
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
 				E196A4F35E409B6FA6AA8551 /* Copy Pods Resources */,
+				853B7FA07E0A56DC013C0888 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -318,6 +320,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		24853EC578D6F28ED0E261EA /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZRelationalCollectionController/Pods-MZRelationalCollectionController-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7963011BC8981C5D93737DC8 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,6 +348,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZRelationalCollectionController/Pods-MZRelationalCollectionController-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		853B7FA07E0A56DC013C0888 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D35486F31490E43634D8D824 /* Check Pods Manifest.lock */ = {
