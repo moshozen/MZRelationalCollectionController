@@ -37,6 +37,7 @@
                                        onObject:(id)object
                                      filteredBy:(NSPredicate *)predicate
                                        sortedBy:(NSArray *)sortDescriptors
-                         observingChildKeyPaths:(NSArray *)childKeyPaths;
+                         observingChildKeyPaths:(NSArray *)childKeyPaths
+                                       delegate:(id<MZRelationalCollectionControllerDelegate>)delegate;
 
 @end

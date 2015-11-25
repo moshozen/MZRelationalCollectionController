@@ -35,7 +35,8 @@
                                                                              onObject:self.artist
                                                                            filteredBy:[NSPredicate predicateWithFormat:@"liveAlbum != YES"]
                                                                              sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
-                                                               observingChildKeyPaths:@[@"title"]];
+                                                               observingChildKeyPaths:@[@"title"]
+                                                                             delegate:nil];
 }
 
 @end
@@ -218,8 +219,8 @@
                                                                              onObject:self.artist
                                                                            filteredBy:nil
                                                                              sortedBy:nil
-                                                               observingChildKeyPaths:nil];
-
+                                                               observingChildKeyPaths:nil
+                                                                             delegate:nil];
   [self.artist setAlbums:@[album1, album2, album3]];
   
   NSArray *expected = @[album1, album2, album3];
@@ -245,7 +246,8 @@
                                                                              onObject:self.artist
                                                                            filteredBy:[NSPredicate predicateWithFormat:@"self != %@", album1]
                                                                              sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
-                                                               observingChildKeyPaths:@[@"title"]];
+                                                               observingChildKeyPaths:@[@"title"]
+                                                                             delegate:nil];
 
   [self.artist setAlbums:@[album1, album2, album3]];
   NSArray *expected = @[album2, album3];

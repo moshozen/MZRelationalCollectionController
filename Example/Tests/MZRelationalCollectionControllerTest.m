@@ -26,7 +26,8 @@
                                                                              onObject:self.artist
                                                                            filteredBy:[NSPredicate predicateWithFormat:@"liveAlbum != YES"]
                                                                              sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
-                                                               observingChildKeyPaths:@[@"title"]];
+                                                               observingChildKeyPaths:@[@"title"]
+                                                                             delegate:nil];
 }
 
 @end
@@ -209,7 +210,8 @@
                                                                              onObject:self.artist
                                                                            filteredBy:nil
                                                                              sortedBy:nil
-                                                               observingChildKeyPaths:nil];
+                                                               observingChildKeyPaths:nil
+                                                                             delegate:nil];
 
   [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
 
@@ -236,8 +238,8 @@
                                                                              onObject:self.artist
                                                                            filteredBy:[NSPredicate predicateWithFormat:@"self != %@", album1]
                                                                              sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
-                                                               observingChildKeyPaths:@[@"title"]];
-
+                                                               observingChildKeyPaths:@[@"title"]
+                                                                             delegate:nil];
   [self.artist setAlbums:[NSSet setWithObjects:album1, album2, album3, nil]];
   NSArray *expected = @[album2, album3];
   XCTAssertEqualObjects(self.controller.collection, expected);

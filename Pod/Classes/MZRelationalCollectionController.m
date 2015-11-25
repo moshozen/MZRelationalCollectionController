@@ -23,17 +23,18 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 
 @implementation MZRelationalCollectionController
 
-+ (instancetype)collectionControllerForRelation:(NSString *)key onObject:(id)object filteredBy:(NSPredicate *)filteringPredicate sortedBy:(NSArray *)sortDescriptors observingChildKeyPaths:(NSArray *)childKeyPaths {
-  return [[self alloc] initWithRelation:key onObject:object filteredBy:filteringPredicate sortedBy:sortDescriptors observingChildKeyPaths:childKeyPaths];
++ (instancetype)collectionControllerForRelation:(NSString *)key onObject:(id)object filteredBy:(NSPredicate *)filteringPredicate sortedBy:(NSArray *)sortDescriptors observingChildKeyPaths:(NSArray *)childKeyPaths delegate:(id<MZRelationalCollectionControllerDelegate>)delegate {
+  return [[self alloc] initWithRelation:key onObject:object filteredBy:filteringPredicate sortedBy:sortDescriptors observingChildKeyPaths:childKeyPaths delegate:delegate];
 }
 
-- (instancetype)initWithRelation:(NSString *)key onObject:(id)object filteredBy:(NSPredicate *)filteringPredicate sortedBy:(NSArray *)sortDescriptors observingChildKeyPaths:(NSArray *)childKeyPaths {
+- (instancetype)initWithRelation:(NSString *)key onObject:(id)object filteredBy:(NSPredicate *)filteringPredicate sortedBy:(NSArray *)sortDescriptors observingChildKeyPaths:(NSArray *)childKeyPaths delegate:(id<MZRelationalCollectionControllerDelegate>)delegate {
   if (self = [super init]) {
     self.object = object;
     self.relation = key;
     self.filteringPredicate = filteringPredicate ?: [NSPredicate predicateWithValue:YES];
     self.sortDescriptors = sortDescriptors;
     self.observedChildKeyPaths = childKeyPaths;
+    self.delegate = delegate;
     [self.object addObserver:self forKeyPath:key options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
   }
   return self;
