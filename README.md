@@ -15,7 +15,9 @@ NSFetchedResultsController
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project simply clone the repo, open the
+`Example/MZRelationalCollectionController.xcworkspace` workspace, and go to
+town.
 
 ## Requirements
 
