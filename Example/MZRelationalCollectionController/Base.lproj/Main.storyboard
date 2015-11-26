@@ -221,9 +221,6 @@
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="editingDidBegin:" destination="PFn-w3-58D" eventType="editingDidBegin" id="oZ0-w8-BXd"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <animations/>

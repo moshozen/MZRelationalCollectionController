@@ -35,14 +35,6 @@
     [self updateUIFromAlbum];
 }
 
-- (IBAction)editingDidBegin:(UITextField *)textField
-{
-    if (textField == self.releaseDateField && !self.album.releaseDate) {
-        self.album.releaseDate = self.datePicker.date;
-        [self updateUIFromAlbum];
-    }
-}
-
 - (IBAction)textDidChange:(UITextField *)textField
 {
     if (textField == self.titleField) {
@@ -80,6 +72,9 @@
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
     dateFormatter.dateStyle = NSDateFormatterMediumStyle;
 
+    if (self.album.releaseDate) {
+        self.datePicker.date = self.album.releaseDate;
+    }
     self.releaseDateField.text = [dateFormatter stringFromDate:self.album.releaseDate];
     self.liveAlbumCell.accessoryType = self.album.liveAlbum? UITableViewCellAccessoryCheckmark : UITableViewCellEditingStyleNone;
 }
