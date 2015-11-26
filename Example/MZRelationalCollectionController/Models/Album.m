@@ -10,4 +10,12 @@
 
 @implementation Album
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.tracks = @[];
+    }
+    return self;
+}
+
 @end
