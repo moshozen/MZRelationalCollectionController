@@ -37,7 +37,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trackCell" forIndexPath:indexPath];
     Song *track = self.tracksController.collection[indexPath.row];
-    cell.textLabel.text = track.title;
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld: %@", indexPath.row + 1, track.title];
     NSInteger minutes = fmod(trunc(track.duration / 60.0), 60.0);
     NSInteger seconds = fmod(track.duration, 60.0);
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", minutes, seconds];
