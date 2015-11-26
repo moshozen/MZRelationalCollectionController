@@ -143,7 +143,168 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kh4-eC-z7V" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="okc-fd-xOx" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3018" y="-178"/>
+            <point key="canvasLocation" x="2998" y="-188"/>
+        </scene>
+        <!--Edit Album-->
+        <scene sceneID="o0Q-q8-1yi">
+            <objects>
+                <tableViewController id="PFn-w3-58D" customClass="MZAlbumEditViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ZqB-JD-NAf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="UwJ-UT-H82">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="q58-1O-v4W">
+                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q58-1O-v4W" id="Ej9-Gt-bei">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9L-gO-1wo">
+                                                    <rect key="frame" x="15" y="14" width="91" height="15"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="91" id="pXV-ET-eWu"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Album Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RTf-Au-L3a">
+                                                    <rect key="frame" x="112" y="13" width="478" height="17"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textDidChange:" destination="PFn-w3-58D" eventType="editingChanged" id="aCU-8m-MOn"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="RTf-Au-L3a" firstAttribute="centerY" secondItem="Ej9-Gt-bei" secondAttribute="centerY" id="6NM-4L-vac"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="RTf-Au-L3a" secondAttribute="trailing" constant="2" id="BBl-r1-LUf"/>
+                                                <constraint firstItem="O9L-gO-1wo" firstAttribute="centerY" secondItem="Ej9-Gt-bei" secondAttribute="centerY" id="F5O-Pg-EfH"/>
+                                                <constraint firstItem="O9L-gO-1wo" firstAttribute="leading" secondItem="Ej9-Gt-bei" secondAttribute="leadingMargin" constant="7" id="PXQ-ey-C0e"/>
+                                                <constraint firstItem="RTf-Au-L3a" firstAttribute="leading" secondItem="O9L-gO-1wo" secondAttribute="trailing" constant="6" id="gw8-JN-WOs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="J2h-E9-MuK">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="TnY-1u-SXE">
+                                        <rect key="frame" x="0.0" y="179" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TnY-1u-SXE" id="KdS-fA-vjq">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Release Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXm-SS-9Eo">
+                                                    <rect key="frame" x="15" y="14" width="91" height="15"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="91" id="CqM-OE-LdD"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QPd-mf-rKB">
+                                                    <rect key="frame" x="112" y="13" width="478" height="17"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="editingDidBegin:" destination="PFn-w3-58D" eventType="editingDidBegin" id="oZ0-w8-BXd"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="QPd-mf-rKB" firstAttribute="leading" secondItem="dXm-SS-9Eo" secondAttribute="trailing" constant="6" id="HCm-Sc-TqQ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="QPd-mf-rKB" secondAttribute="trailing" constant="2" id="Lj9-o7-wfF"/>
+                                                <constraint firstItem="dXm-SS-9Eo" firstAttribute="centerY" secondItem="KdS-fA-vjq" secondAttribute="centerY" id="V1o-Bm-L6Q"/>
+                                                <constraint firstItem="QPd-mf-rKB" firstAttribute="centerY" secondItem="KdS-fA-vjq" secondAttribute="centerY" id="j1N-1G-CGS"/>
+                                                <constraint firstItem="dXm-SS-9Eo" firstAttribute="leading" secondItem="KdS-fA-vjq" secondAttribute="leadingMargin" constant="7" id="z6Q-Eq-dfG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="ZJN-wO-4Qs">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="0DF-8D-y30" style="IBUITableViewCellStyleDefault" id="3bi-8m-lH0">
+                                        <rect key="frame" x="0.0" y="259" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3bi-8m-lH0" id="aVD-EJ-ivv">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Live Album" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0DF-8D-y30">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="PFn-w3-58D" id="fU2-4d-RYw"/>
+                            <outlet property="delegate" destination="PFn-w3-58D" id="h49-v3-1I5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit Album" id="r5A-ip-TJM">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="EsL-uN-OXp">
+                            <connections>
+                                <segue destination="5Hq-K5-V9X" kind="unwind" unwindAction="cancel:" id="WYP-p3-pYF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="tBL-su-Pt4">
+                            <connections>
+                                <segue destination="5Hq-K5-V9X" kind="unwind" unwindAction="done:" id="RKf-HQ-13X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="z9E-zw-RKJ" id="LCk-uR-eUS"/>
+                        <outlet property="liveAlbumCell" destination="3bi-8m-lH0" id="dqX-jj-FK1"/>
+                        <outlet property="releaseDateCell" destination="TnY-1u-SXE" id="MUt-3S-PxC"/>
+                        <outlet property="releaseDateField" destination="QPd-mf-rKB" id="BoQ-03-FV0"/>
+                        <outlet property="titleCell" destination="q58-1O-v4W" id="YJ8-JQ-czx"/>
+                        <outlet property="titleField" destination="RTf-Au-L3a" id="ogz-vG-kF8"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fAs-RT-VGt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="z9E-zw-RKJ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <date key="date" timeIntervalSinceReferenceDate="470255480.95703399">
+                        <!--2015-11-26 18:31:20 +0000-->
+                    </date>
+                    <connections>
+                        <action selector="dateDidChange:" destination="PFn-w3-58D" eventType="valueChanged" id="2Ch-Bn-KKr"/>
+                    </connections>
+                </datePicker>
+                <exit id="5Hq-K5-V9X" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4581" y="-188"/>
         </scene>
         <!--Artist-->
         <scene sceneID="kzM-z9-nAL">
@@ -155,11 +316,11 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="albumCell" textLabel="pky-I6-p7j" detailTextLabel="0sw-mp-6Jc" style="IBUITableViewCellStyleSubtitle" id="9XJ-r9-umn">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="albumCell" textLabel="pky-I6-p7j" detailTextLabel="0sw-mp-6Jc" style="IBUITableViewCellStyleSubtitle" id="9XJ-r9-umn">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9XJ-r9-umn" id="gIq-6h-ZfD">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="533" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pky-I6-p7j">
@@ -183,7 +344,8 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <segue destination="Vrp-eQ-wWM" kind="show" identifier="showAlbum" id="ob7-BF-uge"/>
+                                    <segue destination="PFn-w3-58D" kind="show" identifier="editAlbum" trigger="accessoryAction" id="Cav-Pt-hZh"/>
+                                    <segue destination="Vrp-eQ-wWM" kind="show" identifier="showAlbum" id="BiA-hE-97d"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -195,14 +357,14 @@
                     <navigationItem key="navigationItem" title="Artist" id="GKE-5A-nVp">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="V0r-ua-5Qy">
                             <connections>
-                                <action selector="addAlbum:" destination="Nv5-hc-OA1" id="mBV-hh-1vZ"/>
+                                <segue destination="oHH-t9-cYn" kind="presentation" identifier="newAlbum" id="kJ5-wl-oML"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pdc-Jc-SuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3018" y="614"/>
+            <point key="canvasLocation" x="3786" y="614"/>
         </scene>
         <!--Album-->
         <scene sceneID="GK2-Ww-kpS">
@@ -252,7 +414,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aN8-5J-Ybr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3857" y="614"/>
+            <point key="canvasLocation" x="5393" y="614"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TEQ-xB-For">
@@ -290,10 +452,30 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pHf-ad-vS7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2218" y="-178"/>
+            <point key="canvasLocation" x="2212" y="-188"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JhY-0I-6i9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oHH-t9-cYn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pvl-TQ-Hyt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PFn-w3-58D" kind="relationship" relationship="rootViewController" id="yeZ-bA-gi6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iKK-Aq-6dY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3786" y="-188"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5gH-LM-S0s"/>
+        <segue reference="w3J-Xg-DrS"/>
+        <segue reference="Cav-Pt-hZh"/>
     </inferredMetricsTieBreakers>
 </document>

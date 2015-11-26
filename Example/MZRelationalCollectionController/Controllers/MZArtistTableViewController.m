@@ -11,6 +11,7 @@
 #import <MZRelationalCollectionController/MZRelationalCollectionController.h>
 
 #import "MZAlbumTableViewController.h"
+#import "MZAlbumEditViewController.h"
 
 #import "Artist.h"
 #import "Album.h"
@@ -37,8 +38,12 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"albumCell" forIndexPath:indexPath];
     Album *album = self.albumsController.collection[indexPath.row];
-    cell.textLabel.text = album.title;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld songs, %ld duration", album.tracks.count, [[album.tracks valueForKeyPath:@"@sum.duration"] integerValue]];
+    if (album.liveAlbum) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ (Live)", album.title];
+    } else {
+        cell.textLabel.text = album.title;
+    }
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld songs", album.tracks.count];
     return cell;
 }
 
@@ -61,26 +66,31 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         Album *album = self.albumsController.collection[indexPath.row];
         ((MZAlbumTableViewController *)segue.destinationViewController).album = album;
+    } else if ([segue.identifier isEqualToString:@"editAlbum"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        Album *album = self.albumsController.collection[indexPath.row];
+        segue.destinationViewController.navigationItem.leftBarButtonItem = nil;
+        segue.destinationViewController.navigationItem.rightBarButtonItem = nil;
+        ((MZAlbumEditViewController *)segue.destinationViewController).album = album;
+    } else if ([segue.identifier isEqualToString:@"newAlbum"]) {
+        Album *album = [Album new];
+        UINavigationController *navigationController = segue.destinationViewController;
+        ((MZAlbumEditViewController *)navigationController.viewControllers.firstObject).album = album;
     }
 }
 
-#pragma mark - Album Creation support
-
-- (IBAction)addAlbum:(id)sender
+- (IBAction)cancel:(UIStoryboardSegue *)unwindSegue
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add Album" message:@"Enter the album title" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addTextFieldWithConfigurationHandler:nil];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        Album *album = [Album new];
-        album.title = alertController.textFields.firstObject.text;
-        [[self.artist mutableSetValueForKey:@"albums"] addObject:album];
-    }]];
-    [self presentViewController:alertController animated:YES completion:nil];
+    // NOP
+}
+
+- (IBAction)done:(UIStoryboardSegue *)unwindSegue
+{
+    Album *album = ((MZAlbumEditViewController *)unwindSegue.sourceViewController).album;
+    [[self.artist mutableSetValueForKey:@"albums"] addObject:album];
 }
 
 #pragma mark - Data management
-
 
 - (void)setArtist:(Artist *)artist
 {
@@ -90,7 +100,7 @@
                                                                                         onObject:self.artist
                                                                                       filteredBy:nil
                                                                                         sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
-                                                                          observingChildKeyPaths:@[@"tracks"] // TODO -- this needs to observe duration as well
+                                                                          observingChildKeyPaths:@[@"title", @"liveAlbum", @"tracks"]
                                                                                         delegate:self];
 }
 
