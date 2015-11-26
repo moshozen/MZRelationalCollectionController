@@ -85,11 +85,11 @@
 {
     _catalogue = catalogue;
     self.artistsController = [MZRelationalCollectionController collectionControllerForRelation:@"artists"
-                                                                                        onObject:self.catalogue
-                                                                                      filteredBy:nil
-                                                                                        sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]
-                                                                          observingChildKeyPaths:@[@"albums"]
-                                                                                        delegate:self];
+                                                                                      onObject:self.catalogue
+                                                                                    filteredBy:nil
+                                                                                      sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]
+                                                                        observingChildKeyPaths:@[@"name", @"albums"]
+                                                                                      delegate:self];
 }
 
 #pragma mark - MZRelationalCollectionControllerDelegate
