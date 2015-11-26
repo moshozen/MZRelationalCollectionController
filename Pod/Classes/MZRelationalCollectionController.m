@@ -13,12 +13,12 @@ static const void *sortChangeContext = @"sortChangeContext";
 static const void *filteringPredicateContext = @"filteringPredicateContext";
 
 @interface MZRelationalCollectionController ()
-@property (nonatomic, strong) id object;
-@property (nonatomic, strong) NSString *relation;
-@property (nonatomic, strong) NSPredicate *filteringPredicate;
-@property (nonatomic, strong) NSArray *sortDescriptors;
-@property (nonatomic, strong) NSArray *observedChildKeyPaths;
-@property (nonatomic, strong) NSMutableArray *mutableCollection;
+@property id object;
+@property NSString *relation;
+@property NSPredicate *filteringPredicate;
+@property NSArray *sortDescriptors;
+@property NSArray *observedChildKeyPaths;
+@property NSMutableArray *mutableCollection;
 @end
 
 @implementation MZRelationalCollectionController
