@@ -555,9 +555,6 @@
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="editingDidBegin:" destination="FcN-b6-Yng" eventType="editingDidBegin" id="8q0-GN-P3v"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <animations/>
@@ -594,23 +591,21 @@
                     <connections>
                         <outlet property="durationCell" destination="ihO-EU-Kqt" id="3Gh-Vk-nYW"/>
                         <outlet property="durationField" destination="gur-mQ-aEi" id="Ivn-Bz-agD"/>
-                        <outlet property="durationPicker" destination="St7-fJ-46m" id="sUP-BF-Sro"/>
+                        <outlet property="durationPicker" destination="23w-h3-NRZ" id="EQ9-e1-133"/>
                         <outlet property="titleCell" destination="qE2-6b-JpQ" id="V3t-Pq-fsn"/>
                         <outlet property="titleField" destination="wjc-3p-VT0" id="oRi-15-SDq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="So2-cP-pY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" countDownDuration="180" minuteInterval="1" useCurrentDate="NO" id="St7-fJ-46m">
+                <pickerView contentMode="scaleToFill" id="23w-h3-NRZ">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <animations/>
-                    <date key="date" timeIntervalSinceReferenceDate="-978289199.04296601">
-                        <!--1970-01-01 05:00:00 +0000-->
-                    </date>
                     <connections>
-                        <action selector="dateDidChange:" destination="FcN-b6-Yng" eventType="valueChanged" id="3i4-rZ-MVE"/>
+                        <outlet property="dataSource" destination="FcN-b6-Yng" id="WGV-WL-iV9"/>
+                        <outlet property="delegate" destination="FcN-b6-Yng" id="bVD-bi-oJF"/>
                     </connections>
-                </datePicker>
+                </pickerView>
                 <exit id="li7-ic-jXN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="6188" y="-188"/>
