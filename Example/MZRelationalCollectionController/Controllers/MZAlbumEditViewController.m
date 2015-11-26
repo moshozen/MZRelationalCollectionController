@@ -70,8 +70,8 @@
         [self.titleField resignFirstResponder];
         [self.releaseDateField resignFirstResponder];
         self.album.liveAlbum = !self.album.liveAlbum;
+        [self updateUIFromAlbum];
     }
-    [self updateUIFromAlbum];
 }
 
 - (void)updateUIFromAlbum
