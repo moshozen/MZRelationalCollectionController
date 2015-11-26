@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MZAlbumTableViewController : UITableViewController
+@class Album;
 
+@interface MZAlbumTableViewController : UITableViewController
+@property(nonatomic) Album *album;
 @end

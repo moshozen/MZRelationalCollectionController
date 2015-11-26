@@ -10,4 +10,12 @@
 
 @implementation Artist
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.albums = [NSSet set];
+    }
+    return self;
+}
+
 @end

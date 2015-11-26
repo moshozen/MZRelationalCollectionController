@@ -111,7 +111,13 @@
                             <outlet property="delegate" destination="Nv5-hc-OA1" id="rck-J7-qTy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Artist" id="GKE-5A-nVp"/>
+                    <navigationItem key="navigationItem" title="Artist" id="GKE-5A-nVp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="V0r-ua-5Qy">
+                            <connections>
+                                <action selector="addAlbum:" destination="Nv5-hc-OA1" id="mBV-hh-1vZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pdc-Jc-SuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
