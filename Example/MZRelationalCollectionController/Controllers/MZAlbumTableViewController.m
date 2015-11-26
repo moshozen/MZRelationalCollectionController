@@ -38,10 +38,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trackCell" forIndexPath:indexPath];
     Song *track = self.tracksController.collection[indexPath.row];
     cell.textLabel.text = track.title;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld seconds", (NSInteger)track.duration];
+    NSInteger minutes = fmod(trunc(track.duration / 60.0), 60.0);
+    NSInteger seconds = fmod(track.duration, 60.0);
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", minutes, seconds];
     return cell;
 }
-
+	
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleDelete;
