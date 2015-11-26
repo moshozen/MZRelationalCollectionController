@@ -71,10 +71,12 @@
         Album *album = self.albumsController.collection[indexPath.row];
         segue.destinationViewController.navigationItem.leftBarButtonItem = nil;
         segue.destinationViewController.navigationItem.rightBarButtonItem = nil;
+        segue.destinationViewController.title = @"Edit Album";
         ((MZAlbumEditViewController *)segue.destinationViewController).album = album;
     } else if ([segue.identifier isEqualToString:@"newAlbum"]) {
         Album *album = [Album new];
         UINavigationController *navigationController = segue.destinationViewController;
+        navigationController.viewControllers.firstObject.title = @"New Album";
         ((MZAlbumEditViewController *)navigationController.viewControllers.firstObject).album = album;
     }
 }

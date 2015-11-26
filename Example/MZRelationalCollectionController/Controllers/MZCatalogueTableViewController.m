@@ -67,10 +67,12 @@
         Artist *artist = self.artistsController.collection[indexPath.row];
         segue.destinationViewController.navigationItem.leftBarButtonItem = nil;
         segue.destinationViewController.navigationItem.rightBarButtonItem = nil;
+        segue.destinationViewController.title = @"Edit Artist";
         ((MZArtistEditViewController *)segue.destinationViewController).artist = artist;
     } else if ([segue.identifier isEqualToString:@"newArtist"]) {
         Artist *artist = [Artist new];
         UINavigationController *navigationController = segue.destinationViewController;
+        navigationController.viewControllers.firstObject.title = @"New Artist";
         ((MZArtistEditViewController *)navigationController.viewControllers.firstObject).artist = artist;
     }
 }

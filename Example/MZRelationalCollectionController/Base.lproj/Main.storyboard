@@ -66,7 +66,7 @@
             </objects>
             <point key="canvasLocation" x="2218" y="614"/>
         </scene>
-        <!--Edit Artist-->
+        <!--Artist Edit View Controller-->
         <scene sceneID="Pl7-dh-TEk">
             <objects>
                 <tableViewController id="R3l-1Y-iC5" customClass="MZArtistEditViewController" sceneMemberID="viewController">
@@ -124,7 +124,7 @@
                             <outlet property="delegate" destination="R3l-1Y-iC5" id="4W6-pH-A3K"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Edit Artist" id="WUm-ne-uoj">
+                    <navigationItem key="navigationItem" id="WUm-ne-uoj">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rFU-op-cc5">
                             <connections>
                                 <segue destination="okc-fd-xOx" kind="unwind" unwindAction="cancel:" id="8zo-ZY-dov"/>
@@ -145,7 +145,7 @@
             </objects>
             <point key="canvasLocation" x="2998" y="-188"/>
         </scene>
-        <!--Edit Album-->
+        <!--Album Edit View Controller-->
         <scene sceneID="o0Q-q8-1yi">
             <objects>
                 <tableViewController id="PFn-w3-58D" customClass="MZAlbumEditViewController" sceneMemberID="viewController">
@@ -269,7 +269,7 @@
                             <outlet property="delegate" destination="PFn-w3-58D" id="h49-v3-1I5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Edit Album" id="r5A-ip-TJM">
+                    <navigationItem key="navigationItem" id="r5A-ip-TJM">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="EsL-uN-OXp">
                             <connections>
                                 <segue destination="5Hq-K5-V9X" kind="unwind" unwindAction="cancel:" id="WYP-p3-pYF"/>
