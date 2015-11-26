@@ -11,6 +11,7 @@
 #import <MZRelationalCollectionController/MZRelationalCollectionController.h>
 
 #import "MZArtistTableViewController.h"
+#import "MZArtistEditViewController.h"
 
 #import "Catalogue.h"
 #import "Artist.h"
@@ -61,22 +62,28 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         Artist *artist = self.artistsController.collection[indexPath.row];
         ((MZArtistTableViewController *)segue.destinationViewController).artist = artist;
+    } else if ([segue.identifier isEqualToString:@"editArtist"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        Artist *artist = self.artistsController.collection[indexPath.row];
+        segue.destinationViewController.navigationItem.leftBarButtonItem = nil;
+        segue.destinationViewController.navigationItem.rightBarButtonItem = nil;
+        ((MZArtistEditViewController *)segue.destinationViewController).artist = artist;
+    } else if ([segue.identifier isEqualToString:@"newArtist"]) {
+        Artist *artist = [Artist new];
+        UINavigationController *navigationController = segue.destinationViewController;
+        ((MZArtistEditViewController *)navigationController.viewControllers.firstObject).artist = artist;
     }
 }
 
-#pragma mark - Artist Creation support
-
-- (IBAction)addArtist:(id)sender
+- (IBAction)cancel:(UIStoryboardSegue *)unwindSegue
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add Artist" message:@"Enter the name of the new artist" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addTextFieldWithConfigurationHandler:nil];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        Artist *artist = [Artist new];
-        artist.name = alertController.textFields.firstObject.text;
-        [[self.catalogue mutableSetValueForKey:@"artists"] addObject:artist];
-    }]];
-    [self presentViewController:alertController animated:YES completion:nil];
+    // NOP
+}
+
+- (IBAction)done:(UIStoryboardSegue *)unwindSegue
+{
+    Artist *artist = ((MZArtistEditViewController *)unwindSegue.sourceViewController).artist;
+    [[self.catalogue mutableSetValueForKey:@"artists"] addObject:artist];
 }
 
 #pragma mark - Data management

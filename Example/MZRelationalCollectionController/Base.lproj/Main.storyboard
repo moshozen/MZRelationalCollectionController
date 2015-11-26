@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Catalogue-->
@@ -15,11 +16,11 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="artistCell" textLabel="y8D-kC-uRQ" detailTextLabel="l7C-6N-IhS" style="IBUITableViewCellStyleSubtitle" id="3hF-wo-KUM">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="artistCell" textLabel="y8D-kC-uRQ" detailTextLabel="l7C-6N-IhS" style="IBUITableViewCellStyleSubtitle" id="3hF-wo-KUM">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3hF-wo-KUM" id="Eij-Bt-l2y">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="533" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y8D-kC-uRQ">
@@ -44,6 +45,7 @@
                                 <animations/>
                                 <connections>
                                     <segue destination="Nv5-hc-OA1" kind="show" identifier="showArtist" id="ZDS-2K-PLC"/>
+                                    <segue destination="R3l-1Y-iC5" kind="show" identifier="editArtist" trigger="accessoryAction" id="5gH-LM-S0s"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -55,7 +57,7 @@
                     <navigationItem key="navigationItem" title="Catalogue" id="n0o-Nh-Qut">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="t8z-L4-TDC">
                             <connections>
-                                <action selector="addArtist:" destination="MaL-wb-ijr" id="OcK-MJ-Zn0"/>
+                                <segue destination="LRa-0K-IXq" kind="presentation" identifier="newArtist" id="sdg-2B-3TR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -63,6 +65,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XUU-7q-v77" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2218" y="614"/>
+        </scene>
+        <!--Edit Artist-->
+        <scene sceneID="Pl7-dh-TEk">
+            <objects>
+                <tableViewController id="R3l-1Y-iC5" customClass="MZArtistEditViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="qxn-SN-cpe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="dlm-tA-SDE">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="SKL-ga-RJX">
+                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SKL-ga-RJX" id="54i-G9-V5a">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQ0-1F-A3u">
+                                                    <rect key="frame" x="15" y="14" width="91" height="15"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="91" id="JmU-db-o6M"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Artist Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g3F-4Z-2f2">
+                                                    <rect key="frame" x="112" y="13" width="478" height="17"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textDidChange:" destination="R3l-1Y-iC5" eventType="editingChanged" id="S3j-DU-azS"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="g3F-4Z-2f2" firstAttribute="leading" secondItem="JQ0-1F-A3u" secondAttribute="trailing" constant="6" id="07g-7c-AFL"/>
+                                                <constraint firstItem="JQ0-1F-A3u" firstAttribute="leading" secondItem="54i-G9-V5a" secondAttribute="leadingMargin" constant="7" id="NAn-bv-Jij"/>
+                                                <constraint firstItem="g3F-4Z-2f2" firstAttribute="centerY" secondItem="54i-G9-V5a" secondAttribute="centerY" id="SeI-0y-BIM"/>
+                                                <constraint firstItem="JQ0-1F-A3u" firstAttribute="centerY" secondItem="54i-G9-V5a" secondAttribute="centerY" id="lrQ-er-71Y"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="g3F-4Z-2f2" secondAttribute="trailing" constant="2" id="xTz-SS-TDR"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="R3l-1Y-iC5" id="jBf-DC-xGh"/>
+                            <outlet property="delegate" destination="R3l-1Y-iC5" id="4W6-pH-A3K"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit Artist" id="WUm-ne-uoj">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="rFU-op-cc5">
+                            <connections>
+                                <segue destination="okc-fd-xOx" kind="unwind" unwindAction="cancel:" id="8zo-ZY-dov"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="zuR-rW-a8K">
+                            <connections>
+                                <segue destination="okc-fd-xOx" kind="unwind" unwindAction="done:" id="DPj-t8-ZpH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nameField" destination="g3F-4Z-2f2" id="NjF-F6-RwE"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kh4-eC-z7V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="okc-fd-xOx" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3018" y="-178"/>
         </scene>
         <!--Artist-->
         <scene sceneID="kzM-z9-nAL">
@@ -192,5 +273,27 @@
             </objects>
             <point key="canvasLocation" x="1406" y="614"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="YAI-fR-2Yu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LRa-0K-IXq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rmB-NM-NMG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="R3l-1Y-iC5" kind="relationship" relationship="rootViewController" id="w3J-Xg-DrS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pHf-ad-vS7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2218" y="-178"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5gH-LM-S0s"/>
+    </inferredMetricsTieBreakers>
 </document>
