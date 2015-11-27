@@ -43,7 +43,7 @@
     } else {
         cell.textLabel.text = album.title;
     }
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld songs", album.tracks.count];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld songs", (unsigned long)album.tracks.count];
     return cell;
 }
 

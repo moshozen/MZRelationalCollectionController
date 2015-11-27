@@ -58,7 +58,7 @@
     cell.textLabel.text = track.title;
     NSInteger minutes = fmod(trunc(track.duration / 60.0), 60.0);
     NSInteger seconds = fmod(track.duration, 60.0);
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", minutes, seconds];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
     return cell;
 }
 

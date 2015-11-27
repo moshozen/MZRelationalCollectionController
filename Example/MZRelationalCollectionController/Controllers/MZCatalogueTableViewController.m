@@ -39,7 +39,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"artistCell" forIndexPath:indexPath];
     Artist *artist = self.artistsController.collection[indexPath.row];
     cell.textLabel.text = artist.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld albums", artist.albums.count];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld albums", (unsigned long)artist.albums.count];
     return cell;
 }
 

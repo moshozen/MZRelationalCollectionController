@@ -58,7 +58,7 @@
     NSInteger seconds = fmod(self.track.duration, 60.0);
     [self.durationPicker selectRow:minutes inComponent:0 animated:NO];
     [self.durationPicker selectRow:seconds inComponent:1 animated:NO];
-    self.durationField.text = [NSString stringWithFormat:@"%02ld:%02ld", minutes, seconds];
+    self.durationField.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
 }
 
 - (NSTimeInterval)durationFromPicker
@@ -85,9 +85,9 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if (component == 0) {
-        return [NSString stringWithFormat:@"%ld min", row];
+        return [NSString stringWithFormat:@"%ld min", (long)row];
     } else {
-        return [NSString stringWithFormat:@"%ld sec", row];
+        return [NSString stringWithFormat:@"%ld sec", (long)row];
     }
 }
 
