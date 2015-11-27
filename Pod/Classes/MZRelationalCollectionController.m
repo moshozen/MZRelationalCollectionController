@@ -97,6 +97,9 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
             [self startObservingCollectionObject:obj];
         }
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeInsertion) {
+        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
+            [self.delegate relationalCollectionControllerWillChangeContent:self];
+        }
         if ([change[NSKeyValueChangeNewKey] conformsToProtocol:@protocol(NSFastEnumeration)]) {
             for (id obj in change[NSKeyValueChangeNewKey]) {
                 [self startObservingRelationObject:obj];
@@ -110,10 +113,6 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
         }
         [self.mutableCollection addObjectsFromArray:newObjects];
         [self.mutableCollection sortUsingDescriptors:self.sortDescriptors];
-
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-            [self.delegate relationalCollectionControllerWillChangeContent:self];
-        }
         for (id newObject in newObjects) {
             [self startObservingCollectionObject:newObject];
             if ([self.delegate respondsToSelector:@selector(relationalCollectionController:insertedObject:atIndex:)]) {
@@ -124,6 +123,9 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
             [self.delegate relationalCollectionControllerDidChangeContent:self];
         }
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeRemoval) {
+        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
+            [self.delegate relationalCollectionControllerWillChangeContent:self];
+        }
         NSArray *oldObjects;
         if ([change[NSKeyValueChangeOldKey] isKindOfClass:[NSSet class]]) {
             oldObjects = [change[NSKeyValueChangeOldKey] allObjects];
@@ -140,9 +142,6 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
             }
         }
         [self.mutableCollection removeObjectsInArray:oldObjects];
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-            [self.delegate relationalCollectionControllerWillChangeContent:self];
-        }
         if ([self.delegate respondsToSelector:@selector(relationalCollectionController:removedObject:atIndex:)]) {
             for (NSNumber *oldIndex in oldIndexMap) {
                 [self.delegate relationalCollectionController:self removedObject:oldIndexMap[oldIndex] atIndex:oldIndex.integerValue];
@@ -155,12 +154,12 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
         if (!self.sortDescriptors) {
             if (self.lastExchangedIndexSet) {
                 NSAssert(self.lastExchangedIndexSet.count == 1,  @"Can't (yet) handle cases where NSArray exchanges involve more than 1 item");
-                NSUInteger oldIndex = self.lastExchangedIndexSet.firstIndex;
-                NSUInteger newIndex = [change[NSKeyValueChangeIndexesKey] firstIndex];
-                id object = [change[NSKeyValueChangeNewKey] firstObject];
                 if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
                     [self.delegate relationalCollectionControllerWillChangeContent:self];
                 }
+                NSUInteger oldIndex = self.lastExchangedIndexSet.firstIndex;
+                NSUInteger newIndex = [change[NSKeyValueChangeIndexesKey] firstIndex];
+                id object = [change[NSKeyValueChangeNewKey] firstObject];
                 [self.mutableCollection exchangeObjectAtIndex:oldIndex withObjectAtIndex:newIndex];
                 if ([self.delegate respondsToSelector:@selector(relationalCollectionController:movedObject:fromIndex:toIndex:)]) {
                     [self.delegate relationalCollectionController:self movedObject:object fromIndex:oldIndex toIndex:newIndex];
@@ -177,13 +176,13 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 }
 
 - (void)handleChangeToSortOrderFromCollectionObject:(id)object {
+    if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
+        [self.delegate relationalCollectionControllerWillChangeContent:self];
+    }
     NSUInteger oldIndex = [self.mutableCollection indexOfObject:object];
     [self.mutableCollection sortUsingDescriptors:self.sortDescriptors];
     NSUInteger newIndex = [self.mutableCollection indexOfObject:object];
     if (oldIndex != newIndex) {
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-            [self.delegate relationalCollectionControllerWillChangeContent:self];
-        }
         if ([self.delegate respondsToSelector:@selector(relationalCollectionController:movedObject:fromIndex:toIndex:)]) {
             [self.delegate relationalCollectionController:self movedObject:object fromIndex:oldIndex toIndex:newIndex];
         }
@@ -195,12 +194,12 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 
 - (void)handleChangeToFilterKeypathsFromObject:(id)object {
     if ([self.collection containsObject:object] && ![self.filteringPredicate evaluateWithObject:object]) {
-        NSUInteger oldIndex = [self.mutableCollection indexOfObject:object];
-        [self stopObservingCollectionObject:object];
-        [self.mutableCollection removeObject:object];
         if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
             [self.delegate relationalCollectionControllerWillChangeContent:self];
         }
+        NSUInteger oldIndex = [self.mutableCollection indexOfObject:object];
+        [self stopObservingCollectionObject:object];
+        [self.mutableCollection removeObject:object];
         if ([self.delegate respondsToSelector:@selector(relationalCollectionController:removedObject:atIndex:)]) {
             [self.delegate relationalCollectionController:self removedObject:object atIndex:oldIndex];
         }
@@ -208,13 +207,12 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
             [self.delegate relationalCollectionControllerDidChangeContent:self];
         }
     } else if (![self.collection containsObject:object] && [self.filteringPredicate evaluateWithObject:object]) {
-        [self.mutableCollection addObject:object];
-        [self.mutableCollection sortUsingDescriptors:self.sortDescriptors];
-        [self startObservingCollectionObject:object];
-
         if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
             [self.delegate relationalCollectionControllerWillChangeContent:self];
         }
+        [self.mutableCollection addObject:object];
+        [self.mutableCollection sortUsingDescriptors:self.sortDescriptors];
+        [self startObservingCollectionObject:object];
         if ([self.delegate respondsToSelector:@selector(relationalCollectionController:insertedObject:atIndex:)]) {
             [self.delegate relationalCollectionController:self insertedObject:object atIndex:[self.mutableCollection indexOfObject:object]];
         }
