@@ -21,6 +21,24 @@
 
 @implementation MZAlbumTableViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setToolbarHidden:NO animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setToolbarHidden:YES animated:YES];
+}
+
 #pragma mark - UITableViewDelegate & UITableViewDatasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -37,16 +55,16 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trackCell" forIndexPath:indexPath];
     Song *track = self.tracksController.collection[indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld: %@", indexPath.row + 1, track.title];
+    cell.textLabel.text = track.title;
     NSInteger minutes = fmod(trunc(track.duration / 60.0), 60.0);
     NSInteger seconds = fmod(track.duration, 60.0);
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", minutes, seconds];
     return cell;
 }
-	
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    return UITableViewCellEditingStyleDelete;
+    [[self.album mutableArrayValueForKey:@"tracks"] exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

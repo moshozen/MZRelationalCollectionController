@@ -373,7 +373,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="trackCell" textLabel="sEa-sJ-npT" detailTextLabel="ILG-lY-ivZ" style="IBUITableViewCellStyleSubtitle" id="nER-CU-ZqK">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" showsReorderControl="YES" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="trackCell" textLabel="sEa-sJ-npT" detailTextLabel="ILG-lY-ivZ" style="IBUITableViewCellStyleSubtitle" id="nER-CU-ZqK">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nER-CU-ZqK" id="RiC-Yc-3iB">
@@ -410,13 +410,16 @@
                             <outlet property="delegate" destination="Vrp-eQ-wWM" id="fFR-Xp-wr3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Album" id="TbM-QF-RxJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ro-Xj-HQL">
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="lYb-fN-ODl"/>
+                        <barButtonItem systemItem="add" id="4Ro-Xj-HQL">
                             <connections>
                                 <segue destination="hEp-8a-fKw" kind="presentation" identifier="newTrack" id="de5-t7-wDf"/>
                             </connections>
                         </barButtonItem>
-                    </navigationItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Album" id="TbM-QF-RxJ"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aN8-5J-Ybr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
