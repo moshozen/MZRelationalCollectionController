@@ -356,7 +356,25 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		03CA91998D6773EC5D02B3DB87B8353E /* Release */ = {
+		12294A525E47D1F388932728E0CF239D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F44B186CE967F5DEB653DE5AC7AC40D /* MZRelationalCollectionController.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MZRelationalCollectionController/MZRelationalCollectionController-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		511103F7F15A7E8F83B268EA03462CAB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -383,14 +401,66 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		0B57334D6C23DADAA4F7D802A5760EB2 /* Debug */ = {
+		522ED5DC405D34D0443995A80BE2A2E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F44B186CE967F5DEB653DE5AC7AC40D /* MZRelationalCollectionController.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MZRelationalCollectionController/MZRelationalCollectionController-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		569B79A5A0DA7D174442AEF49DA88A00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83B356FC08384B8AB334BF987CC750CB /* Pods-MZRelationalCollectionController.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		976D3DD307A483473CC2472C4FD98BA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 678EB5F83A9874F5F0BBA3E225646CA7 /* Pods-Tests.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AA05AF9C3A14EE0E32F42C6E6D42D34F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -422,19 +492,19 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				ONLY_ACTIVE_ARCH = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		337F7A64AD96F84109C75A3114FA19A3 /* Release */ = {
+		E9D6E518E5199BE708795C014993FF66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A0DEC03F6CB535654C52A54CD0591814 /* Pods-MZRelationalCollectionController.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -446,29 +516,12 @@
 			};
 			name = Release;
 		};
-		7F21CF2871544EB95851C1D929F8C6B4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 678EB5F83A9874F5F0BBA3E225646CA7 /* Pods-Tests.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		A8770CBEAEF4CD3BB0BEC491A1DF6321 /* Debug */ = {
+		F9C23807361DA00F15A340C553104207 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 175930CFCC6160992E7526AD9EC8BB05 /* Pods-Tests.debug.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
@@ -479,59 +532,6 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
-		};
-		C8B7A7C3627221028E1BACB95626BA8D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F44B186CE967F5DEB653DE5AC7AC40D /* MZRelationalCollectionController.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MZRelationalCollectionController/MZRelationalCollectionController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		ECD044E99974519D50ADBEAC19AA5A80 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83B356FC08384B8AB334BF987CC750CB /* Pods-MZRelationalCollectionController.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F963CA477C2A3D10F440A6A1626F5557 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F44B186CE967F5DEB653DE5AC7AC40D /* MZRelationalCollectionController.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MZRelationalCollectionController/MZRelationalCollectionController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -539,8 +539,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0B57334D6C23DADAA4F7D802A5760EB2 /* Debug */,
-				03CA91998D6773EC5D02B3DB87B8353E /* Release */,
+				AA05AF9C3A14EE0E32F42C6E6D42D34F /* Debug */,
+				511103F7F15A7E8F83B268EA03462CAB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -548,8 +548,8 @@
 		325F7A09EE1DE412878DACC6A052C3B9 /* Build configuration list for PBXNativeTarget "Pods-MZRelationalCollectionController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ECD044E99974519D50ADBEAC19AA5A80 /* Debug */,
-				337F7A64AD96F84109C75A3114FA19A3 /* Release */,
+				569B79A5A0DA7D174442AEF49DA88A00 /* Debug */,
+				E9D6E518E5199BE708795C014993FF66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -557,8 +557,8 @@
 		564373AE14D1B9A3840ECD5FF1CBAC66 /* Build configuration list for PBXNativeTarget "Pods-Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8770CBEAEF4CD3BB0BEC491A1DF6321 /* Debug */,
-				7F21CF2871544EB95851C1D929F8C6B4 /* Release */,
+				F9C23807361DA00F15A340C553104207 /* Debug */,
+				976D3DD307A483473CC2472C4FD98BA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -566,8 +566,8 @@
 		793AB6557E64F6022F55B647F0126AB4 /* Build configuration list for PBXNativeTarget "MZRelationalCollectionController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C8B7A7C3627221028E1BACB95626BA8D /* Debug */,
-				F963CA477C2A3D10F440A6A1626F5557 /* Release */,
+				522ED5DC405D34D0443995A80BE2A2E4 /* Debug */,
+				12294A525E47D1F388932728E0CF239D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
