@@ -62,11 +62,14 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == self.object) {
         [self handleChangeToRootObject:change];
-    } else if (context == sortChangeContext) { // Safe to compare pointers since it's a const
-        [self handleChangeToSortOrderFromCollectionObject:object];
-    } else if (context == filteringPredicateContext) { // Safe to compare pointers since it's a const
+    }
+    if (context == filteringPredicateContext) { // Safe to compare pointers since it's a const
         [self handleChangeToFilterKeypathsFromObject:object];
-    } else {
+    }
+    if (context == sortChangeContext) { // Safe to compare pointers since it's a const
+        [self handleChangeToSortOrderFromCollectionObject:object];
+    }
+    if (object != self.object && context == nil) {
         [self handleChangeToCollectionObject:object forKeyPath:keyPath change:change];
     }
 }
@@ -90,20 +93,15 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
             NSAssert([self.object valueForKey:self.relation] == nil, @"Encountered a relation collection of unsupported type: %@", [self.object valueForKey:self.relation]);
             self.mutableCollection = [NSMutableArray array];
         }
-        for (id obj in [self.object valueForKey:self.relation]) {
-            [self startObservingRelationObject:obj];
-        }
         for (id obj in self.collection) {
             [self startObservingCollectionObject:obj];
+        }
+        for (id obj in [self.object valueForKey:self.relation]) {
+            [self startObservingRelationObject:obj];
         }
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeInsertion) {
         if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
             [self.delegate relationalCollectionControllerWillChangeContent:self];
-        }
-        if ([change[NSKeyValueChangeNewKey] conformsToProtocol:@protocol(NSFastEnumeration)]) {
-            for (id obj in change[NSKeyValueChangeNewKey]) {
-                [self startObservingRelationObject:obj];
-            }
         }
         NSArray *newObjects;
         if ([change[NSKeyValueChangeNewKey] isKindOfClass:[NSSet class]]) {
@@ -117,6 +115,11 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
             [self startObservingCollectionObject:newObject];
             if ([self.delegate respondsToSelector:@selector(relationalCollectionController:insertedObject:atIndex:)]) {
                 [self.delegate relationalCollectionController:self insertedObject:newObject atIndex:[self.mutableCollection indexOfObject:newObject]];
+            }
+        }
+        if ([change[NSKeyValueChangeNewKey] conformsToProtocol:@protocol(NSFastEnumeration)]) {
+            for (id obj in change[NSKeyValueChangeNewKey]) {
+                [self startObservingRelationObject:obj];
             }
         }
         if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
@@ -223,14 +226,17 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 }
 
 - (void)handleChangeToCollectionObject:(id)object forKeyPath:(NSString *)keyPath change:(NSDictionary *)change {
-    if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-        [self.delegate relationalCollectionControllerWillChangeContent:self];
-    }
-    if ([self.delegate respondsToSelector:@selector(relationalCollectionController:updatedObject:atIndex:changedKeyPath:)]) {
-        [self.delegate relationalCollectionController:self updatedObject:object atIndex:[self.collection indexOfObject:object] changedKeyPath:keyPath];
-    }
-    if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-        [self.delegate relationalCollectionControllerDidChangeContent:self];
+    NSUInteger index = [self.collection indexOfObject:object];
+    if (index != NSNotFound) {
+        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
+            [self.delegate relationalCollectionControllerWillChangeContent:self];
+        }
+        if ([self.delegate respondsToSelector:@selector(relationalCollectionController:updatedObject:atIndex:changedKeyPath:)]) {
+            [self.delegate relationalCollectionController:self updatedObject:object atIndex:index changedKeyPath:keyPath];
+        }
+        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
+            [self.delegate relationalCollectionControllerDidChangeContent:self];
+        }
     }
 }
 

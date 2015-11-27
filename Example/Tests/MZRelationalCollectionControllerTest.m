@@ -191,6 +191,48 @@
     XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
+- (void)testPredicateFilteringOnChangeInWhenOverlapsWithSortPredicates {
+    NSDate *date = [NSDate date];
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:[NSPredicate predicateWithFormat:@"releaseDate > %@", [date dateByAddingTimeInterval:1]]
+                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
+                                                                 observingChildKeyPaths:@[@"releaseDate"]
+                                                                               delegate:nil];
+
+    Album *album1 = [Album new];
+    album1.releaseDate = [date dateByAddingTimeInterval:0];
+    Album *album2 = [Album new];
+    album2.releaseDate = [date dateByAddingTimeInterval:2];
+
+    [self.artist setAlbums:[NSSet setWithObjects:album1, album2, nil]];
+    album1.releaseDate = [date dateByAddingTimeInterval:3];
+
+    NSArray *expected = @[album2, album1];
+    XCTAssertEqualObjects(self.controller.collection, expected);
+}
+
+- (void)testPredicateFilteringOnChangeOutWhenOverlapsWithSortPredicates {
+    NSDate *date = [NSDate date];
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:[NSPredicate predicateWithFormat:@"releaseDate > %@", [date dateByAddingTimeInterval:1]]
+                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
+                                                                 observingChildKeyPaths:@[@"releaseDate"]
+                                                                               delegate:nil];
+
+    Album *album1 = [Album new];
+    album1.releaseDate = [date dateByAddingTimeInterval:2];
+    Album *album2 = [Album new];
+    album2.releaseDate = [date dateByAddingTimeInterval:3];
+
+    [self.artist setAlbums:[NSSet setWithObjects:album1, album2, nil]];
+    album1.releaseDate = [date dateByAddingTimeInterval:1];
+
+    NSArray *expected = @[album2];
+    XCTAssertEqualObjects(self.controller.collection, expected);
+}
+
 @end
 
 @interface MZRelationalCollectionControllerParamaterFreeTest : MZRelationalCollectionControllerTest
@@ -387,6 +429,79 @@
     NSArray *expected = @[self.controller, album2, @1];
     XCTAssertEqualObjects(self.relationalCollectionControllerInsertedObjectAtIndexParameters.firstObject, expected);
 }
+
+- (void)testOverlappingKeypathsOnInsertion {
+    NSDate *date = [NSDate date];
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:[NSPredicate predicateWithFormat:@"releaseDate > %@", [date dateByAddingTimeInterval:1]]
+                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
+                                                                 observingChildKeyPaths:@[@"releaseDate"]
+                                                                               delegate:self];
+
+    Album *album1 = [Album new];
+    album1.releaseDate = [date dateByAddingTimeInterval:0];
+    Album *album2 = [Album new];
+    album2.releaseDate = [date dateByAddingTimeInterval:1];
+
+    [self.artist setAlbums:[NSSet setWithObjects:album1, album2, nil]];
+    album1.releaseDate = [date dateByAddingTimeInterval:2];
+
+    XCTAssertEqual(self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters.count, 0);
+    XCTAssertEqual(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.count, 0);
+
+    NSArray *expected = @[@[self.controller, album1, @0]];
+    XCTAssertEqualObjects(self.relationalCollectionControllerInsertedObjectAtIndexParameters, expected);
+}
+
+- (void)testOverlappingKeypathsOnDeletion {
+    NSDate *date = [NSDate date];
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:[NSPredicate predicateWithFormat:@"releaseDate > %@", [date dateByAddingTimeInterval:1]]
+                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
+                                                                 observingChildKeyPaths:@[@"releaseDate"]
+                                                                               delegate:self];
+
+    Album *album1 = [Album new];
+    album1.releaseDate = [date dateByAddingTimeInterval:2];
+    Album *album2 = [Album new];
+    album2.releaseDate = [date dateByAddingTimeInterval:3];
+
+    [self.artist setAlbums:[NSSet setWithObjects:album1, album2, nil]];
+    album1.releaseDate = [date dateByAddingTimeInterval:1];
+
+    XCTAssertEqual(self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters.count, 0);
+    XCTAssertEqual(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.count, 0);
+
+    NSArray *expected = @[@[self.controller, album1, @0]];
+    XCTAssertEqualObjects(self.relationalCollectionControllerRemovedObjectAtIndexParameters, expected);
+}
+
+- (void)testOverlappingKeypathsOnUpdate {
+    NSDate *date = [NSDate date];
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:[NSPredicate predicateWithFormat:@"releaseDate > %@", [date dateByAddingTimeInterval:1]]
+                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
+                                                                 observingChildKeyPaths:@[@"releaseDate"]
+                                                                               delegate:self];
+
+    Album *album1 = [Album new];
+    album1.releaseDate = [date dateByAddingTimeInterval:2];
+    Album *album2 = [Album new];
+    album2.releaseDate = [date dateByAddingTimeInterval:3];
+
+    [self.artist setAlbums:[NSSet setWithObjects:album1, album2, nil]];
+    album1.releaseDate = [date dateByAddingTimeInterval:4];
+
+    NSArray *expected = @[@[self.controller, album1, @0, @1]];
+    XCTAssertEqualObjects(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters, expected);
+
+    expected = @[@[self.controller, album1, @1, @"releaseDate"]];
+    XCTAssertEqualObjects(self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters, expected);
+}
+
 
 // Delegate methods
 
