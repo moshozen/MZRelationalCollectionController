@@ -19,6 +19,7 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 @property NSArray *sortDescriptors;
 @property NSArray *observedChildKeyPaths;
 @property NSMutableArray *mutableCollection;
+@property NSIndexSet *lastExchangedIndexSet;
 @end
 
 @implementation MZRelationalCollectionController
@@ -150,6 +151,28 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
     if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
       [self.delegate relationalCollectionControllerDidChangeContent:self];
     }
+  } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeReplacement) {
+      if (!self.sortDescriptors) {
+          if (self.lastExchangedIndexSet) {
+              NSAssert(self.lastExchangedIndexSet.count == 1,  @"Can't (yet) handle cases where NSArray exchanges involve more than 1 item");
+              NSUInteger oldIndex = self.lastExchangedIndexSet.firstIndex;
+              NSUInteger newIndex = [change[NSKeyValueChangeIndexesKey] firstIndex];
+              id object = [change[NSKeyValueChangeNewKey] firstObject];
+              if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
+                  [self.delegate relationalCollectionControllerWillChangeContent:self];
+              }
+              [self.mutableCollection exchangeObjectAtIndex:oldIndex withObjectAtIndex:newIndex];
+              if ([self.delegate respondsToSelector:@selector(relationalCollectionController:movedObject:fromIndex:toIndex:)]) {
+                  [self.delegate relationalCollectionController:self movedObject:object fromIndex:oldIndex toIndex:newIndex];
+              }
+              self.lastExchangedIndexSet = nil;
+              if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
+                  [self.delegate relationalCollectionControllerDidChangeContent:self];
+              }
+          } else {
+              self.lastExchangedIndexSet = change[NSKeyValueChangeIndexesKey];
+          }
+      }
   }
 }
 

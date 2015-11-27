@@ -218,6 +218,28 @@
     XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
+- (void)testUnderlyingExchangeUpdatesCollection {
+    Album *album1 = [Album new];
+    album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+    Album *album2 = [Album new];
+    album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    Album *album3 = [Album new];
+    album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
+
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:nil
+                                                                               sortedBy:nil
+                                                                 observingChildKeyPaths:nil
+                                                                               delegate:nil];
+    [self.artist setAlbums:@[album1, album2, album3]];
+    [[self.artist mutableArrayValueForKey:@"albums"] exchangeObjectAtIndex:0 withObjectAtIndex:2];
+
+    NSArray *expected = @[album3, album2, album1];
+    XCTAssertEqualObjects(self.controller.collection, expected);
+}
+
+
 @end
 
 @interface MZRelationalCollectionControllerComplexPredicateArrayTest : MZRelationalCollectionControllerArrayTest
@@ -420,6 +442,34 @@
     [self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters addObject:@[controller, object, @(index), keyPath]];
 }
 
+@end
 
+@interface MZRelationalCollectionControllerImplicitSortDelegateArrayTest : MZRelationalCollectionControllerDelegateArrayTest
+@end
+
+@implementation MZRelationalCollectionControllerImplicitSortDelegateArrayTest
+
+- (void)testImplicitSortProducesMoveCalls {
+    Album *album1 = [Album new];
+    album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+    Album *album2 = [Album new];
+    album2.releaseDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    Album *album3 = [Album new];
+    album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
+
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:nil
+                                                                               sortedBy:nil
+                                                                 observingChildKeyPaths:nil
+                                                                               delegate:self];
+    [self.artist setAlbums:@[album1, album2, album3]];
+    [[self.artist mutableArrayValueForKey:@"albums"] exchangeObjectAtIndex:0 withObjectAtIndex:2];
+
+    XCTAssertEqual(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.count, 1);
+    NSArray *expected = @[self.controller, album1, @0, @2];
+    XCTAssertEqualObjects(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.firstObject, expected);
+    expected = @[album2, album3, album1];
+}
 
 @end
