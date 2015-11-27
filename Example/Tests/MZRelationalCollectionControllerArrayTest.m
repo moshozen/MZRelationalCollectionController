@@ -233,14 +233,13 @@
     XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
-@end
-
-@interface MZRelationalCollectionControllerParamaterFreeArrayTest : MZRelationalCollectionControllerArrayTest
-@end
-
-@implementation MZRelationalCollectionControllerParamaterFreeArrayTest
-
-- (void)testWithNoParameters {
+- (void)testWithNoFilterOrSortDescriptors {
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:nil
+                                                                               sortedBy:nil
+                                                                 observingChildKeyPaths:nil
+                                                                               delegate:nil];
     Album *album1 = [Album new];
     album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
     Album *album2 = [Album new];
@@ -248,19 +247,13 @@
     Album *album3 = [Album new];
     album3.releaseDate = [NSDate dateWithTimeIntervalSinceNow:2];
 
-    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
-                                                                               onObject:self.artist
-                                                                             filteredBy:nil
-                                                                               sortedBy:nil
-                                                                 observingChildKeyPaths:nil
-                                                                               delegate:nil];
     [self.artist setAlbums:@[album1, album2, album3]];
 
     NSArray *expected = @[album1, album2, album3];
     XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
-- (void)testUnderlyingExchangeUpdatesCollection {
+- (void)testUnderlyingExchangeUpdatesCollectionWithNoSortDescriptor {
     Album *album1 = [Album new];
     album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
     Album *album2 = [Album new];
@@ -281,15 +274,7 @@
     XCTAssertEqualObjects(self.controller.collection, expected);
 }
 
-
-@end
-
-@interface MZRelationalCollectionControllerComplexPredicateArrayTest : MZRelationalCollectionControllerArrayTest
-@end
-
-@implementation MZRelationalCollectionControllerComplexPredicateArrayTest
-
-- (void)testPredicateFilteringOnObjects {
+- (void)testObjectBasedPredicateFilteringOnObjects {
     Album *album1 = [Album new];
     album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
     Album *album2 = [Album new];
@@ -303,7 +288,6 @@
                                                                                sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
                                                                  observingChildKeyPaths:@[@"title"]
                                                                                delegate:nil];
-
     [self.artist setAlbums:@[album1, album2, album3]];
     NSArray *expected = @[album2, album3];
     XCTAssertEqualObjects(self.controller.collection, expected);
@@ -312,12 +296,7 @@
 @end
 
 @interface MZRelationalCollectionControllerDelegateArrayTest : MZRelationalCollectionControllerArrayTest <MZRelationalCollectionControllerDelegate>
-@property NSMutableArray *relationalCollectionControllerWillChangeContentParameters;
-@property NSMutableArray *relationalCollectionControllerDidChangeContentParameters;
-@property NSMutableArray *relationalCollectionControllerInsertedObjectAtIndexParameters;
-@property NSMutableArray *relationalCollectionControllerRemovedObjectAtIndexParameters;
-@property NSMutableArray *relationalCollectionControllerMovedObjectFromIndexToIndexParameters;
-@property NSMutableArray *relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters;
+@property NSMutableArray *delegateCalls;
 @end
 
 @implementation MZRelationalCollectionControllerDelegateArrayTest
@@ -326,32 +305,7 @@
     [super setUp];
     self.artist.albums = @[];
     self.controller.delegate = self;
-    self.relationalCollectionControllerWillChangeContentParameters = [NSMutableArray array];
-    self.relationalCollectionControllerDidChangeContentParameters = [NSMutableArray array];
-    self.relationalCollectionControllerInsertedObjectAtIndexParameters = [NSMutableArray array];
-    self.relationalCollectionControllerRemovedObjectAtIndexParameters = [NSMutableArray array];
-    self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters = [NSMutableArray array];
-    self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters = [NSMutableArray array];
-}
-
-- (void)testRelationalCollectionControllerWillChangeContent {
-    Album *album = [Album new];
-    album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
-
-    [[self.artist mutableArrayValueForKey:@"albums"] addObject:album];
-
-    XCTAssertEqual(self.relationalCollectionControllerWillChangeContentParameters.count, 1);
-    XCTAssertEqualObjects([self.relationalCollectionControllerWillChangeContentParameters.firstObject firstObject], self.controller);
-}
-
-- (void)testRelationalCollectionControllerDidChangeContent {
-    Album *album = [Album new];
-    album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
-
-    [[self.artist mutableArrayValueForKey:@"albums"] addObject:album];
-
-    XCTAssertEqual(self.relationalCollectionControllerDidChangeContentParameters.count, 1);
-    XCTAssertEqualObjects([self.relationalCollectionControllerDidChangeContentParameters.firstObject firstObject], self.controller);
+    self.delegateCalls = [NSMutableArray array];
 }
 
 - (void)testRelationalCollectionControllerInsertedObjectAtIndex {
@@ -360,9 +314,10 @@
 
     [[self.artist mutableArrayValueForKey:@"albums"] addObject:album];
 
-    XCTAssertEqual(self.relationalCollectionControllerInsertedObjectAtIndexParameters.count, 1);
-    NSArray *expected = @[self.controller, album, @0];
-    XCTAssertEqualObjects(self.relationalCollectionControllerInsertedObjectAtIndexParameters.firstObject, expected);
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"insert", self.controller, album, @0],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
 - (void)testRelationalCollectionControllerRemovedObjectAtIndex {
@@ -373,9 +328,10 @@
 
     [[self.artist mutableArrayValueForKey:@"albums"] removeObject:album];
 
-    XCTAssertEqual(self.relationalCollectionControllerRemovedObjectAtIndexParameters.count, 1);
-    NSArray *expected = @[self.controller, album, @0];
-    XCTAssertEqualObjects(self.relationalCollectionControllerRemovedObjectAtIndexParameters.firstObject, expected);
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"remove", self.controller, album, @0],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
 - (void)testRelationalCollectionControllerMovedObjectFromIndexToIndex {
@@ -390,9 +346,10 @@
 
     album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:3];
 
-    XCTAssertEqual(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.count, 1);
-    NSArray *expected = @[self.controller, album1, @0, @2];
-    XCTAssertEqualObjects(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.firstObject, expected);
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"move", self.controller, album1, @0, @2],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
 - (void)testRelationalCollectionControllerUpdatedObjectAtIndexChangedKeyPath {
@@ -403,9 +360,10 @@
 
     album.title = @"New Title";
 
-    XCTAssertEqual(self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters.count, 1);
-    NSArray *expected = @[self.controller, album, @0, @"title"];
-    XCTAssertEqualObjects(self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters.firstObject, expected);
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"update", self.controller, album, @0, @"title"],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
 - (void)testRelationalCollectionControllerRemovedObjectAtIndexViaPredicateChangeOut {
@@ -416,9 +374,10 @@
 
     album.liveAlbum = YES;
 
-    XCTAssertEqual(self.relationalCollectionControllerRemovedObjectAtIndexParameters.count, 1);
-    NSArray *expected = @[self.controller, album, @0];
-    XCTAssertEqualObjects(self.relationalCollectionControllerRemovedObjectAtIndexParameters.firstObject, expected);
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"remove", self.controller, album, @0],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
 - (void)testNoRelationalCollectionControllerInsertedObjectAtIndexOnPredicateFailureInsertion {
@@ -433,7 +392,9 @@
 
     [[self.artist mutableArrayValueForKey:@"albums"] addObject:album2];
 
-    XCTAssertEqual(self.relationalCollectionControllerInsertedObjectAtIndexParameters.count, 0);
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
 - (void)testRelationalCollectionControllerInsertedObjectAtIndexViaPredicateChangeIn {
@@ -447,9 +408,10 @@
 
     album2.liveAlbum = NO;
 
-    XCTAssertEqual(self.relationalCollectionControllerInsertedObjectAtIndexParameters.count, 1);
-    NSArray *expected = @[self.controller, album2, @1];
-    XCTAssertEqualObjects(self.relationalCollectionControllerInsertedObjectAtIndexParameters.firstObject, expected);
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"insert", self.controller, album2, @1],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
 - (void)testOverlappingKeypathsOnInsertion {
@@ -469,11 +431,10 @@
     [self.artist setAlbums:@[album1, album2]];
     album1.releaseDate = [date dateByAddingTimeInterval:2];
 
-    XCTAssertEqual(self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters.count, 0);
-    XCTAssertEqual(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.count, 0);
-
-    NSArray *expected = @[@[self.controller, album1, @0]];
-    XCTAssertEqualObjects(self.relationalCollectionControllerInsertedObjectAtIndexParameters, expected);
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"insert", self.controller, album1, @0],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
 - (void)testOverlappingKeypathsOnDeletion {
@@ -493,11 +454,10 @@
     [self.artist setAlbums:@[album1, album2]];
     album1.releaseDate = [date dateByAddingTimeInterval:1];
 
-    XCTAssertEqual(self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters.count, 0);
-    XCTAssertEqual(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.count, 0);
-
-    NSArray *expected = @[@[self.controller, album1, @0]];
-    XCTAssertEqualObjects(self.relationalCollectionControllerRemovedObjectAtIndexParameters, expected);
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"remove", self.controller, album1, @0],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
 - (void)testOverlappingKeypathsOnUpdate {
@@ -517,43 +477,46 @@
     [self.artist setAlbums:@[album1, album2]];
     album1.releaseDate = [date dateByAddingTimeInterval:4];
 
-    NSArray *expected = @[@[self.controller, album1, @0, @1]];
-    XCTAssertEqualObjects(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters, expected);
-
-    expected = @[@[self.controller, album1, @1, @"releaseDate"]];
-    XCTAssertEqualObjects(self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters, expected);
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"move", self.controller, album1, @0, @1],
+                          @[@"didChange", self.controller],
+                          @[@"willChange", self.controller],
+                          @[@"update", self.controller, album1, @1, @"releaseDate"],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
+
 
 // Delegate methods
 
 - (void)relationalCollectionControllerWillChangeContent:(MZRelationalCollectionController *)controller
 {
-    [self.relationalCollectionControllerWillChangeContentParameters addObject:@[controller]];
+    [self.delegateCalls addObject:@[@"willChange", controller]];
 }
 
 - (void)relationalCollectionControllerDidChangeContent:(MZRelationalCollectionController *)controller
 {
-    [self.relationalCollectionControllerDidChangeContentParameters addObject:@[controller]];
+    [self.delegateCalls addObject:@[@"didChange", controller]];
 }
 
 - (void)relationalCollectionController:(MZRelationalCollectionController *)controller insertedObject:(id)object atIndex:(NSUInteger)index
 {
-    [self.relationalCollectionControllerInsertedObjectAtIndexParameters addObject:@[controller, object, @(index)]];
+    [self.delegateCalls addObject:@[@"insert", controller, object, @(index)]];
 }
 
 - (void)relationalCollectionController:(MZRelationalCollectionController *)controller removedObject:(id)object atIndex:(NSUInteger)index
 {
-    [self.relationalCollectionControllerRemovedObjectAtIndexParameters addObject:@[controller, object, @(index)]];
+    [self.delegateCalls addObject:@[@"remove", controller, object, @(index)]];
 }
 
 - (void)relationalCollectionController:(MZRelationalCollectionController *)controller movedObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex
 {
-    [self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters addObject:@[controller, object, @(fromIndex), @(toIndex)]];
+    [self.delegateCalls addObject:@[@"move", controller, object, @(fromIndex), @(toIndex)]];
 }
 
 - (void)relationalCollectionController:(MZRelationalCollectionController *)controller updatedObject:(id)object atIndex:(NSUInteger)index changedKeyPath:(NSString *)keyPath
 {
-    [self.relationalCollectionControllerUpdatedObjectAtIndexChangedKeyPathParameters addObject:@[controller, object, @(index), keyPath]];
+    [self.delegateCalls addObject:@[@"update", controller, object, @(index), keyPath]];
 }
 
 @end
@@ -580,10 +543,10 @@
     [self.artist setAlbums:@[album1, album2, album3]];
     [[self.artist mutableArrayValueForKey:@"albums"] exchangeObjectAtIndex:0 withObjectAtIndex:2];
 
-    XCTAssertEqual(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.count, 1);
-    NSArray *expected = @[self.controller, album1, @0, @2];
-    XCTAssertEqualObjects(self.relationalCollectionControllerMovedObjectFromIndexToIndexParameters.firstObject, expected);
-    expected = @[album2, album3, album1];
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"move", self.controller, album1, @0, @2],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
 @end
