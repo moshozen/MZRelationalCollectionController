@@ -9,15 +9,16 @@
 
 #import "NSPredicate+KeypathExtraction.h"
 
-static const void *sortChangeContext = @"sortChangeContext";
-static const void *filteringPredicateContext = @"filteringPredicateContext";
-
 @interface MZRelationalCollectionController ()
 @property id object;
 @property NSString *relation;
 @property NSPredicate *filteringPredicate;
+@property NSSet *filteringChildKeyPaths;
 @property NSArray *sortDescriptors;
+@property NSSet *sortChildKeyPaths;
 @property NSArray *observedChildKeyPaths;
+@property NSSet *childKeysUniqueToCollectionObjects;
+
 @property NSMutableArray *mutableCollection;
 @property NSIndexSet *lastExchangedIndexSet;
 @end
@@ -33,8 +34,13 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
         self.object = object;
         self.relation = key;
         self.filteringPredicate = filteringPredicate ?: [NSPredicate predicateWithValue:YES];
+        self.filteringChildKeyPaths = [self.filteringPredicate mz_referencedKeyPaths];
         self.sortDescriptors = sortDescriptors;
+        self.sortChildKeyPaths = [NSSet setWithArray:[sortDescriptors valueForKey:@"key"]];
         self.observedChildKeyPaths = childKeyPaths;
+        NSMutableSet *childKeysUniqueToCollectionObjects = [[[NSSet setWithArray:self.observedChildKeyPaths] setByAddingObjectsFromSet:self.sortChildKeyPaths] mutableCopy];
+        [childKeysUniqueToCollectionObjects minusSet:self.filteringChildKeyPaths];
+        self.childKeysUniqueToCollectionObjects = childKeysUniqueToCollectionObjects;
         self.delegate = delegate;
         [self.object addObserver:self forKeyPath:key options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     }
@@ -62,15 +68,19 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == self.object) {
         [self handleChangeToRootObject:change];
-    }
-    if (context == filteringPredicateContext) { // Safe to compare pointers since it's a const
-        [self handleChangeToFilterKeypathsFromObject:object];
-    }
-    if (context == sortChangeContext) { // Safe to compare pointers since it's a const
-        [self handleChangeToSortOrderFromCollectionObject:object];
-    }
-    if (object != self.object && context == nil) {
-        [self handleChangeToCollectionObject:object forKeyPath:keyPath change:change];
+    } else {
+        BOOL collectionChanged = NO;
+        if ([self.filteringChildKeyPaths containsObject:keyPath]) {
+            collectionChanged = [self handleChangeToFilterKeypathsFromObject:object];
+        }
+        if (!collectionChanged) {
+            if ([self.sortChildKeyPaths containsObject:keyPath]) {
+                [self handleChangeToSortOrderFromCollectionObject:object];
+            }
+            if ([self.observedChildKeyPaths containsObject:keyPath]) {
+                [self handleChangeToCollectionObject:object forKeyPath:keyPath change:change];
+            }
+        }
     }
 }
 
@@ -195,7 +205,7 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
     }
 }
 
-- (void)handleChangeToFilterKeypathsFromObject:(id)object {
+- (BOOL)handleChangeToFilterKeypathsFromObject:(id)object {
     if ([self.collection containsObject:object] && ![self.filteringPredicate evaluateWithObject:object]) {
         if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
             [self.delegate relationalCollectionControllerWillChangeContent:self];
@@ -209,6 +219,7 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
         if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
             [self.delegate relationalCollectionControllerDidChangeContent:self];
         }
+        return YES;
     } else if (![self.collection containsObject:object] && [self.filteringPredicate evaluateWithObject:object]) {
         if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
             [self.delegate relationalCollectionControllerWillChangeContent:self];
@@ -222,6 +233,9 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
         if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
             [self.delegate relationalCollectionControllerDidChangeContent:self];
         }
+        return YES;
+    } else {
+        return NO;
     }
 }
 
@@ -243,41 +257,27 @@ static const void *filteringPredicateContext = @"filteringPredicateContext";
 #pragma mark - Setup and teardown of object observation
 
 - (void)startObservingRelationObject:(id)object {
-    for (NSString *keypath in self.childKeyPathsForFilter) {
-        [object addObserver:self forKeyPath:keypath options:0 context:(void *)filteringPredicateContext];
+    for (NSString *keypath in self.filteringChildKeyPaths) {
+        [object addObserver:self forKeyPath:keypath options:0 context:nil];
     }
 }
 
 - (void)stopObservingRelationObject:(id)object {
-    for (NSString *keypath in self.childKeyPathsForFilter) {
-        [object removeObserver:self forKeyPath:keypath context:(void *)filteringPredicateContext];
+    for (NSString *keypath in self.filteringChildKeyPaths) {
+        [object removeObserver:self forKeyPath:keypath context:nil];
     }
 }
 
 - (void)startObservingCollectionObject:(id)object {
-    for (NSString *keypath in self.observedChildKeyPaths) {
+    for (NSString *keypath in self.childKeysUniqueToCollectionObjects) {
         [object addObserver:self forKeyPath:keypath options:0 context:nil];
-    }
-    for (NSString *keypath in self.childKeyPathsForSort) {
-        [object addObserver:self forKeyPath:keypath options:0 context:(void *)sortChangeContext];
     }
 }
 
 - (void)stopObservingCollectionObject:(id)object {
-    for (NSString *keypath in self.observedChildKeyPaths) {
+    for (NSString *keypath in self.childKeysUniqueToCollectionObjects) {
         [object removeObserver:self forKeyPath:keypath context:nil];
     }
-    for (NSString *keypath in self.childKeyPathsForSort) {
-        [object removeObserver:self forKeyPath:keypath context:(void *)sortChangeContext];
-    }
-}
-
-- (NSSet *)childKeyPathsForFilter {
-    return [self.filteringPredicate mz_referencedKeyPaths];
-}
-
-- (NSArray *)childKeyPathsForSort {
-    return [self.sortDescriptors valueForKey:@"key"];
 }
 
 @end
