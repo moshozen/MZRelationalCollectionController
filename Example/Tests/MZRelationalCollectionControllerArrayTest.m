@@ -22,12 +22,6 @@
 - (void)setUp {
     [super setUp];
     self.artist = [ArrayArtist new];
-    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
-                                                                               onObject:self.artist
-                                                                             filteredBy:[NSPredicate predicateWithFormat:@"liveAlbum != YES"]
-                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
-                                                                 observingChildKeyPaths:@[@"title"]
-                                                                               delegate:nil];
 }
 
 @end
@@ -36,6 +30,16 @@
 @end
 
 @implementation MZRelationalCollectionControllerMembershipArrayTest
+
+- (void)setUp {
+    [super setUp];
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:[NSPredicate predicateWithFormat:@"liveAlbum != YES"]
+                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
+                                                                 observingChildKeyPaths:@[@"title"]
+                                                                               delegate:nil];
+}
 
 - (void)testAssignment {
     Album *album = [Album new];
@@ -304,8 +308,56 @@
 - (void)setUp {
     [super setUp];
     self.artist.albums = @[];
-    self.controller.delegate = self;
     self.delegateCalls = [NSMutableArray array];
+}
+
+// Delegate methods
+
+- (void)relationalCollectionControllerWillChangeContent:(MZRelationalCollectionController *)controller
+{
+    [self.delegateCalls addObject:@[@"willChange", controller]];
+}
+
+- (void)relationalCollectionControllerDidChangeContent:(MZRelationalCollectionController *)controller
+{
+    [self.delegateCalls addObject:@[@"didChange", controller]];
+}
+
+- (void)relationalCollectionController:(MZRelationalCollectionController *)controller insertedObject:(id)object atIndex:(NSUInteger)index
+{
+    [self.delegateCalls addObject:@[@"insert", controller, object, @(index)]];
+}
+
+- (void)relationalCollectionController:(MZRelationalCollectionController *)controller removedObject:(id)object atIndex:(NSUInteger)index
+{
+    [self.delegateCalls addObject:@[@"remove", controller, object, @(index)]];
+}
+
+- (void)relationalCollectionController:(MZRelationalCollectionController *)controller movedObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex
+{
+    [self.delegateCalls addObject:@[@"move", controller, object, @(fromIndex), @(toIndex)]];
+}
+
+- (void)relationalCollectionController:(MZRelationalCollectionController *)controller updatedObject:(id)object atIndex:(NSUInteger)index changedKeyPath:(NSString *)keyPath
+{
+    [self.delegateCalls addObject:@[@"update", controller, object, @(index), keyPath]];
+}
+
+@end
+
+@interface MZRelationalCollectionControllerMembershipDelegateArrayTest : MZRelationalCollectionControllerDelegateArrayTest
+@end
+
+@implementation MZRelationalCollectionControllerMembershipDelegateArrayTest
+
+- (void)setUp {
+    [super setUp];
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:[NSPredicate predicateWithFormat:@"liveAlbum != YES"]
+                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
+                                                                 observingChildKeyPaths:@[@"title"]
+                                                                               delegate:self];
 }
 
 - (void)testRelationalCollectionControllerInsertedObjectAtIndex {
@@ -414,22 +466,33 @@
     XCTAssertEqualObjects(self.delegateCalls, expected);
 }
 
-- (void)testOverlappingKeypathsOnInsertion {
-    NSDate *date = [NSDate date];
+@end
+
+@interface MZRelationalCollectionControllerOverlappingKeypathsDelegateArrayTest : MZRelationalCollectionControllerDelegateArrayTest
+@property NSDate *date;
+@end
+
+@implementation MZRelationalCollectionControllerOverlappingKeypathsDelegateArrayTest
+
+- (void)setUp {
+    [super setUp];
+    self.date = [NSDate date];
     self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
                                                                                onObject:self.artist
-                                                                             filteredBy:[NSPredicate predicateWithFormat:@"releaseDate > %@", [date dateByAddingTimeInterval:1]]
+                                                                             filteredBy:[NSPredicate predicateWithFormat:@"releaseDate > %@", [self.date dateByAddingTimeInterval:1]]
                                                                                sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
                                                                  observingChildKeyPaths:@[@"releaseDate"]
                                                                                delegate:self];
+}
 
+- (void)testOverlappingKeypathsOnInsertion {
     Album *album1 = [Album new];
-    album1.releaseDate = [date dateByAddingTimeInterval:0];
+    album1.releaseDate = [self.date dateByAddingTimeInterval:0];
     Album *album2 = [Album new];
-    album2.releaseDate = [date dateByAddingTimeInterval:1];
+    album2.releaseDate = [self.date dateByAddingTimeInterval:1];
 
     [self.artist setAlbums:@[album1, album2]];
-    album1.releaseDate = [date dateByAddingTimeInterval:2];
+    album1.releaseDate = [self.date dateByAddingTimeInterval:2];
 
     NSArray *expected = @[@[@"willChange", self.controller],
                           @[@"insert", self.controller, album1, @0],
@@ -438,21 +501,13 @@
 }
 
 - (void)testOverlappingKeypathsOnDeletion {
-    NSDate *date = [NSDate date];
-    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
-                                                                               onObject:self.artist
-                                                                             filteredBy:[NSPredicate predicateWithFormat:@"releaseDate > %@", [date dateByAddingTimeInterval:1]]
-                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
-                                                                 observingChildKeyPaths:@[@"releaseDate"]
-                                                                               delegate:self];
-
     Album *album1 = [Album new];
-    album1.releaseDate = [date dateByAddingTimeInterval:2];
+    album1.releaseDate = [self.date dateByAddingTimeInterval:2];
     Album *album2 = [Album new];
-    album2.releaseDate = [date dateByAddingTimeInterval:3];
+    album2.releaseDate = [self.date dateByAddingTimeInterval:3];
 
     [self.artist setAlbums:@[album1, album2]];
-    album1.releaseDate = [date dateByAddingTimeInterval:1];
+    album1.releaseDate = [self.date dateByAddingTimeInterval:1];
 
     NSArray *expected = @[@[@"willChange", self.controller],
                           @[@"remove", self.controller, album1, @0],
@@ -461,21 +516,13 @@
 }
 
 - (void)testOverlappingKeypathsOnUpdate {
-    NSDate *date = [NSDate date];
-    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
-                                                                               onObject:self.artist
-                                                                             filteredBy:[NSPredicate predicateWithFormat:@"releaseDate > %@", [date dateByAddingTimeInterval:1]]
-                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
-                                                                 observingChildKeyPaths:@[@"releaseDate"]
-                                                                               delegate:self];
-
     Album *album1 = [Album new];
-    album1.releaseDate = [date dateByAddingTimeInterval:2];
+    album1.releaseDate = [self.date dateByAddingTimeInterval:2];
     Album *album2 = [Album new];
-    album2.releaseDate = [date dateByAddingTimeInterval:3];
+    album2.releaseDate = [self.date dateByAddingTimeInterval:3];
 
     [self.artist setAlbums:@[album1, album2]];
-    album1.releaseDate = [date dateByAddingTimeInterval:4];
+    album1.releaseDate = [self.date dateByAddingTimeInterval:4];
 
     NSArray *expected = @[@[@"willChange", self.controller],
                           @[@"move", self.controller, album1, @0, @1],
@@ -484,39 +531,6 @@
                           @[@"update", self.controller, album1, @1, @"releaseDate"],
                           @[@"didChange", self.controller]];
     XCTAssertEqualObjects(self.delegateCalls, expected);
-}
-
-
-// Delegate methods
-
-- (void)relationalCollectionControllerWillChangeContent:(MZRelationalCollectionController *)controller
-{
-    [self.delegateCalls addObject:@[@"willChange", controller]];
-}
-
-- (void)relationalCollectionControllerDidChangeContent:(MZRelationalCollectionController *)controller
-{
-    [self.delegateCalls addObject:@[@"didChange", controller]];
-}
-
-- (void)relationalCollectionController:(MZRelationalCollectionController *)controller insertedObject:(id)object atIndex:(NSUInteger)index
-{
-    [self.delegateCalls addObject:@[@"insert", controller, object, @(index)]];
-}
-
-- (void)relationalCollectionController:(MZRelationalCollectionController *)controller removedObject:(id)object atIndex:(NSUInteger)index
-{
-    [self.delegateCalls addObject:@[@"remove", controller, object, @(index)]];
-}
-
-- (void)relationalCollectionController:(MZRelationalCollectionController *)controller movedObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex
-{
-    [self.delegateCalls addObject:@[@"move", controller, object, @(fromIndex), @(toIndex)]];
-}
-
-- (void)relationalCollectionController:(MZRelationalCollectionController *)controller updatedObject:(id)object atIndex:(NSUInteger)index changedKeyPath:(NSString *)keyPath
-{
-    [self.delegateCalls addObject:@[@"update", controller, object, @(index), keyPath]];
 }
 
 @end
