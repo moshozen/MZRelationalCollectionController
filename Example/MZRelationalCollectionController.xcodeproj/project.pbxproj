@@ -126,18 +126,10 @@
 		405E7ED21C09390E007C7A82 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				405E7ED41C093943007C7A82 /* MZAlbumEditViewController.h */,
-				405E7ED51C093943007C7A82 /* MZAlbumEditViewController.m */,
-				405E7ED61C093943007C7A82 /* MZAlbumTableViewController.h */,
-				405E7ED71C093943007C7A82 /* MZAlbumTableViewController.m */,
-				405E7ED81C093943007C7A82 /* MZArtistEditViewController.h */,
-				405E7ED91C093943007C7A82 /* MZArtistEditViewController.m */,
-				405E7EDA1C093943007C7A82 /* MZArtistTableViewController.h */,
-				405E7EDB1C093943007C7A82 /* MZArtistTableViewController.m */,
-				405E7EDC1C093943007C7A82 /* MZCatalogueTableViewController.h */,
-				405E7EDD1C093943007C7A82 /* MZCatalogueTableViewController.m */,
-				405E7EDE1C093943007C7A82 /* MZTrackEditViewController.h */,
-				405E7EDF1C093943007C7A82 /* MZTrackEditViewController.m */,
+				405E7EFB1C093A70007C7A82 /* Catalogue */,
+				405E7EFC1C093A7B007C7A82 /* Artist */,
+				405E7EFD1C093A94007C7A82 /* Album */,
+				405E7EFE1C093A9B007C7A82 /* Track */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -145,25 +137,65 @@
 		405E7ED31C093924007C7A82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				405E7EE61C093954007C7A82 /* Album.h */,
-				405E7EE71C093954007C7A82 /* Album.m */,
-				405E7EE81C093954007C7A82 /* ArrayArtist.h */,
-				405E7EE91C093954007C7A82 /* ArrayArtist.m */,
-				405E7EEA1C093954007C7A82 /* Artist.h */,
-				405E7EEB1C093954007C7A82 /* Artist.m */,
 				405E7EEC1C093954007C7A82 /* Catalogue.h */,
 				405E7EED1C093954007C7A82 /* Catalogue.m */,
+				405E7EEA1C093954007C7A82 /* Artist.h */,
+				405E7EEB1C093954007C7A82 /* Artist.m */,
+				405E7EE81C093954007C7A82 /* ArrayArtist.h */,
+				405E7EE91C093954007C7A82 /* ArrayArtist.m */,
+				405E7EE61C093954007C7A82 /* Album.h */,
+				405E7EE71C093954007C7A82 /* Album.m */,
 				405E7EEE1C093954007C7A82 /* Song.h */,
 				405E7EEF1C093954007C7A82 /* Song.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
+		405E7EFB1C093A70007C7A82 /* Catalogue */ = {
+			isa = PBXGroup;
+			children = (
+				405E7EDC1C093943007C7A82 /* MZCatalogueTableViewController.h */,
+				405E7EDD1C093943007C7A82 /* MZCatalogueTableViewController.m */,
+			);
+			name = Catalogue;
+			sourceTree = "<group>";
+		};
+		405E7EFC1C093A7B007C7A82 /* Artist */ = {
+			isa = PBXGroup;
+			children = (
+				405E7EDA1C093943007C7A82 /* MZArtistTableViewController.h */,
+				405E7EDB1C093943007C7A82 /* MZArtistTableViewController.m */,
+				405E7ED81C093943007C7A82 /* MZArtistEditViewController.h */,
+				405E7ED91C093943007C7A82 /* MZArtistEditViewController.m */,
+			);
+			name = Artist;
+			sourceTree = "<group>";
+		};
+		405E7EFD1C093A94007C7A82 /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				405E7ED61C093943007C7A82 /* MZAlbumTableViewController.h */,
+				405E7ED71C093943007C7A82 /* MZAlbumTableViewController.m */,
+				405E7ED41C093943007C7A82 /* MZAlbumEditViewController.h */,
+				405E7ED51C093943007C7A82 /* MZAlbumEditViewController.m */,
+			);
+			name = Album;
+			sourceTree = "<group>";
+		};
+		405E7EFE1C093A9B007C7A82 /* Track */ = {
+			isa = PBXGroup;
+			children = (
+				405E7EDE1C093943007C7A82 /* MZTrackEditViewController.h */,
+				405E7EDF1C093943007C7A82 /* MZTrackEditViewController.m */,
+			);
+			name = Track;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
-				6003F593195388D20070C39A /* Example for MZRelationalCollectionController */,
+				6003F593195388D20070C39A /* Example Project */,
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
@@ -193,17 +225,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6003F593195388D20070C39A /* Example for MZRelationalCollectionController */ = {
+		6003F593195388D20070C39A /* Example Project */ = {
 			isa = PBXGroup;
 			children = (
-				405E7ED31C093924007C7A82 /* Models */,
-				405E7ED21C09390E007C7A82 /* Controllers */,
 				6003F59C195388D20070C39A /* MZAppDelegate.h */,
 				6003F59D195388D20070C39A /* MZAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
+				405E7ED31C093924007C7A82 /* Models */,
+				405E7ED21C09390E007C7A82 /* Controllers */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
-			name = "Example for MZRelationalCollectionController";
+			name = "Example Project";
 			path = MZRelationalCollectionController;
 			sourceTree = "<group>";
 		};
