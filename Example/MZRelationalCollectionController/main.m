@@ -2,12 +2,11 @@
 //  main.m
 //  MZRelationalCollectionController
 //
-//  Created by Mat Trudel on 05/15/2015.
-//  Copyright (c) 2014 Mat Trudel. All rights reserved.
+//  Created by Mat Trudel on 11/27/2015.
+//  Copyright (c) 2015 Mat Trudel. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
+@import UIKit;
 #import "MZAppDelegate.h"
 
 int main(int argc, char * argv[])

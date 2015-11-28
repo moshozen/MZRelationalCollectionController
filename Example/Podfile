@@ -1,9 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
 
-target 'MZRelationalCollectionController', :exclusive => true do
+target 'MZRelationalCollectionController_Example', :exclusive => true do
   pod "MZRelationalCollectionController", :path => "../"
 end
 
-target 'Tests', :exclusive => true do
+target 'MZRelationalCollectionController_Tests', :exclusive => true do
   pod "MZRelationalCollectionController", :path => "../"
+
+  
 end

@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MZRelationalCollectionController: 6413dbc85fd6d385acf99822ff250230acad9d11
+  MZRelationalCollectionController: 8db58ad4fc26b76d6a21a4e3fd0c8a472ddf2de3
 
 COCOAPODS: 0.39.0

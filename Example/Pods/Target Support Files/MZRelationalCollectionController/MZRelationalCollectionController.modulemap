@@ -1,0 +1,6 @@
+framework module MZRelationalCollectionController {
+  umbrella header "MZRelationalCollectionController-umbrella.h"
+
+  export *
+  module * { export * }
+}

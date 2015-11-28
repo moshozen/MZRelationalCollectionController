@@ -7,36 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		400497E21B06854400FD9EFB /* MZRelationalCollectionControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 400497E11B06854400FD9EFB /* MZRelationalCollectionControllerTest.m */; };
-		402F27391C0647E80001F83B /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F27381C0647E80001F83B /* Artist.m */; };
-		402F273C1C0648140001F83B /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F273B1C0648140001F83B /* Album.m */; };
-		402F273F1C0648480001F83B /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F273E1C0648480001F83B /* Song.m */; };
-		402F27401C064E540001F83B /* MZRelationalCollectionControllerArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C471441B34706B00BEF8FD /* MZRelationalCollectionControllerArrayTest.m */; };
-		402F6E981C06552C00276647 /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F27381C0647E80001F83B /* Artist.m */; };
-		402F6E991C06552C00276647 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F273B1C0648140001F83B /* Album.m */; };
-		402F6E9A1C06552C00276647 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F273E1C0648480001F83B /* Song.m */; };
-		402F6EA01C0655F400276647 /* ArrayArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6E9F1C0655F400276647 /* ArrayArtist.m */; };
-		402F6EA11C06563800276647 /* ArrayArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6E9F1C0655F400276647 /* ArrayArtist.m */; };
-		402F6EA41C065FCA00276647 /* Catalogue.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EA31C065FCA00276647 /* Catalogue.m */; };
-		402F6EB11C0663A300276647 /* MZCatalogueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EB01C0663A300276647 /* MZCatalogueTableViewController.m */; };
-		402F6EB41C0663B200276647 /* MZArtistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EB31C0663B200276647 /* MZArtistTableViewController.m */; };
-		402F6EB71C0663CC00276647 /* MZAlbumTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EB61C0663CC00276647 /* MZAlbumTableViewController.m */; };
-		402F6EBE1C0753EA00276647 /* MZArtistEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EBD1C0753EA00276647 /* MZArtistEditViewController.m */; };
-		402F6EC21C07787D00276647 /* MZAlbumEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EC11C07787D00276647 /* MZAlbumEditViewController.m */; };
-		402F6EC61C078E4700276647 /* MZTrackEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402F6EC51C078E4700276647 /* MZTrackEditViewController.m */; };
+		405E7EE01C093943007C7A82 /* MZAlbumEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7ED51C093943007C7A82 /* MZAlbumEditViewController.m */; };
+		405E7EE11C093943007C7A82 /* MZAlbumTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7ED71C093943007C7A82 /* MZAlbumTableViewController.m */; };
+		405E7EE21C093943007C7A82 /* MZArtistEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7ED91C093943007C7A82 /* MZArtistEditViewController.m */; };
+		405E7EE31C093943007C7A82 /* MZArtistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7EDB1C093943007C7A82 /* MZArtistTableViewController.m */; };
+		405E7EE41C093943007C7A82 /* MZCatalogueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7EDD1C093943007C7A82 /* MZCatalogueTableViewController.m */; };
+		405E7EE51C093943007C7A82 /* MZTrackEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7EDF1C093943007C7A82 /* MZTrackEditViewController.m */; };
+		405E7EF01C093954007C7A82 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7EE71C093954007C7A82 /* Album.m */; };
+		405E7EF11C093954007C7A82 /* ArrayArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7EE91C093954007C7A82 /* ArrayArtist.m */; };
+		405E7EF21C093954007C7A82 /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7EEB1C093954007C7A82 /* Artist.m */; };
+		405E7EF31C093954007C7A82 /* Catalogue.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7EED1C093954007C7A82 /* Catalogue.m */; };
+		405E7EF41C093954007C7A82 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7EEF1C093954007C7A82 /* Song.m */; };
+		405E7EF91C093990007C7A82 /* MZRelationalCollectionControllerArrayTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7EF51C093987007C7A82 /* MZRelationalCollectionControllerArrayTest.m */; };
+		405E7EFA1C093990007C7A82 /* MZRelationalCollectionControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 405E7EF61C093987007C7A82 /* MZRelationalCollectionControllerTest.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* MZAppDelegate.m */; };
-		6003F5A1195388D20070C39A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* Main.storyboard */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		EC04169FD7CF659B34C3E8B8 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F11ABFA3E903FFE992E02699 /* libPods-Tests.a */; };
-		EDF20C842A0EC05A8AA5CE01 /* libPods-MZRelationalCollectionController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E14B359946B52A4F9CEC4698 /* libPods-MZRelationalCollectionController.a */; };
+		703360CF5D5AD1192E6D04F0 /* Pods_MZRelationalCollectionController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7146E4A7F66E9BD4CABE2FF4 /* Pods_MZRelationalCollectionController_Tests.framework */; };
+		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		AF0D9EEA6841F53AA0990E3E /* Pods_MZRelationalCollectionController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12D08854AC796B917C78912 /* Pods_MZRelationalCollectionController_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,34 +46,37 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1D7DAF1696F5EABB3A949414 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		21629699CFACD5D6769E1F22 /* MZRelationalCollectionController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MZRelationalCollectionController.podspec; path = ../MZRelationalCollectionController.podspec; sourceTree = "<group>"; };
-		400497E11B06854400FD9EFB /* MZRelationalCollectionControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRelationalCollectionControllerTest.m; sourceTree = "<group>"; };
-		402F27371C0647E80001F83B /* Artist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Artist.h; sourceTree = "<group>"; };
-		402F27381C0647E80001F83B /* Artist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Artist.m; sourceTree = "<group>"; };
-		402F273A1C0648140001F83B /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
-		402F273B1C0648140001F83B /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
-		402F273D1C0648480001F83B /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
-		402F273E1C0648480001F83B /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
-		402F6E9E1C0655F400276647 /* ArrayArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayArtist.h; sourceTree = "<group>"; };
-		402F6E9F1C0655F400276647 /* ArrayArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayArtist.m; sourceTree = "<group>"; };
-		402F6EA21C065FCA00276647 /* Catalogue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Catalogue.h; sourceTree = "<group>"; };
-		402F6EA31C065FCA00276647 /* Catalogue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Catalogue.m; sourceTree = "<group>"; };
-		402F6EAF1C0663A300276647 /* MZCatalogueTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCatalogueTableViewController.h; sourceTree = "<group>"; };
-		402F6EB01C0663A300276647 /* MZCatalogueTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCatalogueTableViewController.m; sourceTree = "<group>"; };
-		402F6EB21C0663B200276647 /* MZArtistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZArtistTableViewController.h; sourceTree = "<group>"; };
-		402F6EB31C0663B200276647 /* MZArtistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZArtistTableViewController.m; sourceTree = "<group>"; };
-		402F6EB51C0663CC00276647 /* MZAlbumTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAlbumTableViewController.h; sourceTree = "<group>"; };
-		402F6EB61C0663CC00276647 /* MZAlbumTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAlbumTableViewController.m; sourceTree = "<group>"; };
-		402F6EBC1C0753EA00276647 /* MZArtistEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZArtistEditViewController.h; sourceTree = "<group>"; };
-		402F6EBD1C0753EA00276647 /* MZArtistEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZArtistEditViewController.m; sourceTree = "<group>"; };
-		402F6EC01C07787D00276647 /* MZAlbumEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAlbumEditViewController.h; sourceTree = "<group>"; };
-		402F6EC11C07787D00276647 /* MZAlbumEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAlbumEditViewController.m; sourceTree = "<group>"; };
-		402F6EC41C078E4700276647 /* MZTrackEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZTrackEditViewController.h; sourceTree = "<group>"; };
-		402F6EC51C078E4700276647 /* MZTrackEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZTrackEditViewController.m; sourceTree = "<group>"; };
-		40C471441B34706B00BEF8FD /* MZRelationalCollectionControllerArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRelationalCollectionControllerArrayTest.m; sourceTree = "<group>"; };
-		55A57F8EEEE20464D6679E76 /* Pods-MZRelationalCollectionController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZRelationalCollectionController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MZRelationalCollectionController/Pods-MZRelationalCollectionController.debug.xcconfig"; sourceTree = "<group>"; };
-		6003F58A195388D20070C39A /* MZRelationalCollectionController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZRelationalCollectionController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0574C2FCD1DED6DC9F074CE4 /* Pods-MZRelationalCollectionController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZRelationalCollectionController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MZRelationalCollectionController_Tests/Pods-MZRelationalCollectionController_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		057980F266C82F2A61869204 /* Pods-MZRelationalCollectionController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZRelationalCollectionController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MZRelationalCollectionController_Example/Pods-MZRelationalCollectionController_Example.release.xcconfig"; sourceTree = "<group>"; };
+		178A68AE123DF5C92F915E6C /* Pods-MZRelationalCollectionController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZRelationalCollectionController_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MZRelationalCollectionController_Tests/Pods-MZRelationalCollectionController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		17B36385F072211F35406D17 /* Pods-MZRelationalCollectionController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZRelationalCollectionController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MZRelationalCollectionController_Example/Pods-MZRelationalCollectionController_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		2A587B5EB82D84CD6B3590CA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		405E7ED41C093943007C7A82 /* MZAlbumEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAlbumEditViewController.h; sourceTree = "<group>"; };
+		405E7ED51C093943007C7A82 /* MZAlbumEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAlbumEditViewController.m; sourceTree = "<group>"; };
+		405E7ED61C093943007C7A82 /* MZAlbumTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAlbumTableViewController.h; sourceTree = "<group>"; };
+		405E7ED71C093943007C7A82 /* MZAlbumTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAlbumTableViewController.m; sourceTree = "<group>"; };
+		405E7ED81C093943007C7A82 /* MZArtistEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZArtistEditViewController.h; sourceTree = "<group>"; };
+		405E7ED91C093943007C7A82 /* MZArtistEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZArtistEditViewController.m; sourceTree = "<group>"; };
+		405E7EDA1C093943007C7A82 /* MZArtistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZArtistTableViewController.h; sourceTree = "<group>"; };
+		405E7EDB1C093943007C7A82 /* MZArtistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZArtistTableViewController.m; sourceTree = "<group>"; };
+		405E7EDC1C093943007C7A82 /* MZCatalogueTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCatalogueTableViewController.h; sourceTree = "<group>"; };
+		405E7EDD1C093943007C7A82 /* MZCatalogueTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCatalogueTableViewController.m; sourceTree = "<group>"; };
+		405E7EDE1C093943007C7A82 /* MZTrackEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZTrackEditViewController.h; sourceTree = "<group>"; };
+		405E7EDF1C093943007C7A82 /* MZTrackEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZTrackEditViewController.m; sourceTree = "<group>"; };
+		405E7EE61C093954007C7A82 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		405E7EE71C093954007C7A82 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
+		405E7EE81C093954007C7A82 /* ArrayArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayArtist.h; sourceTree = "<group>"; };
+		405E7EE91C093954007C7A82 /* ArrayArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayArtist.m; sourceTree = "<group>"; };
+		405E7EEA1C093954007C7A82 /* Artist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Artist.h; sourceTree = "<group>"; };
+		405E7EEB1C093954007C7A82 /* Artist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Artist.m; sourceTree = "<group>"; };
+		405E7EEC1C093954007C7A82 /* Catalogue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Catalogue.h; sourceTree = "<group>"; };
+		405E7EED1C093954007C7A82 /* Catalogue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Catalogue.m; sourceTree = "<group>"; };
+		405E7EEE1C093954007C7A82 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		405E7EEF1C093954007C7A82 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		405E7EF51C093987007C7A82 /* MZRelationalCollectionControllerArrayTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRelationalCollectionControllerArrayTest.m; sourceTree = "<group>"; };
+		405E7EF61C093987007C7A82 /* MZRelationalCollectionControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRelationalCollectionControllerTest.m; sourceTree = "<group>"; };
+		50884B5C48A20BC948D3B8D2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		6003F58A195388D20070C39A /* MZRelationalCollectionController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZRelationalCollectionController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -87,17 +86,15 @@
 		6003F59B195388D20070C39A /* MZRelationalCollectionController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MZRelationalCollectionController-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A0195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F5AE195388D20070C39A /* MZRelationalCollectionController_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MZRelationalCollectionController_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8D957148663133CBA7970ED3 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		A7B36530B841638580479599 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
-		E14B359946B52A4F9CEC4698 /* libPods-MZRelationalCollectionController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MZRelationalCollectionController.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9617CB0C99B43112418A66D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		F11ABFA3E903FFE992E02699 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FFC9139D211AB1374FD67A9A /* Pods-MZRelationalCollectionController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZRelationalCollectionController.release.xcconfig"; path = "Pods/Target Support Files/Pods-MZRelationalCollectionController/Pods-MZRelationalCollectionController.release.xcconfig"; sourceTree = "<group>"; };
+		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		7146E4A7F66E9BD4CABE2FF4 /* Pods_MZRelationalCollectionController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MZRelationalCollectionController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B12D08854AC796B917C78912 /* Pods_MZRelationalCollectionController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MZRelationalCollectionController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC4AEEDB223EAF6E908C1EDA /* MZRelationalCollectionController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MZRelationalCollectionController.podspec; path = ../MZRelationalCollectionController.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +105,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				EDF20C842A0EC05A8AA5CE01 /* libPods-MZRelationalCollectionController.a in Frameworks */,
+				AF0D9EEA6841F53AA0990E3E /* Pods_MZRelationalCollectionController_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,109 +116,66 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				EC04169FD7CF659B34C3E8B8 /* libPods-Tests.a in Frameworks */,
+				703360CF5D5AD1192E6D04F0 /* Pods_MZRelationalCollectionController_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		400497EC1B0686B600FD9EFB /* Models */ = {
+		405E7ED21C09390E007C7A82 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				402F6EA21C065FCA00276647 /* Catalogue.h */,
-				402F6EA31C065FCA00276647 /* Catalogue.m */,
-				402F27371C0647E80001F83B /* Artist.h */,
-				402F27381C0647E80001F83B /* Artist.m */,
-				402F6E9E1C0655F400276647 /* ArrayArtist.h */,
-				402F6E9F1C0655F400276647 /* ArrayArtist.m */,
-				402F273A1C0648140001F83B /* Album.h */,
-				402F273B1C0648140001F83B /* Album.m */,
-				402F273D1C0648480001F83B /* Song.h */,
-				402F273E1C0648480001F83B /* Song.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		402F6EA51C0662F000276647 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				402F6EBA1C0753B500276647 /* Catalogue */,
-				402F6EBB1C0753BE00276647 /* Artist */,
-				402F6EBF1C07784E00276647 /* Album */,
-				402F6EC31C078E3700276647 /* Track */,
+				405E7ED41C093943007C7A82 /* MZAlbumEditViewController.h */,
+				405E7ED51C093943007C7A82 /* MZAlbumEditViewController.m */,
+				405E7ED61C093943007C7A82 /* MZAlbumTableViewController.h */,
+				405E7ED71C093943007C7A82 /* MZAlbumTableViewController.m */,
+				405E7ED81C093943007C7A82 /* MZArtistEditViewController.h */,
+				405E7ED91C093943007C7A82 /* MZArtistEditViewController.m */,
+				405E7EDA1C093943007C7A82 /* MZArtistTableViewController.h */,
+				405E7EDB1C093943007C7A82 /* MZArtistTableViewController.m */,
+				405E7EDC1C093943007C7A82 /* MZCatalogueTableViewController.h */,
+				405E7EDD1C093943007C7A82 /* MZCatalogueTableViewController.m */,
+				405E7EDE1C093943007C7A82 /* MZTrackEditViewController.h */,
+				405E7EDF1C093943007C7A82 /* MZTrackEditViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		402F6EBA1C0753B500276647 /* Catalogue */ = {
+		405E7ED31C093924007C7A82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				402F6EAF1C0663A300276647 /* MZCatalogueTableViewController.h */,
-				402F6EB01C0663A300276647 /* MZCatalogueTableViewController.m */,
+				405E7EE61C093954007C7A82 /* Album.h */,
+				405E7EE71C093954007C7A82 /* Album.m */,
+				405E7EE81C093954007C7A82 /* ArrayArtist.h */,
+				405E7EE91C093954007C7A82 /* ArrayArtist.m */,
+				405E7EEA1C093954007C7A82 /* Artist.h */,
+				405E7EEB1C093954007C7A82 /* Artist.m */,
+				405E7EEC1C093954007C7A82 /* Catalogue.h */,
+				405E7EED1C093954007C7A82 /* Catalogue.m */,
+				405E7EEE1C093954007C7A82 /* Song.h */,
+				405E7EEF1C093954007C7A82 /* Song.m */,
 			);
-			name = Catalogue;
-			sourceTree = "<group>";
-		};
-		402F6EBB1C0753BE00276647 /* Artist */ = {
-			isa = PBXGroup;
-			children = (
-				402F6EB21C0663B200276647 /* MZArtistTableViewController.h */,
-				402F6EB31C0663B200276647 /* MZArtistTableViewController.m */,
-				402F6EBC1C0753EA00276647 /* MZArtistEditViewController.h */,
-				402F6EBD1C0753EA00276647 /* MZArtistEditViewController.m */,
-			);
-			name = Artist;
-			sourceTree = "<group>";
-		};
-		402F6EBF1C07784E00276647 /* Album */ = {
-			isa = PBXGroup;
-			children = (
-				402F6EB51C0663CC00276647 /* MZAlbumTableViewController.h */,
-				402F6EB61C0663CC00276647 /* MZAlbumTableViewController.m */,
-				402F6EC01C07787D00276647 /* MZAlbumEditViewController.h */,
-				402F6EC11C07787D00276647 /* MZAlbumEditViewController.m */,
-			);
-			name = Album;
-			sourceTree = "<group>";
-		};
-		402F6EC31C078E3700276647 /* Track */ = {
-			isa = PBXGroup;
-			children = (
-				402F6EC41C078E4700276647 /* MZTrackEditViewController.h */,
-				402F6EC51C078E4700276647 /* MZTrackEditViewController.m */,
-			);
-			name = Track;
-			sourceTree = "<group>";
-		};
-		4999F2CFC78CEECA22FB2317 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				55A57F8EEEE20464D6679E76 /* Pods-MZRelationalCollectionController.debug.xcconfig */,
-				FFC9139D211AB1374FD67A9A /* Pods-MZRelationalCollectionController.release.xcconfig */,
-				8D957148663133CBA7970ED3 /* Pods-Tests.debug.xcconfig */,
-				A7B36530B841638580479599 /* Pods-Tests.release.xcconfig */,
-			);
-			name = Pods;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
-				6003F593195388D20070C39A /* MZRelationalCollectionController */,
+				6003F593195388D20070C39A /* Example for MZRelationalCollectionController */,
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				4999F2CFC78CEECA22FB2317 /* Pods */,
+				D255031833AFDE501ABFC4E2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F58A195388D20070C39A /* MZRelationalCollectionController.app */,
-				6003F5AE195388D20070C39A /* Tests.xctest */,
+				6003F58A195388D20070C39A /* MZRelationalCollectionController_Example.app */,
+				6003F5AE195388D20070C39A /* MZRelationalCollectionController_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,22 +187,23 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				E14B359946B52A4F9CEC4698 /* libPods-MZRelationalCollectionController.a */,
-				F11ABFA3E903FFE992E02699 /* libPods-Tests.a */,
+				B12D08854AC796B917C78912 /* Pods_MZRelationalCollectionController_Example.framework */,
+				7146E4A7F66E9BD4CABE2FF4 /* Pods_MZRelationalCollectionController_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6003F593195388D20070C39A /* MZRelationalCollectionController */ = {
+		6003F593195388D20070C39A /* Example for MZRelationalCollectionController */ = {
 			isa = PBXGroup;
 			children = (
+				405E7ED31C093924007C7A82 /* Models */,
+				405E7ED21C09390E007C7A82 /* Controllers */,
 				6003F59C195388D20070C39A /* MZAppDelegate.h */,
 				6003F59D195388D20070C39A /* MZAppDelegate.m */,
-				6003F59F195388D20070C39A /* Main.storyboard */,
-				400497EC1B0686B600FD9EFB /* Models */,
-				402F6EA51C0662F000276647 /* Controllers */,
+				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
+			name = "Example for MZRelationalCollectionController";
 			path = MZRelationalCollectionController;
 			sourceTree = "<group>";
 		};
@@ -266,8 +221,8 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				40C471441B34706B00BEF8FD /* MZRelationalCollectionControllerArrayTest.m */,
-				400497E11B06854400FD9EFB /* MZRelationalCollectionControllerTest.m */,
+				405E7EF51C093987007C7A82 /* MZRelationalCollectionControllerArrayTest.m */,
+				405E7EF61C093987007C7A82 /* MZRelationalCollectionControllerTest.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -278,6 +233,7 @@
 			children = (
 				6003F5B7195388D20070C39A /* Tests-Info.plist */,
 				6003F5B8195388D20070C39A /* InfoPlist.strings */,
+				606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -285,55 +241,66 @@
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				21629699CFACD5D6769E1F22 /* MZRelationalCollectionController.podspec */,
-				E9617CB0C99B43112418A66D /* README.md */,
-				1D7DAF1696F5EABB3A949414 /* LICENSE */,
+				CC4AEEDB223EAF6E908C1EDA /* MZRelationalCollectionController.podspec */,
+				2A587B5EB82D84CD6B3590CA /* README.md */,
+				50884B5C48A20BC948D3B8D2 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		D255031833AFDE501ABFC4E2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				17B36385F072211F35406D17 /* Pods-MZRelationalCollectionController_Example.debug.xcconfig */,
+				057980F266C82F2A61869204 /* Pods-MZRelationalCollectionController_Example.release.xcconfig */,
+				178A68AE123DF5C92F915E6C /* Pods-MZRelationalCollectionController_Tests.debug.xcconfig */,
+				0574C2FCD1DED6DC9F074CE4 /* Pods-MZRelationalCollectionController_Tests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6003F589195388D20070C39A /* MZRelationalCollectionController */ = {
+		6003F589195388D20070C39A /* MZRelationalCollectionController_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "MZRelationalCollectionController" */;
+			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "MZRelationalCollectionController_Example" */;
 			buildPhases = (
-				D35486F31490E43634D8D824 /* Check Pods Manifest.lock */,
+				4DFF39DFBEEB973ECBA20ACE /* Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				7963011BC8981C5D93737DC8 /* Copy Pods Resources */,
-				24853EC578D6F28ED0E261EA /* Embed Pods Frameworks */,
+				B96F9D6B025A9B41F61F0900 /* Embed Pods Frameworks */,
+				64C185CA18C9AF88C6B72E71 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MZRelationalCollectionController;
+			name = MZRelationalCollectionController_Example;
 			productName = MZRelationalCollectionController;
-			productReference = 6003F58A195388D20070C39A /* MZRelationalCollectionController.app */;
+			productReference = 6003F58A195388D20070C39A /* MZRelationalCollectionController_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6003F5AD195388D20070C39A /* Tests */ = {
+		6003F5AD195388D20070C39A /* MZRelationalCollectionController_Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "MZRelationalCollectionController_Tests" */;
 			buildPhases = (
-				FB9DECA77847EE4D814D78D9 /* Check Pods Manifest.lock */,
+				9F80B2F96646D85607831A68 /* Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				E196A4F35E409B6FA6AA8551 /* Copy Pods Resources */,
-				853B7FA07E0A56DC013C0888 /* Embed Pods Frameworks */,
+				E02533482584C9B6943D4C93 /* Embed Pods Frameworks */,
+				052BCA475225D137F27CF0C5 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				6003F5B4195388D20070C39A /* PBXTargetDependency */,
 			);
-			name = Tests;
+			name = MZRelationalCollectionController_Tests;
 			productName = MZRelationalCollectionControllerTests;
-			productReference = 6003F5AE195388D20070C39A /* Tests.xctest */;
+			productReference = 6003F5AE195388D20070C39A /* MZRelationalCollectionController_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -345,6 +312,11 @@
 				CLASSPREFIX = MZ;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Mat Trudel";
+				TargetAttributes = {
+					6003F5AD195388D20070C39A = {
+						TestTargetID = 6003F589195388D20070C39A;
+					};
+				};
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "MZRelationalCollectionController" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -359,8 +331,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6003F589195388D20070C39A /* MZRelationalCollectionController */,
-				6003F5AD195388D20070C39A /* Tests */,
+				6003F589195388D20070C39A /* MZRelationalCollectionController_Example */,
+				6003F5AD195388D20070C39A /* MZRelationalCollectionController_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -370,7 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5A1195388D20070C39A /* Main.storyboard in Resources */,
+				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,22 +358,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		24853EC578D6F28ED0E261EA /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZRelationalCollectionController/Pods-MZRelationalCollectionController-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7963011BC8981C5D93737DC8 /* Copy Pods Resources */ = {
+		052BCA475225D137F27CF0C5 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -413,25 +370,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZRelationalCollectionController/Pods-MZRelationalCollectionController-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZRelationalCollectionController_Tests/Pods-MZRelationalCollectionController_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		853B7FA07E0A56DC013C0888 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D35486F31490E43634D8D824 /* Check Pods Manifest.lock */ = {
+		4DFF39DFBEEB973ECBA20ACE /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -446,7 +388,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E196A4F35E409B6FA6AA8551 /* Copy Pods Resources */ = {
+		64C185CA18C9AF88C6B72E71 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -458,10 +400,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZRelationalCollectionController_Example/Pods-MZRelationalCollectionController_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FB9DECA77847EE4D814D78D9 /* Check Pods Manifest.lock */ = {
+		9F80B2F96646D85607831A68 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -474,6 +416,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B96F9D6B025A9B41F61F0900 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZRelationalCollectionController_Example/Pods-MZRelationalCollectionController_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E02533482584C9B6943D4C93 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZRelationalCollectionController_Tests/Pods-MZRelationalCollectionController_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -483,19 +455,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				402F6EBE1C0753EA00276647 /* MZArtistEditViewController.m in Sources */,
-				402F6EB71C0663CC00276647 /* MZAlbumTableViewController.m in Sources */,
-				402F6EB41C0663B200276647 /* MZArtistTableViewController.m in Sources */,
-				402F273F1C0648480001F83B /* Song.m in Sources */,
+				405E7EF41C093954007C7A82 /* Song.m in Sources */,
+				405E7EF11C093954007C7A82 /* ArrayArtist.m in Sources */,
+				405E7EE21C093943007C7A82 /* MZArtistEditViewController.m in Sources */,
 				6003F59E195388D20070C39A /* MZAppDelegate.m in Sources */,
-				402F6EC61C078E4700276647 /* MZTrackEditViewController.m in Sources */,
-				402F6EA41C065FCA00276647 /* Catalogue.m in Sources */,
-				402F27391C0647E80001F83B /* Artist.m in Sources */,
-				402F6EC21C07787D00276647 /* MZAlbumEditViewController.m in Sources */,
-				402F6EB11C0663A300276647 /* MZCatalogueTableViewController.m in Sources */,
-				402F273C1C0648140001F83B /* Album.m in Sources */,
+				405E7EE41C093943007C7A82 /* MZCatalogueTableViewController.m in Sources */,
+				405E7EF21C093954007C7A82 /* Artist.m in Sources */,
+				405E7EE01C093943007C7A82 /* MZAlbumEditViewController.m in Sources */,
+				405E7EE31C093943007C7A82 /* MZArtistTableViewController.m in Sources */,
+				405E7EF31C093954007C7A82 /* Catalogue.m in Sources */,
+				405E7EE11C093943007C7A82 /* MZAlbumTableViewController.m in Sources */,
+				405E7EF01C093954007C7A82 /* Album.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				402F6EA01C0655F400276647 /* ArrayArtist.m in Sources */,
+				405E7EE51C093943007C7A82 /* MZTrackEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,12 +475,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				402F6E9A1C06552C00276647 /* Song.m in Sources */,
-				400497E21B06854400FD9EFB /* MZRelationalCollectionControllerTest.m in Sources */,
-				402F6EA11C06563800276647 /* ArrayArtist.m in Sources */,
-				402F6E981C06552C00276647 /* Artist.m in Sources */,
-				402F27401C064E540001F83B /* MZRelationalCollectionControllerArrayTest.m in Sources */,
-				402F6E991C06552C00276647 /* Album.m in Sources */,
+				405E7EF91C093990007C7A82 /* MZRelationalCollectionControllerArrayTest.m in Sources */,
+				405E7EFA1C093990007C7A82 /* MZRelationalCollectionControllerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +485,7 @@
 /* Begin PBXTargetDependency section */
 		6003F5B4195388D20070C39A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6003F589195388D20070C39A /* MZRelationalCollectionController */;
+			target = 6003F589195388D20070C39A /* MZRelationalCollectionController_Example */;
 			targetProxy = 6003F5B3195388D20070C39A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -529,14 +497,6 @@
 				6003F597195388D20070C39A /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6003F59F195388D20070C39A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6003F5A0195388D20070C39A /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		6003F5B8195388D20070C39A /* InfoPlist.strings */ = {
@@ -568,7 +528,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -625,13 +584,14 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55A57F8EEEE20464D6679E76 /* Pods-MZRelationalCollectionController.debug.xcconfig */;
+			baseConfigurationReference = 17B36385F072211F35406D17 /* Pods-MZRelationalCollectionController_Example.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MZRelationalCollectionController/MZRelationalCollectionController-Prefix.pch";
 				INFOPLIST_FILE = "MZRelationalCollectionController/MZRelationalCollectionController-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				MODULE_NAME = ExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -639,13 +599,14 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFC9139D211AB1374FD67A9A /* Pods-MZRelationalCollectionController.release.xcconfig */;
+			baseConfigurationReference = 057980F266C82F2A61869204 /* Pods-MZRelationalCollectionController_Example.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MZRelationalCollectionController/MZRelationalCollectionController-Prefix.pch";
 				INFOPLIST_FILE = "MZRelationalCollectionController/MZRelationalCollectionController-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				MODULE_NAME = ExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -653,28 +614,42 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D957148663133CBA7970ED3 /* Pods-Tests.debug.xcconfig */;
+			baseConfigurationReference = 178A68AE123DF5C92F915E6C /* Pods-MZRelationalCollectionController_Tests.debug.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MZRelationalCollectionController_Example.app/MZRelationalCollectionController_Example";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A7B36530B841638580479599 /* Pods-Tests.release.xcconfig */;
+			baseConfigurationReference = 0574C2FCD1DED6DC9F074CE4 /* Pods-MZRelationalCollectionController_Tests.release.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MZRelationalCollectionController_Example.app/MZRelationalCollectionController_Example";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -691,7 +666,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "MZRelationalCollectionController" */ = {
+		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "MZRelationalCollectionController_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C0195388D20070C39A /* Debug */,
@@ -700,7 +675,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tests" */ = {
+		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "MZRelationalCollectionController_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C3195388D20070C39A /* Debug */,
