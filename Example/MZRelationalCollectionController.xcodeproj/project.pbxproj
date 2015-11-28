@@ -618,8 +618,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17B36385F072211F35406D17 /* Pods-MZRelationalCollectionController_Example.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MZRelationalCollectionController/MZRelationalCollectionController-Prefix.pch";
 				INFOPLIST_FILE = "MZRelationalCollectionController/MZRelationalCollectionController-Info.plist";
@@ -633,8 +631,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 057980F266C82F2A61869204 /* Pods-MZRelationalCollectionController_Example.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MZRelationalCollectionController/MZRelationalCollectionController-Prefix.pch";
 				INFOPLIST_FILE = "MZRelationalCollectionController/MZRelationalCollectionController-Info.plist";
