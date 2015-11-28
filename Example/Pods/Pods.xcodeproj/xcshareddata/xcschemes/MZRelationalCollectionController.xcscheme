@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '045AB8864EA0B144CDD6D7CE'
+               BlueprintIdentifier = '69E7FCEFDFE6CF78BD5CF3C6'
                BlueprintName = 'MZRelationalCollectionController'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libMZRelationalCollectionController.a'>
