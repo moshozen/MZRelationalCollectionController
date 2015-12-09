@@ -16,7 +16,7 @@ controllers quickly and easily, helping you keep the size of your controllers
 down and letting you focus on the actual intent of your application instead of
 managing data and keeping your UI up to date.
 
-# Usage
+## Usage
 
 An `MZRelationalCollectionController` instance is constructed as in the following example:
 
@@ -64,8 +64,7 @@ town.
 
 ## Known Issues
 
-* Support for replacement operations on `NSArray` collections (ie: `
-- replaceObjectAtIndex:withObject:` and its ilk) aren't supported. Replacement
+* Support for replacement operations on `NSArray` collections (ie: `- replaceObjectAtIndex:withObject:` and its ilk) aren't supported. Replacement
 calls are tricky in general for a number of reasons, though support can be added if anyone
 needs it. In 'typical' use (i.e.: on top of Core Data) this isn't a problem since all relations
 are `NSSet` collections anyway.
