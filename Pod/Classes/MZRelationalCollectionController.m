@@ -199,9 +199,9 @@
         if ([self.delegate respondsToSelector:@selector(relationalCollectionController:movedObject:fromIndex:toIndex:)]) {
             [self.delegate relationalCollectionController:self movedObject:object fromIndex:oldIndex toIndex:newIndex];
         }
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-            [self.delegate relationalCollectionControllerDidChangeContent:self];
-        }
+    }
+    if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
+        [self.delegate relationalCollectionControllerDidChangeContent:self];
     }
 }
 
