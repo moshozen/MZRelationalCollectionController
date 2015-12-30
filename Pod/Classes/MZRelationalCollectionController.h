@@ -15,6 +15,7 @@
 - (void)relationalCollectionControllerWillChangeContent:(MZRelationalCollectionController *)controller;
 - (void)relationalCollectionControllerDidChangeContent:(MZRelationalCollectionController *)controller;
 
+- (void)relationalCollectionControllerReplacedEntireCollection:(MZRelationalCollectionController *)controller;
 - (void)relationalCollectionController:(MZRelationalCollectionController *)controller insertedObject:(id)object atIndex:(NSUInteger)index;
 - (void)relationalCollectionController:(MZRelationalCollectionController *)controller removedObject:(id)object atIndex:(NSUInteger)index;
 - (void)relationalCollectionController:(MZRelationalCollectionController *)controller movedObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;

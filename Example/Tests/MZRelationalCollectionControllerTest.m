@@ -301,6 +301,11 @@
     [self.delegateCalls addObject:@[@"didChange", controller]];
 }
 
+- (void)relationalCollectionControllerReplacedEntireCollection:(MZRelationalCollectionController *)controller
+{
+    [self.delegateCalls addObject:@[@"replacedEntireCollection", controller]];
+}
+
 - (void)relationalCollectionController:(MZRelationalCollectionController *)controller insertedObject:(id)object atIndex:(NSUInteger)index
 {
     [self.delegateCalls addObject:@[@"insert", controller, object, @(index)]];
@@ -338,6 +343,18 @@
                                                                                delegate:self];
 }
 
+- (void)testRelationalCollectionControllerReplacement {
+    Album *album = [Album new];
+    album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+
+    [self.artist setAlbums:[NSSet setWithObject:album]];
+
+    NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"replacedEntireCollection", self.controller],
+                          @[@"didChange", self.controller]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
+}
+
 - (void)testRelationalCollectionControllerInsertedObjectAtIndex {
     Album *album = [Album new];
     album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
@@ -359,6 +376,9 @@
     [[self.artist mutableSetValueForKey:@"albums"] removeObject:album];
 
     NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"replacedEntireCollection", self.controller],
+                          @[@"didChange", self.controller],
+                          @[@"willChange", self.controller],
                           @[@"remove", self.controller, album, @0],
                           @[@"didChange", self.controller]];
     XCTAssertEqualObjects(self.delegateCalls, expected);
@@ -377,6 +397,9 @@
     album1.releaseDate = [NSDate dateWithTimeIntervalSinceNow:3];
 
     NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"replacedEntireCollection", self.controller],
+                          @[@"didChange", self.controller],
+                          @[@"willChange", self.controller],
                           @[@"move", self.controller, album1, @0, @2],
                           @[@"didChange", self.controller]];
     XCTAssertEqualObjects(self.delegateCalls, expected);
@@ -391,6 +414,9 @@
     album.title = @"New Title";
 
     NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"replacedEntireCollection", self.controller],
+                          @[@"didChange", self.controller],
+                          @[@"willChange", self.controller],
                           @[@"update", self.controller, album, @0, @"title"],
                           @[@"didChange", self.controller]];
     XCTAssertEqualObjects(self.delegateCalls, expected);
@@ -405,6 +431,9 @@
     album.liveAlbum = YES;
 
     NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"replacedEntireCollection", self.controller],
+                          @[@"didChange", self.controller],
+                          @[@"willChange", self.controller],
                           @[@"remove", self.controller, album, @0],
                           @[@"didChange", self.controller]];
     XCTAssertEqualObjects(self.delegateCalls, expected);
@@ -423,6 +452,9 @@
     [[self.artist mutableSetValueForKey:@"albums"] addObject:album2];
 
     NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"replacedEntireCollection", self.controller],
+                          @[@"didChange", self.controller],
+                          @[@"willChange", self.controller],
                           @[@"didChange", self.controller]];
     XCTAssertEqualObjects(self.delegateCalls, expected);
 }
@@ -439,6 +471,9 @@
     album2.liveAlbum = NO;
 
     NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"replacedEntireCollection", self.controller],
+                          @[@"didChange", self.controller],
+                          @[@"willChange", self.controller],
                           @[@"insert", self.controller, album2, @1],
                           @[@"didChange", self.controller]];
     XCTAssertEqualObjects(self.delegateCalls, expected);
@@ -473,6 +508,9 @@
     album1.releaseDate = [self.date dateByAddingTimeInterval:2];
 
     NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"replacedEntireCollection", self.controller],
+                          @[@"didChange", self.controller],
+                          @[@"willChange", self.controller],
                           @[@"insert", self.controller, album1, @0],
                           @[@"didChange", self.controller]];
     XCTAssertEqualObjects(self.delegateCalls, expected);
@@ -488,6 +526,9 @@
     album1.releaseDate = [self.date dateByAddingTimeInterval:1];
 
     NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"replacedEntireCollection", self.controller],
+                          @[@"didChange", self.controller],
+                          @[@"willChange", self.controller],
                           @[@"remove", self.controller, album1, @0],
                           @[@"didChange", self.controller]];
     XCTAssertEqualObjects(self.delegateCalls, expected);
@@ -503,6 +544,9 @@
     album1.releaseDate = [self.date dateByAddingTimeInterval:4];
 
     NSArray *expected = @[@[@"willChange", self.controller],
+                          @[@"replacedEntireCollection", self.controller],
+                          @[@"didChange", self.controller],
+                          @[@"willChange", self.controller],
                           @[@"move", self.controller, album1, @0, @1],
                           @[@"didChange", self.controller],
                           @[@"willChange", self.controller],

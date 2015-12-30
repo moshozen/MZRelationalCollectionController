@@ -41,8 +41,8 @@
         NSMutableSet *childKeysUniqueToCollectionObjects = [[[NSSet setWithArray:self.observedChildKeyPaths] setByAddingObjectsFromSet:self.sortChildKeyPaths] mutableCopy];
         [childKeysUniqueToCollectionObjects minusSet:self.filteringChildKeyPaths];
         self.childKeysUniqueToCollectionObjects = childKeysUniqueToCollectionObjects;
-        self.delegate = delegate;
         [self.object addObserver:self forKeyPath:key options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
+        self.delegate = delegate;
     }
     return self;
 }
@@ -86,6 +86,9 @@
 
 - (void)handleChangeToRootObject:(NSDictionary *)change {
     if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeSetting) {
+        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
+            [self.delegate relationalCollectionControllerWillChangeContent:self];
+        }
         if ([change[NSKeyValueChangeOldKey] conformsToProtocol:@protocol(NSFastEnumeration)]) {
             for (id oldObj in change[NSKeyValueChangeOldKey]) {
                 [self stopObservingRelationObject:oldObj];
@@ -108,6 +111,12 @@
         }
         for (id obj in [self.object valueForKey:self.relation]) {
             [self startObservingRelationObject:obj];
+        }
+        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerReplacedEntireCollection:)]) {
+            [self.delegate relationalCollectionControllerReplacedEntireCollection:self];
+        }
+        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
+            [self.delegate relationalCollectionControllerDidChangeContent:self];
         }
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeInsertion) {
         if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
