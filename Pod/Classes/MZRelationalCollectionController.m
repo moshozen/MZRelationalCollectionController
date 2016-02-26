@@ -113,9 +113,7 @@
         if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerReplacedEntireCollection:)]) {
             [self.delegate relationalCollectionControllerReplacedEntireCollection:self];
         }
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-            [self.delegate relationalCollectionControllerDidChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerDidChangeContent];
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeInsertion) {
         [self sendRelationalCollectionControllerWillChangeContent];
         NSArray *newObjects;
@@ -137,9 +135,7 @@
                 [self startObservingRelationObject:obj];
             }
         }
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-            [self.delegate relationalCollectionControllerDidChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerDidChangeContent];
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeRemoval) {
         [self sendRelationalCollectionControllerWillChangeContent];
         NSArray *oldObjects;
@@ -163,9 +159,7 @@
                 [self.delegate relationalCollectionController:self removedObject:oldIndexMap[oldIndex] atIndex:oldIndex.integerValue];
             }
         }
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-            [self.delegate relationalCollectionControllerDidChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerDidChangeContent];
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeReplacement) {
         if (!self.sortDescriptors) {
             if (self.lastExchangedIndexSet) {
@@ -179,9 +173,7 @@
                     [self.delegate relationalCollectionController:self movedObject:object fromIndex:oldIndex toIndex:newIndex];
                 }
                 self.lastExchangedIndexSet = nil;
-                if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-                    [self.delegate relationalCollectionControllerDidChangeContent:self];
-                }
+                [self sendRelationalCollectionControllerDidChangeContent];
             } else {
                 self.lastExchangedIndexSet = change[NSKeyValueChangeIndexesKey];
             }
@@ -199,9 +191,7 @@
             [self.delegate relationalCollectionController:self movedObject:object fromIndex:oldIndex toIndex:newIndex];
         }
     }
-    if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-        [self.delegate relationalCollectionControllerDidChangeContent:self];
-    }
+    [self sendRelationalCollectionControllerDidChangeContent];
 }
 
 - (BOOL)handleChangeToFilterKeypathsFromObject:(id)object {
@@ -213,9 +203,7 @@
         if ([self.delegate respondsToSelector:@selector(relationalCollectionController:removedObject:atIndex:)]) {
             [self.delegate relationalCollectionController:self removedObject:object atIndex:oldIndex];
         }
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-            [self.delegate relationalCollectionControllerDidChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerDidChangeContent];
         return YES;
     } else if (![self.collection containsObject:object] && [self.filteringPredicate evaluateWithObject:object]) {
         [self sendRelationalCollectionControllerWillChangeContent];
@@ -225,9 +213,7 @@
         if ([self.delegate respondsToSelector:@selector(relationalCollectionController:insertedObject:atIndex:)]) {
             [self.delegate relationalCollectionController:self insertedObject:object atIndex:[self.mutableCollection indexOfObject:object]];
         }
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-            [self.delegate relationalCollectionControllerDidChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerDidChangeContent];
         return YES;
     } else {
         return NO;
@@ -241,9 +227,7 @@
         if ([self.delegate respondsToSelector:@selector(relationalCollectionController:updatedObject:atIndex:changedKeyPath:)]) {
             [self.delegate relationalCollectionController:self updatedObject:object atIndex:index changedKeyPath:keyPath];
         }
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-            [self.delegate relationalCollectionControllerDidChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerDidChangeContent];
     }
 }
 
@@ -280,4 +264,10 @@
         [self.delegate relationalCollectionControllerWillChangeContent:self];
     }
 }
+- (void)sendRelationalCollectionControllerDidChangeContent {
+    if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
+        [self.delegate relationalCollectionControllerDidChangeContent:self];
+    }
+}
+
 @end
