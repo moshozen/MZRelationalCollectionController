@@ -86,9 +86,7 @@
 
 - (void)handleChangeToRootObject:(NSDictionary *)change {
     if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeSetting) {
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-            [self.delegate relationalCollectionControllerWillChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerWillChangeContent];
         if ([change[NSKeyValueChangeOldKey] conformsToProtocol:@protocol(NSFastEnumeration)]) {
             for (id oldObj in change[NSKeyValueChangeOldKey]) {
                 [self stopObservingRelationObject:oldObj];
@@ -119,9 +117,7 @@
             [self.delegate relationalCollectionControllerDidChangeContent:self];
         }
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeInsertion) {
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-            [self.delegate relationalCollectionControllerWillChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerWillChangeContent];
         NSArray *newObjects;
         if ([change[NSKeyValueChangeNewKey] isKindOfClass:[NSSet class]]) {
             newObjects = [[change[NSKeyValueChangeNewKey] filteredSetUsingPredicate:self.filteringPredicate] allObjects];
@@ -145,9 +141,7 @@
             [self.delegate relationalCollectionControllerDidChangeContent:self];
         }
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeRemoval) {
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-            [self.delegate relationalCollectionControllerWillChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerWillChangeContent];
         NSArray *oldObjects;
         if ([change[NSKeyValueChangeOldKey] isKindOfClass:[NSSet class]]) {
             oldObjects = [change[NSKeyValueChangeOldKey] allObjects];
@@ -176,9 +170,7 @@
         if (!self.sortDescriptors) {
             if (self.lastExchangedIndexSet) {
                 NSAssert(self.lastExchangedIndexSet.count == 1,  @"Can't (yet) handle cases where NSArray exchanges involve more than 1 item");
-                if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-                    [self.delegate relationalCollectionControllerWillChangeContent:self];
-                }
+                [self sendRelationalCollectionControllerWillChangeContent];
                 NSUInteger oldIndex = self.lastExchangedIndexSet.firstIndex;
                 NSUInteger newIndex = [change[NSKeyValueChangeIndexesKey] firstIndex];
                 id object = [change[NSKeyValueChangeNewKey] firstObject];
@@ -198,9 +190,7 @@
 }
 
 - (void)handleChangeToSortOrderFromCollectionObject:(id)object {
-    if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-        [self.delegate relationalCollectionControllerWillChangeContent:self];
-    }
+    [self sendRelationalCollectionControllerWillChangeContent];
     NSUInteger oldIndex = [self.mutableCollection indexOfObject:object];
     [self.mutableCollection sortUsingDescriptors:self.sortDescriptors];
     NSUInteger newIndex = [self.mutableCollection indexOfObject:object];
@@ -216,9 +206,7 @@
 
 - (BOOL)handleChangeToFilterKeypathsFromObject:(id)object {
     if ([self.collection containsObject:object] && ![self.filteringPredicate evaluateWithObject:object]) {
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-            [self.delegate relationalCollectionControllerWillChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerWillChangeContent];
         NSUInteger oldIndex = [self.mutableCollection indexOfObject:object];
         [self stopObservingCollectionObject:object];
         [self.mutableCollection removeObject:object];
@@ -230,9 +218,7 @@
         }
         return YES;
     } else if (![self.collection containsObject:object] && [self.filteringPredicate evaluateWithObject:object]) {
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-            [self.delegate relationalCollectionControllerWillChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerWillChangeContent];
         [self.mutableCollection addObject:object];
         [self.mutableCollection sortUsingDescriptors:self.sortDescriptors];
         [self startObservingCollectionObject:object];
@@ -251,9 +237,7 @@
 - (void)handleChangeToCollectionObject:(id)object forKeyPath:(NSString *)keyPath change:(NSDictionary *)change {
     NSUInteger index = [self.collection indexOfObject:object];
     if (index != NSNotFound) {
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-            [self.delegate relationalCollectionControllerWillChangeContent:self];
-        }
+        [self sendRelationalCollectionControllerWillChangeContent];
         if ([self.delegate respondsToSelector:@selector(relationalCollectionController:updatedObject:atIndex:changedKeyPath:)]) {
             [self.delegate relationalCollectionController:self updatedObject:object atIndex:index changedKeyPath:keyPath];
         }
@@ -289,4 +273,11 @@
     }
 }
 
+#pragma mark - Delegate notification
+
+- (void)sendRelationalCollectionControllerWillChangeContent {
+    if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
+        [self.delegate relationalCollectionControllerWillChangeContent:self];
+    }
+}
 @end
