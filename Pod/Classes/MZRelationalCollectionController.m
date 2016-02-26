@@ -124,9 +124,7 @@
         [self.mutableCollection sortUsingDescriptors:self.sortDescriptors];
         for (id newObject in newObjects) {
             [self startObservingCollectionObject:newObject];
-            if ([self.delegate respondsToSelector:@selector(relationalCollectionController:insertedObject:atIndex:)]) {
-                [self.delegate relationalCollectionController:self insertedObject:newObject atIndex:[self.mutableCollection indexOfObject:newObject]];
-            }
+            [self sendRelationalCollectionControllerInsertedObject:newObject atIndex:[self.mutableCollection indexOfObject:newObject]];
         }
         if ([change[NSKeyValueChangeNewKey] conformsToProtocol:@protocol(NSFastEnumeration)]) {
             for (id obj in change[NSKeyValueChangeNewKey]) {
@@ -208,9 +206,7 @@
         [self.mutableCollection addObject:object];
         [self.mutableCollection sortUsingDescriptors:self.sortDescriptors];
         [self startObservingCollectionObject:object];
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionController:insertedObject:atIndex:)]) {
-            [self.delegate relationalCollectionController:self insertedObject:object atIndex:[self.mutableCollection indexOfObject:object]];
-        }
+        [self sendRelationalCollectionControllerInsertedObject:object atIndex:[self.mutableCollection indexOfObject:object]];
         [self sendRelationalCollectionControllerDidChangeContent];
         return YES;
     } else {
@@ -273,6 +269,12 @@
 - (void)sendRelationalCollectionControllerReplacedEntireCollection {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerReplacedEntireCollection:)]) {
         [self.delegate relationalCollectionControllerReplacedEntireCollection:self];
+    }
+}
+
+- (void)sendRelationalCollectionControllerInsertedObject:(id)object atIndex:(NSUInteger)index {
+    if ([self.delegate respondsToSelector:@selector(relationalCollectionController:insertedObject:atIndex:)]) {
+        [self.delegate relationalCollectionController:self insertedObject:object atIndex:index];
     }
 }
 @end
