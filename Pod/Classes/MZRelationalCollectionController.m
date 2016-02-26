@@ -163,9 +163,7 @@
                 NSUInteger newIndex = [change[NSKeyValueChangeIndexesKey] firstIndex];
                 id object = [change[NSKeyValueChangeNewKey] firstObject];
                 [self.mutableCollection exchangeObjectAtIndex:oldIndex withObjectAtIndex:newIndex];
-                if ([self.delegate respondsToSelector:@selector(relationalCollectionController:movedObject:fromIndex:toIndex:)]) {
-                    [self.delegate relationalCollectionController:self movedObject:object fromIndex:oldIndex toIndex:newIndex];
-                }
+                [self sendRelationalCollectionControllerMovedObject:object fromIndex:oldIndex toIndex:newIndex];
                 self.lastExchangedIndexSet = nil;
                 [self sendRelationalCollectionControllerDidChangeContent];
             } else {
@@ -181,9 +179,7 @@
     [self.mutableCollection sortUsingDescriptors:self.sortDescriptors];
     NSUInteger newIndex = [self.mutableCollection indexOfObject:object];
     if (oldIndex != newIndex) {
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionController:movedObject:fromIndex:toIndex:)]) {
-            [self.delegate relationalCollectionController:self movedObject:object fromIndex:oldIndex toIndex:newIndex];
-        }
+        [self sendRelationalCollectionControllerMovedObject:object fromIndex:oldIndex toIndex:newIndex];
     }
     [self sendRelationalCollectionControllerDidChangeContent];
 }
@@ -277,6 +273,12 @@
 - (void)sendRelationalCollectionControllerRemovedObject:(id)object atIndex:(NSUInteger)index {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionController:removedObject:atIndex:)]) {
         [self.delegate relationalCollectionController:self removedObject:object atIndex:index];
+    }
+}
+
+- (void)sendRelationalCollectionControllerMovedObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+    if ([self.delegate respondsToSelector:@selector(relationalCollectionController:movedObject:fromIndex:toIndex:)]) {
+        [self.delegate relationalCollectionController:self movedObject:object fromIndex:fromIndex toIndex:toIndex];
     }
 }
 @end
