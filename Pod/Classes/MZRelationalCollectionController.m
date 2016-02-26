@@ -150,10 +150,8 @@
             }
         }
         [self.mutableCollection removeObjectsInArray:oldObjects];
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionController:removedObject:atIndex:)]) {
-            for (NSNumber *oldIndex in oldIndexMap) {
-                [self.delegate relationalCollectionController:self removedObject:oldIndexMap[oldIndex] atIndex:oldIndex.integerValue];
-            }
+        for (NSNumber *oldIndex in oldIndexMap) {
+            [self sendRelationalCollectionControllerRemovedObject:oldIndexMap[oldIndex] atIndex:oldIndex.integerValue];
         }
         [self sendRelationalCollectionControllerDidChangeContent];
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeReplacement) {
@@ -196,9 +194,7 @@
         NSUInteger oldIndex = [self.mutableCollection indexOfObject:object];
         [self stopObservingCollectionObject:object];
         [self.mutableCollection removeObject:object];
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionController:removedObject:atIndex:)]) {
-            [self.delegate relationalCollectionController:self removedObject:object atIndex:oldIndex];
-        }
+        [self sendRelationalCollectionControllerRemovedObject:object atIndex:oldIndex];
         [self sendRelationalCollectionControllerDidChangeContent];
         return YES;
     } else if (![self.collection containsObject:object] && [self.filteringPredicate evaluateWithObject:object]) {
@@ -275,6 +271,12 @@
 - (void)sendRelationalCollectionControllerInsertedObject:(id)object atIndex:(NSUInteger)index {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionController:insertedObject:atIndex:)]) {
         [self.delegate relationalCollectionController:self insertedObject:object atIndex:index];
+    }
+}
+
+- (void)sendRelationalCollectionControllerRemovedObject:(id)object atIndex:(NSUInteger)index {
+    if ([self.delegate respondsToSelector:@selector(relationalCollectionController:removedObject:atIndex:)]) {
+        [self.delegate relationalCollectionController:self removedObject:object atIndex:index];
     }
 }
 @end
