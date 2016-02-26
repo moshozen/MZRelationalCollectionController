@@ -110,9 +110,7 @@
         for (id obj in [self.object valueForKey:self.relation]) {
             [self startObservingRelationObject:obj];
         }
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerReplacedEntireCollection:)]) {
-            [self.delegate relationalCollectionControllerReplacedEntireCollection:self];
-        }
+        [self sendRelationalCollectionControllerReplacedEntireCollection];
         [self sendRelationalCollectionControllerDidChangeContent];
     } else if ([change[NSKeyValueChangeKindKey] integerValue] == NSKeyValueChangeInsertion) {
         [self sendRelationalCollectionControllerWillChangeContent];
@@ -264,10 +262,17 @@
         [self.delegate relationalCollectionControllerWillChangeContent:self];
     }
 }
+
 - (void)sendRelationalCollectionControllerDidChangeContent {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
         [self.delegate relationalCollectionControllerDidChangeContent:self];
     }
 }
 
+
+- (void)sendRelationalCollectionControllerReplacedEntireCollection {
+    if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerReplacedEntireCollection:)]) {
+        [self.delegate relationalCollectionControllerReplacedEntireCollection:self];
+    }
+}
 @end
