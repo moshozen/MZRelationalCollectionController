@@ -245,44 +245,80 @@
 
 - (void)sendRelationalCollectionControllerWillChangeContent {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerWillChangeContent:)]) {
-        [self.delegate relationalCollectionControllerWillChangeContent:self];
+        __weak __typeof__(self) weakSelf = self;
+        [self dispatchOnMainThread:^{
+            __strong __typeof__(self) strongSelf = weakSelf;
+            [strongSelf.delegate relationalCollectionControllerWillChangeContent:strongSelf];
+        }];
     }
 }
 
 - (void)sendRelationalCollectionControllerDidChangeContent {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerDidChangeContent:)]) {
-        [self.delegate relationalCollectionControllerDidChangeContent:self];
+        __weak __typeof__(self) weakSelf = self;
+        [self dispatchOnMainThread:^{
+            __strong __typeof__(self) strongSelf = weakSelf;
+            [strongSelf.delegate relationalCollectionControllerDidChangeContent:strongSelf];
+        }];
     }
 }
 
 
 - (void)sendRelationalCollectionControllerReplacedEntireCollection {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionControllerReplacedEntireCollection:)]) {
-        [self.delegate relationalCollectionControllerReplacedEntireCollection:self];
+        __weak __typeof__(self) weakSelf = self;
+        [self dispatchOnMainThread:^{
+            __strong __typeof__(self) strongSelf = weakSelf;
+            [strongSelf.delegate relationalCollectionControllerReplacedEntireCollection:strongSelf];
+        }];
     }
 }
 
 - (void)sendRelationalCollectionControllerInsertedObject:(id)object atIndex:(NSUInteger)index {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionController:insertedObject:atIndex:)]) {
-        [self.delegate relationalCollectionController:self insertedObject:object atIndex:index];
+        __weak __typeof__(self) weakSelf = self;
+        [self dispatchOnMainThread:^{
+            __strong __typeof__(self) strongSelf = weakSelf;
+            [strongSelf.delegate relationalCollectionController:strongSelf insertedObject:object atIndex:index];
+        }];
     }
 }
 
 - (void)sendRelationalCollectionControllerRemovedObject:(id)object atIndex:(NSUInteger)index {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionController:removedObject:atIndex:)]) {
-        [self.delegate relationalCollectionController:self removedObject:object atIndex:index];
+        __weak __typeof__(self) weakSelf = self;
+        [self dispatchOnMainThread:^{
+            __strong __typeof__(self) strongSelf = weakSelf;
+            [strongSelf.delegate relationalCollectionController:strongSelf removedObject:object atIndex:index];
+        }];
     }
 }
 
 - (void)sendRelationalCollectionControllerMovedObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionController:movedObject:fromIndex:toIndex:)]) {
-        [self.delegate relationalCollectionController:self movedObject:object fromIndex:fromIndex toIndex:toIndex];
+        __weak __typeof__(self) weakSelf = self;
+        [self dispatchOnMainThread:^{
+            __strong __typeof__(self) strongSelf = weakSelf;
+            [strongSelf.delegate relationalCollectionController:strongSelf movedObject:object fromIndex:fromIndex toIndex:toIndex];
+        }];
     }
 }
 
 - (void)sendRelationalCollectionControllerUpdatedObject:(id)object atIndex:(NSUInteger)index changedKeyPath:(NSString *)keyPath {
     if ([self.delegate respondsToSelector:@selector(relationalCollectionController:updatedObject:atIndex:changedKeyPath:)]) {
-        [self.delegate relationalCollectionController:self updatedObject:object atIndex:index changedKeyPath:keyPath];
+        __weak __typeof__(self) weakSelf = self;
+        [self dispatchOnMainThread:^{
+            __strong __typeof__(self) strongSelf = weakSelf;
+            [strongSelf.delegate relationalCollectionController:strongSelf updatedObject:object atIndex:index changedKeyPath:keyPath];
+        }];
+    }
+}
+
+- (void)dispatchOnMainThread:(void (^)(void))block {
+    if ([NSThread isMainThread]) {
+        block();
+    } else {
+        dispatch_async(dispatch_get_main_queue(), block);
     }
 }
 
