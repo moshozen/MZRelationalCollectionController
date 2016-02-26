@@ -210,9 +210,7 @@
     NSUInteger index = [self.collection indexOfObject:object];
     if (index != NSNotFound) {
         [self sendRelationalCollectionControllerWillChangeContent];
-        if ([self.delegate respondsToSelector:@selector(relationalCollectionController:updatedObject:atIndex:changedKeyPath:)]) {
-            [self.delegate relationalCollectionController:self updatedObject:object atIndex:index changedKeyPath:keyPath];
-        }
+        [self sendRelationalCollectionControllerUpdatedObject:object atIndex:index changedKeyPath:keyPath];
         [self sendRelationalCollectionControllerDidChangeContent];
     }
 }
@@ -281,4 +279,11 @@
         [self.delegate relationalCollectionController:self movedObject:object fromIndex:fromIndex toIndex:toIndex];
     }
 }
+
+- (void)sendRelationalCollectionControllerUpdatedObject:(id)object atIndex:(NSUInteger)index changedKeyPath:(NSString *)keyPath {
+    if ([self.delegate respondsToSelector:@selector(relationalCollectionController:updatedObject:atIndex:changedKeyPath:)]) {
+        [self.delegate relationalCollectionController:self updatedObject:object atIndex:index changedKeyPath:keyPath];
+    }
+}
+
 @end
