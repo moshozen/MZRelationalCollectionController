@@ -46,6 +46,15 @@ have an implicit 'top-level' object such as the current user or an application-w
 these cases the application's top-level navigation list is in fact a collection off of an existing 
 model object (even if the user doesn't see this top-level object).
 
+Since 1.2.0, MZRelationalCollectionController issues all delegate calls on the main thread. Previous
+versions issued calls on whichever thread the underlying KVO change was made on. Because GCD's `main_queue`
+is a serial queue delegate calls are guaranteed to be called in-order, however because they are issued 
+asyncronously from the underlying changes to the modeled collection, there is no guarantee that the 
+modeled collection will reflect the expected state at the time of the delegate call (this is not an 
+issue for updates issued as a result of KVO mutations on the main thread, since delegate calls are 
+made syncronously in this case). In practice this is not much of a problem, as most typical use cases (table
+or collection view updates) work just fine within this limitation.
+
 There are some places where MZRelationalCollectionController isn't very well suited. In particular,
 it maintains several data structures in-memory that are O(*n*) in the size of the collection. This 
 isn't generally a problem for smaller collection (less than several hundred in size, say), however 
