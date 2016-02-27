@@ -481,6 +481,62 @@
 
 @end
 
+@interface MZRelationalCollectionControllerDelegateThreadingTest : MZRelationalCollectionControllerDelegateTest
+@property XCTestExpectation *didChangeContentDelegateCallExpectation;
+@end
+
+@implementation MZRelationalCollectionControllerDelegateThreadingTest
+
+- (void)relationalCollectionControllerWillChangeContent:(MZRelationalCollectionController *)controller
+{
+    [self.delegateCalls addObject:@[@"willChange", controller, [NSThread currentThread]]];
+}
+
+- (void)relationalCollectionControllerDidChangeContent:(MZRelationalCollectionController *)controller
+{
+    [self.delegateCalls addObject:@[@"didChange", controller, [NSThread currentThread]]];
+    [self.didChangeContentDelegateCallExpectation fulfill];
+}
+
+- (void)relationalCollectionControllerReplacedEntireCollection:(MZRelationalCollectionController *)controller
+{
+    [self.delegateCalls addObject:@[@"replacedEntireCollection", controller, [NSThread currentThread]]];
+}
+
+- (void)setUp {
+    [super setUp];
+    self.controller = [MZRelationalCollectionController collectionControllerForRelation:@"albums"
+                                                                               onObject:self.artist
+                                                                             filteredBy:[NSPredicate predicateWithFormat:@"liveAlbum != YES"]
+                                                                               sortedBy:@[[NSSortDescriptor sortDescriptorWithKey:@"releaseDate" ascending:YES]]
+                                                                 observingChildKeyPaths:@[@"title"]
+                                                                               delegate:self];
+}
+
+- (void)testRelationalCollectionControllerRunningOnBackgroundThread {
+    self.didChangeContentDelegateCallExpectation = [self expectationWithDescription:@"That background dispatch has happened"];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        XCTAssert(![NSThread isMainThread]);
+        Album *album = [Album new];
+        album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
+
+        [self.artist setAlbums:[NSSet setWithObject:album]];
+    });
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        if (error) {
+            NSLog(@"Timeout Error: %@", error);
+        }
+    }];
+
+    NSArray *expected = @[@[@"willChange", self.controller, [NSThread mainThread]],
+                          @[@"replacedEntireCollection", self.controller, [NSThread mainThread]],
+                          @[@"didChange", self.controller, [NSThread mainThread]]];
+    XCTAssertEqualObjects(self.delegateCalls, expected);
+}
+
+@end
 @interface MZRelationalCollectionControllerOverlappingKeypathsDelegateTest : MZRelationalCollectionControllerDelegateTest
 @property NSDate *date;
 @end
