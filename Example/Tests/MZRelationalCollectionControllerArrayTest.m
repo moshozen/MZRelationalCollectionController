@@ -504,6 +504,7 @@
 @end
 
 @interface MZRelationalCollectionControllerDelegateThreadingArrayTest : MZRelationalCollectionControllerDelegateArrayTest
+@property XCTestExpectation *didChangeContentDelegateCallExpectation;
 @end
 
 @implementation MZRelationalCollectionControllerDelegateThreadingArrayTest
@@ -516,6 +517,7 @@
 - (void)relationalCollectionControllerDidChangeContent:(MZRelationalCollectionController *)controller
 {
     [self.delegateCalls addObject:@[@"didChange", controller, [NSThread currentThread]]];
+    [self.didChangeContentDelegateCallExpectation fulfill];
 }
 
 - (void)relationalCollectionControllerReplacedEntireCollection:(MZRelationalCollectionController *)controller
@@ -534,7 +536,7 @@
 }
 
 - (void)testRelationalCollectionControllerRunningOnBackgroundThread {
-    XCTestExpectation *expectation = [self expectationWithDescription:@"That background dispatch has happened"];
+    self.didChangeContentDelegateCallExpectation = [self expectationWithDescription:@"That background dispatch has happened"];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         XCTAssert(![NSThread isMainThread]);
@@ -542,7 +544,6 @@
         album.releaseDate = [NSDate dateWithTimeIntervalSinceNow:0];
 
         [self.artist setAlbums:@[album]];
-        [expectation fulfill];
     });
 
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
