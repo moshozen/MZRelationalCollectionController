@@ -231,7 +231,11 @@
 
 - (void)startObservingCollectionObject:(id)object {
     for (NSString *keypath in self.childKeysUniqueToCollectionObjects) {
-        [object valueForKeyPath:keypath]; // If the keypath refers to faulted object(s), force them to fire
+        @try {
+            [object valueForKeyPath:keypath]; // If the keypath refers to faulted object(s), force them to fire
+        } @catch (NSException *e) {
+            // Keypath did not exist (possible in cases of polymorphism)
+        }
         [object addObserver:self forKeyPath:keypath options:0 context:nil];
     }
 }
