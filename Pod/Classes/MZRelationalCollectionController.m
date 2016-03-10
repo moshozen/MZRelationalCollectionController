@@ -231,6 +231,7 @@
 
 - (void)startObservingCollectionObject:(id)object {
     for (NSString *keypath in self.childKeysUniqueToCollectionObjects) {
+        [object valueForKeyPath:keypath]; // If the keypath refers to faulted object(s), force them to fire
         [object addObserver:self forKeyPath:keypath options:0 context:nil];
     }
 }
