@@ -60,11 +60,6 @@ it maintains several data structures in-memory that are O(*n*) in the size of th
 isn't generally a problem for smaller collection (less than several hundred in size, say), however 
 collections which are larger than that may not be the best fit for MZRelationalCollectionController.
 
-In particular, in the case of NSManagedObjects, MZRelationalCollectionController purposely faults in
-all objects in the collection (and in any referenced key paths) at controller initialization time. This
-avoids potentially surprising update callbacks when a fault fires due to accessing objects in the
-collection (particularly for objects observed via nested keypaths).
-
 ## Example App & Tests
 
 The example app provides a comprehensive introduction to MZRelationalCollectionController. 
